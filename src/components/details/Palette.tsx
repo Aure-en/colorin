@@ -1,27 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { fetchPalette } from '../../slices/paletteSlice';
+import Color from '../../ts/color';
 
 const Palette = () => {
-  const [palette, setPalette] = useState([]);
+  const dispatch = useDispatch();
+  const paletteFromAPI = useSelector((state: any) => state.palette?.paletteFromAPI);
 
   useEffect(() => {
-    (async () => {
-      const data = await fetch('http://colormind.io/api/', {
-        method: 'POST',
-        body: JSON.stringify({
-          model: 'default',
-        }),
-      });
-      const json = await data.json();
-      console.log(json);
-      setPalette(json.result);
-    })();
+    dispatch(fetchPalette());
   }, []);
+
+  useEffect(() => {
+    console.log('PALETTE', paletteFromAPI);
+  }, [paletteFromAPI]);
 
   return (
     <>
-      {palette.length > 0 && palette.map((color: number[]) => <Color $color={color} />)}
+      {paletteFromAPI?.length > 0 && paletteFromAPI.map((color: Color) => <ColorComponent key={`${color[0]}-${color[1]}-${color[2]}`} $color={color} />)}
     </>
   );
 };
@@ -34,7 +31,7 @@ interface ColorProps {
   $color: number[],
 }
 
-const Color = styled.div<ColorProps>`
+const ColorComponent = styled.div<ColorProps>`
   width: 100px;
   height: 100px;
   background: ${(props) => `rgb(${props.$color[0]}, ${props.$color[1]}, ${props.$color[2]})`};
