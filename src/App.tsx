@@ -1,10 +1,10 @@
 import React from 'react';
-import Palette from './components/details/Palette';
+import Palettes from './components/details/Palettes';
 
 function App() {
   return (
     <div className="App">
-      <Palette />
+      <Palettes />
     </div>
   );
 }

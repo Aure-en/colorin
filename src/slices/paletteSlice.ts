@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import Color from '../ts/color';
+import { Color } from '../ts/colors';
 import Palette from '../ts/palette';
 import Store from '../ts/store';
 

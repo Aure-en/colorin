@@ -1,6 +1,4 @@
-import Color from './color';
-
-type Palette = Color[];
+import { Palette } from './colors';
 
 interface Palettes {
   palettes: Palette[],
