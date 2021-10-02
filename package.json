@@ -12,13 +12,14 @@
     "@types/react": "^16.14.15",
     "@types/react-dom": "^16.9.14",
     "@types/react-redux": "^7.1.18",
+    "color": "^3.2.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.1",
-    "typescript": "^4.1.6"
+    "typescript": "^4.4.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -44,6 +45,7 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.",
   "main": "index.js",
   "devDependencies": {
+    "@types/color": "^3.0.2",
     "@types/styled-components": "^5.1.14",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",

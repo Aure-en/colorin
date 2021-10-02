@@ -1,12 +1,11 @@
 import Color from './color';
 
+type Input = Color | 'N';
+
 interface Palette {
+  input: Input[],
   paletteFromAPI: Color[],
   mainPalette: Color[],
-  steps: {
-    lighter: Color[],
-    darker: Color[],
-  }
   loading: boolean,
   error: any,
 }
