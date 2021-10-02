@@ -5,12 +5,17 @@ import { Color as ColorType } from '../../ts/colors';
 
 const Color = ({ color }: { color: ColorType }) => (
   <Card>
-    <Background $color={color} />
+    <Background $color={color.hex} />
   </Card>
 );
 
 Color.propTypes = {
-  color: PropTypes.arrayOf(PropTypes.number).isRequired,
+  color: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    hex: PropTypes.string.isRequired,
+    rgb: PropTypes.arrayOf(PropTypes.number).isRequired,
+    hsl: PropTypes.arrayOf(PropTypes.number).isRequired,
+  }).isRequired,
 };
 
 const Card = styled.div`
@@ -19,9 +24,9 @@ const Card = styled.div`
 `;
 
 const Background = styled.div<{
-  $color: number[];
+  $color: string;
 }>`
-  background: ${(props) => `rgb(${props.$color[0]}, ${props.$color[1]}, ${props.$color[2]})`};
+  background: ${(props) => props.$color};
   flex: 1;
 `;
 

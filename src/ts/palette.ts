@@ -1,6 +1,6 @@
-import { Color } from './colors';
+import { Values, Color } from './colors';
 
-type Input = Color | 'N';
+type Input = Values | 'N';
 
 interface Palette {
   input: Input[],

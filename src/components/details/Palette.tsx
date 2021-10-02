@@ -10,7 +10,7 @@ const Palette = ({ palette }: {
   <Row>
     {palette.map((color: ColorType) => (
       <Color
-        key={`${color[0]}-${color[1]}-${color[2]}`}
+        key={`${color.hex}`}
         color={color}
       />
     ))}
@@ -19,9 +19,12 @@ const Palette = ({ palette }: {
 
 Palette.propTypes = {
   palette: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.number,
-    ),
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      hex: PropTypes.string.isRequired,
+      rgb: PropTypes.arrayOf(PropTypes.number).isRequired,
+      hsl: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }),
   ).isRequired,
 };
 

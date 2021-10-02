@@ -34,26 +34,6 @@ const Palettes = () => {
       dark: [],
     };
 
-    for (let step = 1; step <= stepNumber; step += 1) {
-      newSteps.light.unshift(
-        paletteFromAPI.map((color: ColorType): ColorType => {
-          const colorObject = Color.rgb(color);
-          const lighter = colorObject.lighten((step + 2) / 10);
-          const array: ColorType = lighter.rgb().array() as ColorType;
-          return array;
-        }),
-      );
-
-      newSteps.dark.push(
-        paletteFromAPI.map((color: ColorType): ColorType => {
-          const colorObject = Color.rgb(color);
-          const lighter = colorObject.darken((step + 2) / 10);
-          const array: ColorType = lighter.rgb().array() as ColorType;
-          return array;
-        }),
-      );
-    }
-
     setSteps(newSteps);
   }, [paletteFromAPI, stepNumber]);
 
