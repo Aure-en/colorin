@@ -37,7 +37,16 @@ const Palette = () => {
       newSteps.light.unshift(
         paletteFromAPI.map((color: ColorType): ColorType => {
           const colorObject = Color.rgb(color);
-          const lighter = colorObject.lighten(step * (2 / 10));
+          const lighter = colorObject.lighten(step * (2.5 / 10));
+          const array: ColorType = lighter.rgb().array() as ColorType;
+          return array;
+        }),
+      );
+
+      newSteps.dark.push(
+        paletteFromAPI.map((color: ColorType): ColorType => {
+          const colorObject = Color.rgb(color);
+          const lighter = colorObject.darken(step * (2.5 / 10));
           const array: ColorType = lighter.rgb().array() as ColorType;
           return array;
         }),
@@ -72,6 +81,19 @@ const Palette = () => {
           />
         ))}
       </Row>
+
+      {
+        steps.dark.map((palette) => (
+          <Row>
+            {palette.map((color) => (
+              <ColorComponent
+                key={`${color[0]}-${color[1]}-${color[2]}`}
+                $color={color}
+              />
+            ))}
+          </Row>
+        ))
+      }
     </>
   );
 };
