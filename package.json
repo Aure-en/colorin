@@ -44,6 +44,7 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.",
   "main": "index.js",
   "devDependencies": {
+    "@types/styled-components": "^5.1.14",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",
     "eslint": "^7.32.0",
@@ -61,6 +62,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Aure-en/colorin/issues"
-  },
-  "homepage": "https://github.com/Aure-en/colorin#readme"
+  }
 }
