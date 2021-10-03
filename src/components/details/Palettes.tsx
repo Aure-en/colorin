@@ -34,6 +34,14 @@ const Palettes = () => {
       dark: [],
     };
 
+    // Get all steps values.
+
+    // Fetch all names.
+
+    // Save steps.
+
+    const lightSteps: PaletteType[] = [];
+
     setSteps(newSteps);
   }, [paletteFromAPI, stepNumber]);
 

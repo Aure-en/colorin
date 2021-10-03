@@ -1,4 +1,4 @@
-export type Values = [number, number, number];
+export type Values = number[];
 
 export type Color = {
   rgb: Values,
@@ -7,4 +7,4 @@ export type Color = {
   name: string,
 };
 
-export type Palette = [Color, Color, Color, Color, Color];
+export type Palette = Color[];

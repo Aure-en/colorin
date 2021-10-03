@@ -2,7 +2,7 @@ import { Values, Color } from './colors';
 
 type Input = Values | 'N';
 
-interface Palette {
+interface PaletteState {
   input: Input[],
   paletteFromAPI: Color[],
   mainPalette: Color[],
@@ -10,4 +10,4 @@ interface Palette {
   error: any,
 }
 
-export default Palette;
+export default PaletteState;
