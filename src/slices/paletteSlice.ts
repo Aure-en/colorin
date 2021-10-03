@@ -1,18 +1,24 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import Color from 'color';
 import colorName from '../utils/colorName';
 import {
   Color as ColorType,
   Palette as PaletteType,
+  Steps,
   Values,
 } from '../ts/colors';
 import PaletteState from '../ts/palette';
 import Store from '../ts/store';
 
 const initialState: PaletteState = {
-  input: ['N', 'N', 'N', 'N', 'N'], // Locked colors.
   paletteFromAPI: [], // Palette fetched from API.
   mainPalette: [], // Palette modified by the user to fit their taste.
+  input: ['N', 'N', 'N', 'N', 'N'], // Locked colors.
+  stepsNumber: 2,
+  steps: {
+    light: [],
+    dark: [],
+  },
   loading: false,
   error: null,
 };
@@ -62,7 +68,82 @@ export const fetchPalette = createAsyncThunk<
 const paletteSlice = createSlice({
   name: 'palette',
   initialState,
-  reducers: {},
+  reducers: {
+    setSteps: {
+      reducer(state, action: PayloadAction<PaletteType>) {
+        const steps: Steps = {
+          light: [],
+          dark: [],
+        };
+
+        const palette: PaletteType = action.payload;
+
+        /**
+         * For all steps:
+         * - Get their values (rgb, hex, hsl)
+         * - Get their names
+         */
+        for (let step = 1; step <= state.stepsNumber; step += 1) {
+          // Light steps
+          steps.light.unshift(
+            palette.map((color: ColorType): ColorType => {
+              // Lighten the color
+              const colorObject = Color.rgb(color.rgb);
+              const lighter = colorObject.lighten(step * (2.5 / 10));
+
+              // Get new color values
+              const rgb = lighter.rgb().array();
+              const hex = lighter.hex();
+              const hsl = lighter.hsl().array();
+
+              // Get color name
+              const { name } = colorName(hex);
+
+              return {
+                name,
+                rgb,
+                hex,
+                hsl,
+              };
+            }),
+          );
+
+          // Dark steps
+          steps.dark.push(
+            palette.map((color: ColorType): ColorType => {
+              // Darken the color
+              const colorObject = Color.rgb(color.rgb);
+              const darker = colorObject.darken(step * (2.5 / 10));
+
+              // Get new color values
+              const rgb = darker.rgb().array();
+              const hex = darker.hex();
+              const hsl = darker.hsl().array();
+
+              // Get color name
+              const { name } = colorName(hex);
+
+              return {
+                name,
+                rgb,
+                hex,
+                hsl,
+              };
+            }),
+          );
+        }
+
+        return {
+          ...state,
+          steps,
+        };
+      },
+
+      prepare(payload: PaletteType) {
+        return { payload };
+      },
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchPalette.pending, (state: PaletteState) => {
@@ -70,6 +151,7 @@ const paletteSlice = createSlice({
       })
       .addCase(fetchPalette.fulfilled, (state: PaletteState, action) => {
         state.paletteFromAPI = action.payload;
+        state.mainPalette = action.payload;
         state.loading = false;
       })
       .addCase(fetchPalette.rejected, (state: PaletteState) => {
@@ -79,8 +161,12 @@ const paletteSlice = createSlice({
   },
 });
 
+export const { setSteps } = paletteSlice.actions;
+
 export const getPaletteFromAPI = (state: Store) => state.palette.paletteFromAPI;
 
 export const getMainPalette = (state: Store) => state.palette.mainPalette;
+
+export const getSteps = (state: Store) => state.palette.steps;
 
 export default paletteSlice.reducer;

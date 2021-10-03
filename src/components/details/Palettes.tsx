@@ -3,99 +3,42 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Color from 'color';
 import colorName from '../../utils/colorName';
-import { fetchPalette } from '../../slices/paletteSlice';
+import {
+  fetchPalette, getMainPalette, getSteps, setSteps,
+} from '../../slices/paletteSlice';
 import { Color as ColorType, Steps } from '../../ts/colors';
 import Palette from './Palette';
 
 const Palettes = () => {
   const dispatch = useDispatch();
-  const paletteFromAPI = useSelector(
-    (state: any) => state.palette?.paletteFromAPI,
-  );
-
-  const [stepNumber, setStepNumber] = useState(2);
-  const [steps, setSteps] = useState<Steps>({
-    light: [],
-    dark: [],
-  });
+  const mainPalette = useSelector(getMainPalette);
+  const steps = useSelector(getSteps);
 
   useEffect(() => {
     dispatch(fetchPalette());
   }, []);
 
   useEffect(() => {
-    const newSteps: Steps = {
-      light: [],
-      dark: [],
-    };
-
-    /**
-     * For all steps:
-     * - Get their values (rgb, hex, hsl)
-     * - Get their names
-     */
-    for (let step = 1; step <= stepNumber; step += 1) {
-      // Light steps
-      newSteps.light.push(
-        paletteFromAPI.map((color: ColorType): ColorType => {
-          // Lighten the color
-          const colorObject = Color.rgb(color.rgb);
-          const lighter = colorObject.lighten(step * (2.5 / 10));
-
-          // Get new color values
-          const rgb = lighter.rgb().array();
-          const hex = lighter.hex();
-          const hsl = lighter.hsl().array();
-
-          // Get color name
-          const { name } = colorName(hex);
-
-          return {
-            name, rgb, hex, hsl,
-          };
-        }),
-      );
-
-      // Dark steps
-      newSteps.dark.push(
-        paletteFromAPI.map((color: ColorType): ColorType => {
-          // Darken the color
-          const colorObject = Color.rgb(color.rgb);
-          const darker = colorObject.darken(step * (2.5 / 10));
-
-          // Get new color values
-          const rgb = darker.rgb().array();
-          const hex = darker.hex();
-          const hsl = darker.hsl().array();
-
-          // Get color name
-          const { name } = colorName(hex);
-
-          return {
-            name, rgb, hex, hsl,
-          };
-        }),
-      );
-    }
-
-    setSteps(newSteps);
-  }, [paletteFromAPI, stepNumber]);
+    dispatch(setSteps(mainPalette));
+  }, [mainPalette]);
 
   return (
     <Wrapper>
-      {
-        steps.light.map((palette) => (
-          <Palette palette={palette} />
-        ))
-      }
+      {steps.light.map((palette, index) => (
+        <Palette
+          key={`light-${index}`}
+          palette={palette}
+        />
+      ))}
 
-      {paletteFromAPI?.length > 0 && <Palette palette={paletteFromAPI} />}
+      {mainPalette?.length > 0 && <Palette palette={mainPalette} />}
 
-      {
-        steps.dark.map((palette) => (
-          <Palette palette={palette} />
-        ))
-      }
+      {steps.dark.map((palette, index) => (
+        <Palette
+          key={`dark-${index}`}
+          palette={palette}
+        />
+      ))}
     </Wrapper>
   );
 };
