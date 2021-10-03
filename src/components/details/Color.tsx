@@ -48,9 +48,11 @@ const Background = styled.button<{
 }>`
   position: relative;
   background: ${(props) => props.$color};
-  min-height: 4rem;
+  min-height: 5rem;
+  max-height: 5rem;
   flex: 1;
   border: none;
+  cursor: pointer;
 
   &:focus {
     outline: 2px solid transparent;

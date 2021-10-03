@@ -88,7 +88,8 @@ const paletteSlice = createSlice({
           palette.map((color: ColorType): ColorType => {
             // Lighten the color
             const colorObject = Color.rgb(color.rgb);
-            const lighter = colorObject.lighten(step * (2.5 / 10));
+            const luminosity = colorObject.hsl().array()[2];
+            const lighter = colorObject.lightness(100 - (luminosity / step));
 
             // Get new color values
             const rgb = lighter.rgb().array();
@@ -112,7 +113,8 @@ const paletteSlice = createSlice({
           palette.map((color: ColorType): ColorType => {
             // Darken the color
             const colorObject = Color.rgb(color.rgb);
-            const darker = colorObject.darken(step * (2.5 / 10));
+            const luminosity = colorObject.hsl().array()[2];
+            const darker = colorObject.lightness(luminosity / (step + 1));
 
             // Get new color values
             const rgb = darker.rgb().array();

@@ -29,7 +29,7 @@ const copySlice = createSlice({
 
     removeCopy: {
       reducer(state, action: PayloadAction<{ id: string }>) {
-        state.filter((copy) => copy.id !== action.payload.id);
+        return state.filter((copy) => copy.id !== action.payload.id);
       },
 
       prepare(id) {

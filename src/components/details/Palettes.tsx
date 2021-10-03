@@ -5,7 +5,6 @@ import {
   fetchPalette,
   getMainPalette,
   getSteps,
-  getStepsNumber,
   setSteps,
 } from '../../slices/paletteSlice';
 import { Steps } from '../../ts/colors/colors';
@@ -15,7 +14,6 @@ const Palettes: React.FC = (): ReactElement => {
   const dispatch = useDispatch();
   const mainPalette = useSelector(getMainPalette);
   const steps: Steps = useSelector(getSteps);
-  const stepsNumber: number = useSelector(getStepsNumber);
 
   useEffect(() => {
     dispatch(fetchPalette());
@@ -26,7 +24,7 @@ const Palettes: React.FC = (): ReactElement => {
   }, [mainPalette]);
 
   return (
-    <Wrapper $steps={stepsNumber}>
+    <Wrapper>
       {steps.light.map(
         (palette, index) => palette.length > 0 && (
         <Palette
@@ -58,11 +56,8 @@ const Palettes: React.FC = (): ReactElement => {
 
 Palettes.propTypes = {};
 
-const Wrapper = styled.main<{
-  $steps: number,
-}>`
+const Wrapper = styled.main`
   display: grid;
-  grid-template-rows: ${(props) => `repeat(${props.$steps}, 1fr) 2fr repeat(${props.$steps}, 1fr)`};
   height: 100%;
   grid-gap: 1rem;
   width: 100%;

@@ -2,19 +2,23 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Color as ColorType } from '../../ts/colors/colors';
-import copy from '../../utils/copy';
+import useCopy from '../../hooks/useCopy';
 
 interface Props {
   color: ColorType,
 }
 
-const Step : React.FC<Props> = ({ color }: Props): ReactElement => (
-  <Card onClick={() => copy(color.hex)}>
-    <Background $color={color.hex} />
-    <div>{color.name}</div>
-    <div>{color.hex}</div>
-  </Card>
-);
+const Step : React.FC<Props> = ({ color }: Props): ReactElement => {
+  const { copy } = useCopy();
+
+  return (
+    <Card>
+      <Background $color={color.hex} onClick={(e) => { copy(e.pageX, e.pageY, color); }} />
+      <div>{color.name}</div>
+      <div>{color.hex}</div>
+    </Card>
+  );
+};
 
 Step.propTypes = {
   color: PropTypes.shape({
@@ -30,12 +34,20 @@ const Card = styled.div`
   flex-direction: column;
 `;
 
-const Background = styled.div<{
+const Background = styled.button<{
   $color: string;
 }>`
+  position: relative;
   background: ${(props) => props.$color};
+  min-height: 3.5rem;
+  max-height: 3.5rem;
   flex: 1;
-  min-height: 2rem;
+  border: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: 2px solid transparent;
+  }
 `;
 
 export default Step;
