@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import Color from 'color';
-import colorName from '../../utils/colorName';
 import {
   fetchPalette, getMainPalette, getSteps, setSteps,
 } from '../../slices/paletteSlice';
-import { Color as ColorType, Steps } from '../../ts/colors';
 import Palette from './Palette';
 
 const Palettes = () => {
@@ -19,7 +16,7 @@ const Palettes = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(setSteps(mainPalette));
+    dispatch(setSteps());
   }, [mainPalette]);
 
   return (

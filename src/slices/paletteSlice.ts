@@ -69,81 +69,90 @@ const paletteSlice = createSlice({
   name: 'palette',
   initialState,
   reducers: {
-    setSteps: {
-      reducer(state, action: PayloadAction<PaletteType>) {
-        const steps: Steps = {
-          light: [],
-          dark: [],
-        };
+    setSteps(state) {
+      const steps: Steps = {
+        light: [],
+        dark: [],
+      };
 
-        const palette: PaletteType = action.payload;
+      const palette: PaletteType = state.mainPalette;
 
-        /**
-         * For all steps:
-         * - Get their values (rgb, hex, hsl)
-         * - Get their names
-         */
-        for (let step = 1; step <= state.stepsNumber; step += 1) {
-          // Light steps
-          steps.light.unshift(
-            palette.map((color: ColorType): ColorType => {
-              // Lighten the color
-              const colorObject = Color.rgb(color.rgb);
-              const lighter = colorObject.lighten(step * (2.5 / 10));
+      /**
+       * For all steps:
+       * - Get their values (rgb, hex, hsl)
+       * - Get their names
+       */
+      for (let step = 1; step <= state.stepsNumber; step += 1) {
+        // Light steps
+        steps.light.unshift(
+          palette.map((color: ColorType): ColorType => {
+            // Lighten the color
+            const colorObject = Color.rgb(color.rgb);
+            const lighter = colorObject.lighten(step * (2.5 / 10));
 
-              // Get new color values
-              const rgb = lighter.rgb().array();
-              const hex = lighter.hex();
-              const hsl = lighter.hsl().array();
+            // Get new color values
+            const rgb = lighter.rgb().array();
+            const hex = lighter.hex();
+            const hsl = lighter.hsl().array();
 
-              // Get color name
-              const { name } = colorName(hex);
+            // Get color name
+            const { name } = colorName(hex);
 
-              return {
-                name,
-                rgb,
-                hex,
-                hsl,
-              };
-            }),
-          );
+            return {
+              name,
+              rgb,
+              hex,
+              hsl,
+            };
+          }),
+        );
 
-          // Dark steps
-          steps.dark.push(
-            palette.map((color: ColorType): ColorType => {
-              // Darken the color
-              const colorObject = Color.rgb(color.rgb);
-              const darker = colorObject.darken(step * (2.5 / 10));
+        // Dark steps
+        steps.dark.push(
+          palette.map((color: ColorType): ColorType => {
+            // Darken the color
+            const colorObject = Color.rgb(color.rgb);
+            const darker = colorObject.darken(step * (2.5 / 10));
 
-              // Get new color values
-              const rgb = darker.rgb().array();
-              const hex = darker.hex();
-              const hsl = darker.hsl().array();
+            // Get new color values
+            const rgb = darker.rgb().array();
+            const hex = darker.hex();
+            const hsl = darker.hsl().array();
 
-              // Get color name
-              const { name } = colorName(hex);
+            // Get color name
+            const { name } = colorName(hex);
 
-              return {
-                name,
-                rgb,
-                hex,
-                hsl,
-              };
-            }),
-          );
-        }
+            return {
+              name,
+              rgb,
+              hex,
+              hsl,
+            };
+          }),
+        );
+      }
 
-        return {
-          ...state,
-          steps,
-        };
-      },
+      return {
+        ...state,
+        steps,
+      };
+    },
 
-      prepare(payload: PaletteType) {
-        return { payload };
-      },
+    incrementSteps(state) {
+      return {
+        ...state,
+        stepsNumber: state.stepsNumber + 1,
+      };
+    },
+
+    decrementSteps(state) {
+      return {
+        ...state,
+        stepsNumber: state.stepsNumber - 1,
+      };
     },
   },
+
   extraReducers(builder) {
     builder
       .addCase(fetchPalette.pending, (state: PaletteState) => {
@@ -161,12 +170,14 @@ const paletteSlice = createSlice({
   },
 });
 
-export const { setSteps } = paletteSlice.actions;
+export const { setSteps, incrementSteps, decrementSteps } = paletteSlice.actions;
 
-export const getPaletteFromAPI = (state: Store) => state.palette.paletteFromAPI;
+export const getPaletteFromAPI = (state: Store): PaletteType => state.palette.paletteFromAPI;
 
-export const getMainPalette = (state: Store) => state.palette.mainPalette;
+export const getMainPalette = (state: Store): PaletteType => state.palette.mainPalette;
 
-export const getSteps = (state: Store) => state.palette.steps;
+export const getSteps = (state: Store): Steps => state.palette.steps;
+
+export const getStepsNumber = (state: Store): number => state.palette.stepsNumber;
 
 export default paletteSlice.reducer;
