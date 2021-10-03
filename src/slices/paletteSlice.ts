@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import Color from 'color';
 import colorName from '../utils/colorName';
 import {
@@ -13,7 +13,7 @@ import Store from '../ts/store';
 const initialState: PaletteState = {
   paletteFromAPI: [], // Palette fetched from API.
   mainPalette: [], // Palette modified by the user to fit their taste.
-  input: ['N', 'N', 'N', 'N', 'N'], // Locked colors.
+  locked: ['N', 'N', 'N', 'N'], // Locked colors.
   stepsNumber: 2,
   steps: {
     light: [],
@@ -26,15 +26,15 @@ const initialState: PaletteState = {
 export const fetchPalette = createAsyncThunk<
   ColorType[],
   void,
-  { state: PaletteState }
+  { state: Store }
 >('palette/fetchPalette', async (undefined, { getState }) => {
   // Get a 5 colors palette from Colormind API.
-  const { input } = getState();
+  const { locked } = getState().palette;
   const response = await fetch('http://colormind.io/api/', {
     method: 'POST',
     body: JSON.stringify({
       model: 'default',
-      input,
+      input: [...locked, 'N'],
     }),
   });
   const json = await response.json();
@@ -96,7 +96,7 @@ const paletteSlice = createSlice({
             const colorObject = Color.rgb(color.rgb);
             const luminosity = colorObject.hsl().array()[2];
             const lighter = colorObject.lightness(
-              (((100 - luminosity) / (state.stepsNumber + 1)) * step) + luminosity,
+              ((100 - luminosity) / (state.stepsNumber + 1)) * step + luminosity,
             );
 
             // Get new color values
@@ -123,7 +123,7 @@ const paletteSlice = createSlice({
             const colorObject = Color.rgb(color.rgb);
             const luminosity = colorObject.hsl().array()[2];
             const darker = colorObject.lightness(
-              luminosity - ((luminosity / (state.stepsNumber + 1)) * step),
+              luminosity - (luminosity / (state.stepsNumber + 1)) * step,
             );
 
             // Get new color values
@@ -163,6 +163,39 @@ const paletteSlice = createSlice({
         stepsNumber: state.stepsNumber - 1,
       };
     },
+
+    toggleLock: {
+      reducer(state, action: PayloadAction<{ color: Values }>) {
+        /**
+         * Search for the color in the locked array.
+         * If it is in the array, unlock it.
+         * If it is not in the array, lock it if there are < 4 colors locked.
+         */
+        const colorIndex = state.locked.findIndex(
+          (color) => Array.isArray(color)
+            && color.join('') === action.payload.color.join(''),
+        );
+
+        // If the color is locked, unlock it.
+        if (colorIndex !== -1) {
+          state.locked[colorIndex] = 'N';
+        } else {
+          // If the color is not unlocked yet, lock if it there are < 4 colors locked.
+          const freeLock = state.locked.findIndex((lock) => lock === 'N');
+          if (freeLock !== -1) {
+            state.locked[freeLock] = action.payload.color;
+          }
+        }
+      },
+
+      prepare(color: Values) {
+        return {
+          payload: {
+            color,
+          },
+        };
+      },
+    },
   },
 
   extraReducers(builder) {
@@ -182,7 +215,9 @@ const paletteSlice = createSlice({
   },
 });
 
-export const { setSteps, incrementSteps, decrementSteps } = paletteSlice.actions;
+export const {
+  setSteps, incrementSteps, decrementSteps, toggleLock,
+} = paletteSlice.actions;
 
 export const getPaletteFromAPI = (state: Store): PaletteType => state.palette.paletteFromAPI;
 
@@ -191,5 +226,7 @@ export const getMainPalette = (state: Store): PaletteType => state.palette.mainP
 export const getSteps = (state: Store): Steps => state.palette.steps;
 
 export const getStepsNumber = (state: Store): number => state.palette.stepsNumber;
+
+export const getLocked = (state: Store): (Values | 'N')[] => state.palette.locked;
 
 export default paletteSlice.reducer;

@@ -1,9 +1,9 @@
 import { Values, Color, Steps } from './colors';
 
-type Input = Values | 'N';
+type Locked = Values | 'N';
 
 interface PaletteState {
-  input: Input[],
+  locked: Locked[],
   paletteFromAPI: Color[],
   mainPalette: Color[],
   stepsNumber: number,

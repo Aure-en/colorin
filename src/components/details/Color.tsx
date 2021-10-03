@@ -1,16 +1,29 @@
 import React, { ReactElement, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Color as ColorType } from '../../ts/colors/colors';
+import { getLocked, toggleLock } from '../../slices/paletteSlice';
 import useCopy from '../../hooks/useCopy';
 
 interface Props {
-  color: ColorType,
+  color: ColorType;
 }
 
 const Color: React.FC<Props> = ({ color }: Props): ReactElement => {
+  const locked = useSelector(getLocked);
+  const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const { copy } = useCopy();
+
+  /**
+   * Lock the color if there are < 5 locked colors.
+   * The next generated palette will contain this color.
+   */
+  const handleRightClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    dispatch(toggleLock(color.rgb));
+  };
 
   return (
     <Card
@@ -19,9 +32,19 @@ const Color: React.FC<Props> = ({ color }: Props): ReactElement => {
     >
       <Background
         $color={color.hex}
-        onClick={(e) => { copy(e.pageX, e.pageY, color); }}
+        onClick={(e) => {
+          copy(e.pageX, e.pageY, color);
+        }}
+        onContextMenu={(e) => {
+          e.preventDefault();
+          handleRightClick(e);
+        }}
       >
-        <Buttons>Edit</Buttons>
+        <Buttons>
+          {locked.find(
+            (lock) => Array.isArray(lock) && lock.join('') === color.rgb.join(''),
+          ) && 'locked'}
+        </Buttons>
       </Background>
       <div>{color.name}</div>
       <div>{color.hex}</div>
