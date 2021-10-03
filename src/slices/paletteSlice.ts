@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Color from 'color';
-import namedColors from 'color-name-list';
-import nearestColor from 'nearest-color';
+import colorName from '../utils/colorName';
 import {
   Color as ColorType,
   Palette as PaletteType,
@@ -51,20 +50,10 @@ export const fetchPalette = createAsyncThunk<
     };
   });
 
-  // Convert colors to objects { name: string, hex: string }
-  const colors = namedColors.reduce(
-    (
-      o: { name: string; hex: string }[],
-      { name, hex }: { name: string; hex: string },
-    ) => Object.assign(o, { [name]: hex }),
-    {},
-  );
-  const nearest = nearestColor.from(colors);
-
   // Get nearest color name for every palette color.
   const paletteWithName: PaletteType = palette.map((color): ColorType => ({
     ...color,
-    name: nearest(color.hex).name,
+    name: colorName(color.hex).name,
   }));
 
   return paletteWithName;

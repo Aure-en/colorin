@@ -8,3 +8,8 @@ export type Color = {
 };
 
 export type Palette = Color[];
+
+export type Steps = {
+  light: Palette[],
+  dark: Palette[],
+};

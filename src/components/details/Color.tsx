@@ -6,6 +6,8 @@ import { Color as ColorType } from '../../ts/colors';
 const Color = ({ color }: { color: ColorType }) => (
   <Card>
     <Background $color={color.hex} />
+    <div>{color.name}</div>
+    <div>{color.hex}</div>
   </Card>
 );
 
