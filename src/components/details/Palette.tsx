@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from './Color';
 import Step from './Step';
-import { Color as ColorType, Palette as PaletteType } from '../../ts/colors';
+import { Color as ColorType, Palette as PaletteType } from '../../ts/colors/colors';
 
-const Palette = ({ palette, main }: {
+interface Props {
   palette: PaletteType,
   main?: boolean,
-}) => (
+}
+
+const Palette: React.FC<Props> = ({ palette, main }: Props): ReactElement => (
   <Row>
     {palette.map((color: ColorType, index: number) => (
       main
@@ -16,7 +18,6 @@ const Palette = ({ palette, main }: {
           <Color
             key={`${index}-${color.hex}`}
             color={color}
-            index={index}
           />
 
         )
@@ -35,9 +36,9 @@ Palette.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       hex: PropTypes.string.isRequired,
-      rgb: PropTypes.arrayOf(PropTypes.number).isRequired,
-      hsl: PropTypes.arrayOf(PropTypes.number).isRequired,
-    }),
+      rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+      hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    }).isRequired,
   ).isRequired,
   main: PropTypes.bool,
 };

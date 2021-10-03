@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getStepsNumber, incrementSteps, decrementSteps, setSteps,
 } from '../../slices/paletteSlice';
 
-const Steps = () => {
+const Steps: React.FC = (): ReactElement => {
   const dispatch = useDispatch();
   const stepsNumber = useSelector(getStepsNumber);
 

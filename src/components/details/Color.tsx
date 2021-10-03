@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Color as ColorType } from '../../ts/colors';
-import copy from '../../utils/copy';
+import { Color as ColorType } from '../../ts/colors/colors';
+import useCopy from '../../hooks/useCopy';
 
-const Color = ({ color, index }: { color: ColorType, index: number }) => {
+interface Props {
+  color: ColorType,
+}
+
+const Color: React.FC<Props> = ({ color }: Props): ReactElement => {
   const [isHovered, setIsHovered] = useState(false);
+  const { copy } = useCopy();
 
   return (
     <Card
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={() => copy(color.hex)}
     >
-      <Background $color={color.hex}>
+      <Background
+        $color={color.hex}
+        onClick={(e) => { copy(e.pageX, e.pageY, color); }}
+      >
         <Buttons>Edit</Buttons>
       </Background>
       <div>{color.name}</div>
@@ -26,10 +33,9 @@ Color.propTypes = {
   color: PropTypes.shape({
     name: PropTypes.string.isRequired,
     hex: PropTypes.string.isRequired,
-    rgb: PropTypes.arrayOf(PropTypes.number).isRequired,
-    hsl: PropTypes.arrayOf(PropTypes.number).isRequired,
+    rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   }).isRequired,
-  index: PropTypes.number.isRequired,
 };
 
 const Card = styled.div`
@@ -37,13 +43,18 @@ const Card = styled.div`
   flex-direction: column;
 `;
 
-const Background = styled.div<{
+const Background = styled.button<{
   $color: string;
 }>`
   position: relative;
   background: ${(props) => props.$color};
-  min-height: 2rem;
+  min-height: 4rem;
   flex: 1;
+  border: none;
+
+  &:focus {
+    outline: 2px solid transparent;
+  }
 `;
 
 const Buttons = styled.div`

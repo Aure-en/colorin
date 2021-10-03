@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {
@@ -8,13 +8,14 @@ import {
   getStepsNumber,
   setSteps,
 } from '../../slices/paletteSlice';
+import { Steps } from '../../ts/colors/colors';
 import Palette from './Palette';
 
-const Palettes = () => {
+const Palettes: React.FC = (): ReactElement => {
   const dispatch = useDispatch();
   const mainPalette = useSelector(getMainPalette);
-  const steps = useSelector(getSteps);
-  const stepsNumber = useSelector(getStepsNumber);
+  const steps: Steps = useSelector(getSteps);
+  const stepsNumber: number = useSelector(getStepsNumber);
 
   useEffect(() => {
     dispatch(fetchPalette());
@@ -61,10 +62,9 @@ const Wrapper = styled.main<{
   $steps: number,
 }>`
   display: grid;
-  grid-template-rows: ${(props) => `repeat(1fr, ${props.$steps}) 2fr repeat(1fr, ${props.$steps})`};
+  grid-template-rows: ${(props) => `repeat(${props.$steps}, 1fr) 2fr repeat(${props.$steps}, 1fr)`};
   height: 100%;
   grid-gap: 1rem;
-  min-height: 50rem;
   width: 100%;
 `;
 

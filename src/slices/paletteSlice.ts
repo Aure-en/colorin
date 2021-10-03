@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import Color from 'color';
 import colorName from '../utils/colorName';
 import {
@@ -6,8 +6,8 @@ import {
   Palette as PaletteType,
   Steps,
   Values,
-} from '../ts/colors';
-import PaletteState from '../ts/palette';
+} from '../ts/colors/colors';
+import PaletteState from '../ts/colors/palette';
 import Store from '../ts/store';
 
 const initialState: PaletteState = {

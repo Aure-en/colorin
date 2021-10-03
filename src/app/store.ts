@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import paletteReducer from '../slices/paletteSlice';
+import copyReducer from '../slices/copySlice';
 
 export const store = configureStore({
   reducer: {
     palette: paletteReducer,
+    copy: copyReducer,
   },
 });
 
