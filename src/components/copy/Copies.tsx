@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import { getCopied } from '../../slices/copySlice';
 import Copy from './Copy';
 
-const Copies = () => {
+const Copies: React.FC = (): ReactElement => {
   const copied = useSelector(getCopied);
-  console.log(copied);
 
   return (
     <Wrapper>

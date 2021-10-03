@@ -41,26 +41,32 @@ export const fetchPalette = createAsyncThunk<
   const { result }: { result: Values[] } = json; // Color RGB.
 
   // Get color formats from the RGB.
-  const palette = result.map((color): {
-    rgb: Values,
-    hex: string,
-    hsl: Values,
-  } => {
-    const colorObj = Color.rgb(color);
-    const colorHex = colorObj.hex();
-    const colorHsl = colorObj.hsl().array();
-    return {
-      rgb: color,
-      hex: colorHex,
-      hsl: colorHsl,
-    };
-  });
+  const palette = result.map(
+    (
+      color,
+    ): {
+      rgb: Values;
+      hex: string;
+      hsl: Values;
+    } => {
+      const colorObj = Color.rgb(color);
+      const colorHex = colorObj.hex();
+      const colorHsl = colorObj.hsl().array();
+      return {
+        rgb: color,
+        hex: colorHex,
+        hsl: colorHsl,
+      };
+    },
+  );
 
   // Get nearest color name for every palette color.
-  const paletteWithName: PaletteType = palette.map((color): ColorType => ({
-    ...color,
-    name: colorName(color.hex).name,
-  }));
+  const paletteWithName: PaletteType = palette.map(
+    (color): ColorType => ({
+      ...color,
+      name: colorName(color.hex).name,
+    }),
+  );
 
   return paletteWithName;
 });
@@ -89,7 +95,9 @@ const paletteSlice = createSlice({
             // Lighten the color
             const colorObject = Color.rgb(color.rgb);
             const luminosity = colorObject.hsl().array()[2];
-            const lighter = colorObject.lightness(100 - (luminosity / step));
+            const lighter = colorObject.lightness(
+              (((100 - luminosity) / (state.stepsNumber + 1)) * step) + luminosity,
+            );
 
             // Get new color values
             const rgb = lighter.rgb().array();
@@ -114,7 +122,9 @@ const paletteSlice = createSlice({
             // Darken the color
             const colorObject = Color.rgb(color.rgb);
             const luminosity = colorObject.hsl().array()[2];
-            const darker = colorObject.lightness(luminosity / (step + 1));
+            const darker = colorObject.lightness(
+              luminosity - ((luminosity / (state.stepsNumber + 1)) * step),
+            );
 
             // Get new color values
             const rgb = darker.rgb().array();
