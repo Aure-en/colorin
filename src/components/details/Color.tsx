@@ -44,6 +44,7 @@ const Color: React.FC<Props> = ({ color }: Props): ReactElement => {
           {locked.find(
             (lock) => Array.isArray(lock) && lock.join('') === color.rgb.join(''),
           ) && 'locked'}
+          {isHovered && <div>Edit</div>}
         </Buttons>
       </Background>
       <div>{color.name}</div>
@@ -72,7 +73,6 @@ const Background = styled.button<{
   position: relative;
   background: ${(props) => props.$color};
   min-height: 5rem;
-  max-height: 5rem;
   flex: 1;
   border: none;
   cursor: pointer;

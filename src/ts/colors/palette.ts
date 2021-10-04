@@ -1,14 +1,19 @@
-import { Values, Color, Steps } from './colors';
+import { Values, Palette, Steps } from './colors';
 
 type Locked = Values | 'N';
 
 interface PaletteState {
+  models: string[],
+  palettes: Palette[],
   locked: Locked[],
-  paletteFromAPI: Color[],
-  mainPalette: Color[],
+  paletteFromAPI: Palette,
+  mainPalette: Palette,
   stepsNumber: number,
   steps: Steps,
-  loading: boolean,
+  loading: {
+    models: boolean,
+    palette: boolean,
+  },
   error: any,
 }
 

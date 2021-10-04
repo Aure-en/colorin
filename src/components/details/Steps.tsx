@@ -27,7 +27,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 1.5rem;
-  margin: 0 1rem;
 
   & > button {
     border: none;

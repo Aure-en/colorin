@@ -1,32 +1,17 @@
-import React, { ReactElement, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import {
-  fetchPalette,
-  getMainPalette,
-  getSteps,
-  setSteps,
-} from '../../slices/paletteSlice';
-import { Steps } from '../../ts/colors/colors';
 import Palette from './Palette';
+import { Palette as PaletteType, Steps } from '../../ts/colors/colors';
 
-const Palettes: React.FC = (): ReactElement => {
-  const dispatch = useDispatch();
-  const mainPalette = useSelector(getMainPalette);
-  const steps: Steps = useSelector(getSteps);
+interface Props {
+  mainPalette: PaletteType,
+  steps: Steps,
+}
 
-  useEffect(() => {
-    dispatch(fetchPalette());
-  }, []);
-
-  useEffect(() => {
-    dispatch(setSteps());
-  }, [mainPalette]);
-
-  return (
-    <Wrapper>
-      {steps.light.map(
-        (palette, index) => palette.length > 0 && (
+const Palettes: React.FC<Props> = ({ mainPalette, steps }: Props): ReactElement => (
+  <Wrapper>
+    {steps.light.map(
+      (palette, index) => palette.length > 0 && (
         <Palette
           key={`${index}-${palette.reduce(
             (concat, color) => concat + color.hex,
@@ -34,13 +19,13 @@ const Palettes: React.FC = (): ReactElement => {
           )}`}
           palette={palette}
         />
-        ),
-      )}
+      ),
+    )}
 
-      {mainPalette?.length > 0 && <Palette palette={mainPalette} main />}
+    {mainPalette?.length > 0 && <Palette palette={mainPalette} main />}
 
-      {steps.dark.map(
-        (palette, index) => palette.length > 0 && (
+    {steps.dark.map(
+      (palette, index) => palette.length > 0 && (
         <Palette
           key={`${index}-${palette.reduce(
             (concat, color) => concat + color.hex,
@@ -48,11 +33,10 @@ const Palettes: React.FC = (): ReactElement => {
           )}`}
           palette={palette}
         />
-        ),
-      )}
-    </Wrapper>
-  );
-};
+      ),
+    )}
+  </Wrapper>
+);
 
 Palettes.propTypes = {};
 
@@ -61,6 +45,7 @@ const Wrapper = styled.main`
   height: 100%;
   grid-gap: 1rem;
   width: 100%;
+  margin: 0 3rem 0 2rem;
 `;
 
 export default Palettes;

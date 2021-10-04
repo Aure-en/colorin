@@ -11,6 +11,7 @@ import PaletteState from '../ts/colors/palette';
 import Store from '../ts/store';
 
 const initialState: PaletteState = {
+  models: [], // Models from Colormind
   paletteFromAPI: [], // Palette fetched from API.
   mainPalette: [], // Palette modified by the user to fit their taste.
   locked: ['N', 'N', 'N', 'N'], // Locked colors.
@@ -19,9 +20,21 @@ const initialState: PaletteState = {
     light: [],
     dark: [],
   },
-  loading: false,
+  palettes: [], // Group of palettes from API.
+  loading: {
+    models: false,
+    palette: false,
+  },
   error: null,
 };
+
+export const fetchModels = createAsyncThunk('palette/fetchModels', async () => {
+  // Get available models from the Colormind API.
+  const response = await fetch('http://colormind.io/list/');
+  const json = await response.json();
+  const { result }: { result: string[] } = json;
+  return result;
+});
 
 export const fetchPalette = createAsyncThunk<
   ColorType[],
@@ -29,11 +42,14 @@ export const fetchPalette = createAsyncThunk<
   { state: Store }
 >('palette/fetchPalette', async (undefined, { getState }) => {
   // Get a 5 colors palette from Colormind API.
-  const { locked } = getState().palette;
+  const { models, locked } = getState().palette;
   const response = await fetch('http://colormind.io/api/', {
     method: 'POST',
     body: JSON.stringify({
-      model: 'default',
+      model:
+        models.length === 0
+          ? 'default'
+          : models[Math.floor(Math.random() * models.length)],
       input: [...locked, 'N'],
     }),
   });
@@ -201,15 +217,26 @@ const paletteSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchPalette.pending, (state: PaletteState) => {
-        state.loading = true;
+        state.loading.palette = true;
       })
       .addCase(fetchPalette.fulfilled, (state: PaletteState, action) => {
         state.paletteFromAPI = action.payload;
         state.mainPalette = action.payload;
-        state.loading = false;
+        state.loading.palette = false;
       })
       .addCase(fetchPalette.rejected, (state: PaletteState) => {
-        state.loading = false;
+        state.loading.palette = false;
+        state.error = 'Sorry, something went wrong.';
+      })
+      .addCase(fetchModels.pending, (state: PaletteState) => {
+        state.loading.models = true;
+      })
+      .addCase(fetchModels.fulfilled, (state: PaletteState, action) => {
+        state.models = action.payload;
+        state.loading.models = false;
+      })
+      .addCase(fetchModels.rejected, (state: PaletteState) => {
+        state.loading.models = false;
         state.error = 'Sorry, something went wrong.';
       });
   },
@@ -228,5 +255,9 @@ export const getSteps = (state: Store): Steps => state.palette.steps;
 export const getStepsNumber = (state: Store): number => state.palette.stepsNumber;
 
 export const getLocked = (state: Store): (Values | 'N')[] => state.palette.locked;
+
+export const getModels = (state: Store): string[] => state.palette.models;
+
+export const isPaletteLoading = (state: Store): boolean => state.palette.loading.palette;
 
 export default paletteSlice.reducer;
