@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../app/hooks';
 import styled from 'styled-components';
 import { getCopied } from '../../slices/copySlice';
 import Copy from './Copy';
 
 const Copies: React.FC = (): ReactElement => {
-  const copied = useSelector(getCopied);
+  const copied = useAppSelector(getCopied);
 
   return (
     <Wrapper>

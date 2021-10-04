@@ -1,12 +1,13 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ColorConverter from 'color';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Color as ColorType } from '../../ts/colors/colors';
 import { getLocked, toggleLock } from '../../slices/paletteSlice';
 import useCopy from '../../hooks/useCopy';
 import IconLock from '../../assets/icons/IconLock';
+import Edit from './Edit';
 
 interface Props {
   color: ColorType;
@@ -14,8 +15,8 @@ interface Props {
 }
 
 const Color: React.FC<Props> = ({ color, index }: Props): ReactElement => {
-  const locked = useSelector(getLocked);
-  const dispatch = useDispatch();
+  const locked = useAppSelector(getLocked);
+  const dispatch = useAppDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [textColor, setTextColor] = useState('');
   const { copy } = useCopy();
@@ -54,9 +55,7 @@ const Color: React.FC<Props> = ({ color, index }: Props): ReactElement => {
           handleRightClick(e);
         }}
       >
-        <Buttons>
-          {isHovered && <div>Edit</div>}
-        </Buttons>
+        <Edit index={index} />
       </Background>
       <Informations>
         <div>
@@ -96,6 +95,7 @@ const Background = styled.button<{
   flex: 1;
   border: none;
   cursor: pointer;
+  padding: 0;
 
   &:focus {
     outline: 2px solid transparent;

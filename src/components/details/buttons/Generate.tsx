@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchPalette, getModels } from '../../../slices/paletteSlice';
 
 const Generate = () => {
-  const dispatch = useDispatch();
-  const models = useSelector(getModels);
+  const dispatch = useAppDispatch();
+  const models = useAppSelector(getModels);
 
   return (
     <Button type="button" onClick={() => { if (models.length > 0) dispatch(fetchPalette()); }}>

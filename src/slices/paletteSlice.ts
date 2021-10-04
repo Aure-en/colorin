@@ -57,7 +57,7 @@ export const fetchPalette = createAsyncThunk<
   const json = await response.json();
   const { result }: { result: Values[] } = json; // Color RGB.
 
-  const paletteWithLocked = result.map((color, index) => (Array.isArray(locked[index]) ? color : <number[]>locked[index]));
+  const paletteWithLocked = result.map((color, index) => (Array.isArray(locked[index]) ? <number[]>locked[index] : color));
 
   // Get color formats from the RGB.
   const palette = paletteWithLocked.map(
@@ -205,6 +205,31 @@ const paletteSlice = createSlice({
         };
       },
     },
+
+    updatePalette: {
+      reducer(
+        state,
+        action: PayloadAction<{ index: number; color: ColorType }>,
+      ) {
+        state.mainPalette[action.payload.index] = action.payload.color;
+      },
+
+      prepare(index: number, hex: string) {
+        // Return color with all formats and names.
+        const color = Color(hex);
+        return {
+          payload: {
+            color: {
+              hex,
+              rgb: color.rgb().array(),
+              hsl: color.hsl().array(),
+              name: colorName(hex).name,
+            },
+            index,
+          },
+        };
+      },
+    },
   },
 
   extraReducers(builder) {
@@ -236,7 +261,12 @@ const paletteSlice = createSlice({
 });
 
 export const {
-  setSteps, incrementSteps, decrementSteps, toggleLock, reset,
+  setSteps,
+  incrementSteps,
+  decrementSteps,
+  toggleLock,
+  reset,
+  updatePalette,
 } = paletteSlice.actions;
 
 export const getPaletteFromAPI = (state: Store): PaletteType => state.palette.paletteFromAPI;
@@ -252,5 +282,7 @@ export const getLocked = (state: Store): (Values | 'N')[] => state.palette.locke
 export const getModels = (state: Store): string[] => state.palette.models;
 
 export const isPaletteLoading = (state: Store): boolean => state.palette.loading.palette;
+
+export const getColor = (state: Store, index: number): ColorType => state.palette.mainPalette[index];
 
 export default paletteSlice.reducer;

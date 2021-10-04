@@ -1,11 +1,10 @@
 import React from 'react';
-
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../app/hooks';
 import { reset } from '../../../slices/paletteSlice';
 
 const Reset = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Button type="button" onClick={() => { dispatch(reset()); }}>
