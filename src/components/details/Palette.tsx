@@ -17,6 +17,7 @@ const Palette: React.FC<Props> = ({ palette, main }: Props): ReactElement => (
         ? (
           <Color
             key={`${index}-${color.hex}`}
+            index={index}
             color={color}
           />
 

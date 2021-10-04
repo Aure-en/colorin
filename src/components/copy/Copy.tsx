@@ -25,6 +25,10 @@ const Message = styled.div<{
   position: absolute;
   top: ${(props) => props.$y}px;
   left: ${(props) => props.$x}px;
+  background: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-size: 0.875rem;
 `;
 
 export default Copy;

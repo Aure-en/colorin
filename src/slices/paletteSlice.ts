@@ -14,7 +14,7 @@ const initialState: PaletteState = {
   models: [], // Models from Colormind
   paletteFromAPI: [], // Palette fetched from API.
   mainPalette: [], // Palette modified by the user to fit their taste.
-  locked: ['N', 'N', 'N', 'N'], // Locked colors.
+  locked: ['N', 'N', 'N', 'N', 'N'], // Locked colors.
   stepsNumber: 2,
   steps: {
     light: [],
@@ -47,17 +47,20 @@ export const fetchPalette = createAsyncThunk<
     method: 'POST',
     body: JSON.stringify({
       model:
+        // Select a random model
         models.length === 0
           ? 'default'
           : models[Math.floor(Math.random() * models.length)],
-      input: [...locked, 'N'],
+      input: locked,
     }),
   });
   const json = await response.json();
   const { result }: { result: Values[] } = json; // Color RGB.
 
+  const paletteWithLocked = result.map((color, index) => (Array.isArray(locked[index]) ? color : <number[]>locked[index]));
+
   // Get color formats from the RGB.
-  const palette = result.map(
+  const palette = paletteWithLocked.map(
     (
       color,
     ): {
@@ -167,47 +170,37 @@ const paletteSlice = createSlice({
     },
 
     incrementSteps(state) {
-      return {
-        ...state,
-        stepsNumber: state.stepsNumber + 1,
-      };
+      state.stepsNumber += 1;
     },
 
     decrementSteps(state) {
-      return {
-        ...state,
-        stepsNumber: state.stepsNumber - 1,
-      };
+      state.stepsNumber -= 1;
+    },
+
+    reset(state) {
+      state.mainPalette = JSON.parse(JSON.stringify([...state.paletteFromAPI]));
     },
 
     toggleLock: {
-      reducer(state, action: PayloadAction<{ color: Values }>) {
-        /**
-         * Search for the color in the locked array.
-         * If it is in the array, unlock it.
-         * If it is not in the array, lock it if there are < 4 colors locked.
-         */
-        const colorIndex = state.locked.findIndex(
-          (color) => Array.isArray(color)
-            && color.join('') === action.payload.color.join(''),
-        );
-
-        // If the color is locked, unlock it.
-        if (colorIndex !== -1) {
-          state.locked[colorIndex] = 'N';
+      reducer(state, action: PayloadAction<{ index: number; color: Values }>) {
+        // If the color is already locked, unlock it.
+        if (
+          Array.isArray(state.locked[action.payload.index])
+          && (<number[]>state.locked[action.payload.index]).join('')
+            === action.payload.color.join('')
+        ) {
+          state.locked[action.payload.index] = 'N';
+          // If the selected color is not already locked, lock it.
         } else {
-          // If the color is not unlocked yet, lock if it there are < 4 colors locked.
-          const freeLock = state.locked.findIndex((lock) => lock === 'N');
-          if (freeLock !== -1) {
-            state.locked[freeLock] = action.payload.color;
-          }
+          state.locked[action.payload.index] = action.payload.color;
         }
       },
 
-      prepare(color: Values) {
+      prepare(index: number, color: Values) {
         return {
           payload: {
             color,
+            index,
           },
         };
       },
@@ -221,7 +214,7 @@ const paletteSlice = createSlice({
       })
       .addCase(fetchPalette.fulfilled, (state: PaletteState, action) => {
         state.paletteFromAPI = action.payload;
-        state.mainPalette = action.payload;
+        state.mainPalette = JSON.parse(JSON.stringify([...action.payload]));
         state.loading.palette = false;
       })
       .addCase(fetchPalette.rejected, (state: PaletteState) => {
@@ -243,7 +236,7 @@ const paletteSlice = createSlice({
 });
 
 export const {
-  setSteps, incrementSteps, decrementSteps, toggleLock,
+  setSteps, incrementSteps, decrementSteps, toggleLock, reset,
 } = paletteSlice.actions;
 
 export const getPaletteFromAPI = (state: Store): PaletteType => state.palette.paletteFromAPI;

@@ -5,6 +5,7 @@ import Details from './routes/Details';
 import List from './routes/List';
 import Copies from './components/copy/Copies';
 import { fetchModels } from './slices/paletteSlice';
+import GlobalStyles from './style/globalStyles';
 
 function App() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <Router>
+      <GlobalStyles />
       <Switch>
         <Route exact path="/" component={Details} />
         <Route exact path="/list" component={List} />

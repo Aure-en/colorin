@@ -1,19 +1,23 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import ColorConverter from 'color';
 import { Color as ColorType } from '../../ts/colors/colors';
 import { getLocked, toggleLock } from '../../slices/paletteSlice';
 import useCopy from '../../hooks/useCopy';
+import IconLock from '../../assets/icons/IconLock';
 
 interface Props {
   color: ColorType;
+  index: number,
 }
 
-const Color: React.FC<Props> = ({ color }: Props): ReactElement => {
+const Color: React.FC<Props> = ({ color, index }: Props): ReactElement => {
   const locked = useSelector(getLocked);
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
+  const [textColor, setTextColor] = useState('');
   const { copy } = useCopy();
 
   /**
@@ -22,8 +26,18 @@ const Color: React.FC<Props> = ({ color }: Props): ReactElement => {
    */
   const handleRightClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    dispatch(toggleLock(color.rgb));
+    dispatch(toggleLock(index, color.rgb));
   };
+
+  // If the color is bright, darken it to use it on the card.
+  useEffect(() => {
+    const newColor = ColorConverter.rgb(color.rgb);
+    if (newColor.hsl().array()[2] > 70) {
+      setTextColor(newColor.lightness(70).hsl().string());
+    } else {
+      setTextColor(newColor.hsl().string());
+    }
+  }, [color]);
 
   return (
     <Card
@@ -41,14 +55,18 @@ const Color: React.FC<Props> = ({ color }: Props): ReactElement => {
         }}
       >
         <Buttons>
-          {locked.find(
-            (lock) => Array.isArray(lock) && lock.join('') === color.rgb.join(''),
-          ) && 'locked'}
           {isHovered && <div>Edit</div>}
         </Buttons>
       </Background>
-      <div>{color.name}</div>
-      <div>{color.hex}</div>
+      <Informations>
+        <div>
+          <div>{color.name}</div>
+          <Code $color={textColor}>{color.hex}</Code>
+        </div>
+        {locked.find(
+          (lock) => Array.isArray(lock) && lock.join('') === color.rgb.join(''),
+        ) && <IconLock color={textColor} />}
+      </Informations>
     </Card>
   );
 };
@@ -60,6 +78,7 @@ Color.propTypes = {
     rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   }).isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 const Card = styled.div`
@@ -73,6 +92,7 @@ const Background = styled.button<{
   position: relative;
   background: ${(props) => props.$color};
   min-height: 5rem;
+  max-height: 5rem;
   flex: 1;
   border: none;
   cursor: pointer;
@@ -80,6 +100,18 @@ const Background = styled.button<{
   &:focus {
     outline: 2px solid transparent;
   }
+`;
+
+const Code = styled.small<{
+  $color: string,
+}>`
+  color: ${(props) => props.$color};
+  font-size: 0.925rem;
+`;
+
+const Informations = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Buttons = styled.div`

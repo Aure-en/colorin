@@ -45,7 +45,6 @@ const Wrapper = styled.main`
   height: 100%;
   grid-gap: 1rem;
   width: 100%;
-  margin: 0 3rem 0 2rem;
 `;
 
 export default Palettes;

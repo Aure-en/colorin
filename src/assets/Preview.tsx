@@ -16,31 +16,16 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
     if (mainPalette.length === 0) return;
     // Sort by saturation
     const palette: Palette = JSON.parse(
-      JSON.stringify([...mainPalette].sort((a, b) => a.hsl[1] - b.hsl[1])),
+      JSON.stringify([...mainPalette].sort((a, b) => a.hsl[2] - b.hsl[2])),
     );
-
-    // Adjust brightness
-    if (palette[0].hsl[2] > 20) palette[0].hsl[2] = 20;
-
-    if (palette[1].hsl[2] < 30) palette[1].hsl[2] = 30;
-    if (palette[1].hsl[2] > 40) palette[1].hsl[2] = 40;
-
-    if (palette[2].hsl[2] < 80) palette[2].hsl[2] = 80;
-
-    if (palette[3].hsl[2] < 60) palette[3].hsl[2] = 60;
-    if (palette[3].hsl[2] > 70) palette[3].hsl[2] = 70;
-
-    if (palette[4].hsl[2] < 80) palette[4].hsl[2] = 80;
 
     setPalette(palette);
   }, [mainPalette]);
 
   if (palette.length > 0) {
     const primary = Color.hsl(palette[0].hsl).hex(); // Phone and lines
-    const secondary = Color.hsl(palette[1].hsl).hex(); // Sea and buttons
-    const tertiary = Color.hsl(palette[2].hsl).hex(); // Background square
-    const quaternary = Color.hsl(palette[3].hsl).hex(); // Borders
-    const quinary = Color.hsl(palette[4].hsl).hex(); // Clouds
+    const secondary = Color.hsl(palette[2].hsl).hex(); // Sea and buttons
+    const tertiary = Color.hsl(palette[3].hsl).hex(); // Borders and square
 
     return (
       <Svg
@@ -71,7 +56,7 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
           />
           <path
             id="f6ecfbd0-b722-47f2-8687-80b685eaa1e2"
-            fill={quaternary}
+            fill={tertiary}
             d="M830,1914.7c-11,0-20,20.7-20,46.1c0,25.5,8.9,46.1,20,46.1h209.4
 						c11,0,20-20.7,20-46.1c0-25.5-8.9-46.1-20-46.1H830z"
           />
@@ -93,13 +78,14 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
           <path fill={backgroundColor} d="M200.6,807" />
           <path fill={backgroundColor} d="M1018.9,207.8" />
           <path fill={backgroundColor} d="M220.5,207.8" />
-          <path fill={quaternary} d="M172.6,685.1" />
-          <path fill={quaternary} d="M193.1,717.5" />
+          <path fill={tertiary} d="M172.6,685.1" />
+          <path fill={tertiary} d="M193.1,717.5" />
           <path
             id="f7c5b60e-33a7-4042-9d2c-5c8c9116b84c"
-            fill={quaternary}
+            fill={tertiary}
             d="M195.2,1367.5c-4.1,0-7.4,3.6-7.4,8v273.9c0,4.4,3.3,8,7.4,8h863.4
 						c4.1,0,7.4-3.6,7.4-8v-273.9c0-4.4-3.3-8-7.4-8L195.2,1367.5z"
+            style={{ opacity: 0.8 }}
           />
           <path
             id="a8273e4e-93d2-47bb-9b17-df51a96534af"
@@ -116,7 +102,7 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
             id="b60d1a48-178f-4eb5-a9a3-9e4316169c72"
             x="434.9"
             y="1559.8"
-            fill={quaternary}
+            fill={tertiary}
             width="567.9"
             height="3.5"
           />
@@ -151,9 +137,10 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
           <path fill={backgroundColor} d="M698.7,1382.3" />
           <path
             id="f7c5b60e-33a7-4042-9d2c-5c8c9116b84c_1_"
-            fill={quaternary}
+            fill={tertiary}
             d="M198.3,957.8c-4.1,0-7.4,3.6-7.4,8v273.9c0,4.4,3.3,8,7.4,8
 						h863.4c4.1,0,7.4-3.6,7.4-8V965.8c0-4.4-3.3-8-7.4-8L198.3,957.8z"
+            style={{ opacity: 0.8 }}
           />
           <path
             id="a8273e4e-93d2-47bb-9b17-df51a96534af_1_"
@@ -204,6 +191,7 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
           <polyline
             fill={tertiary}
             points="1182.1,866.3 1109.4,939.1 723.3,553 1107.4,168.9 1182.1,243.5 	"
+            style={{ opacity: 0.3 }}
           />
           <path className="st7" d="M1182.1,866.3" />
           <g>
@@ -219,15 +207,17 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
 							c0.3-2.8,0.6-5.5,0.8-8.1c0.7-8.3,1.1-16.9,1.1-25.4C921.6,511.2,919.8,492,916.1,473.1z"
             />
             <path
-              fill={quinary}
+              fill={tertiary}
               d="M693.7,289.3c-0.4,0-0.8-0.3-0.8-0.8c0-0.4,0.3-0.8,0.8-0.8c0,0,0,0,0,0h51.8c2.7-11.1,12.6-18.9,23.9-18.9
 							c5.6-18.1,24.9-28.3,43-22.7c8.2,2.5,15.1,8,19.5,15.4c0.8-0.1,1.5-0.1,2.2-0.1c15.3,0,27.9,11.8,29,27.1c0,0.4-0.3,0.8-0.7,0.8
 							c0,0,0,0,0,0c0,0,0,0-0.1,0c-0.4,0-0.8-0.3-0.8-0.7L693.7,289.3z"
+              style={{ opacity: 0.4 }}
             />
             <path
-              fill={quinary}
+              fill={tertiary}
               d="M853.1,299.3H724.8c-0.4,0-0.8-0.4-0.8-0.8c0-0.4,0.3-0.8,0.8-0.8h128.2c0.4,0,0.8,0.4,0.8,0.8
 							C853.9,299,853.5,299.3,853.1,299.3z"
+              style={{ opacity: 0.4 }}
             />
             <rect
               x="380.5"
@@ -247,7 +237,7 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
               fill={secondary}
               d="M902.1,632.8c-41.7,113.2-150.5,194-278.2,194s-236.5-80.8-278.2-194H902.1z"
             />
-            <circle fill={quinary} cx="415.7" cy="382.7" r="102.3" />
+            <circle fill={tertiary} cx="415.7" cy="382.7" r="102.3" style={{ opacity: 0.4 }} />
             <path
               fill={primary}
               d="M916.1,473.1c-0.3-1.7-0.7-3.4-1-5.2c-0.8-3.8-1.7-7.7-2.7-11.5c-0.5-1.9-1-3.8-1.5-5.8v0
@@ -491,15 +481,17 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
 							S675.1,748.9,672.7,748.9L672.7,748.9z"
             />
             <path
-              fill={quinary}
+              fill={tertiary}
               d="M549.7,364.3c-0.4,0-0.8-0.3-0.8-0.8c0-0.4,0.3-0.8,0.8-0.8c0,0,0,0,0,0h51.8c2.7-11.1,12.6-18.9,23.9-18.9
 							c5.6-18.1,24.9-28.3,43-22.7c8.2,2.5,15.1,8,19.5,15.4c0.8-0.1,1.5-0.1,2.2-0.1c15.3,0,27.9,11.8,29,27.1c0,0.4-0.3,0.8-0.7,0.8
 							c0,0,0,0,0,0c0,0,0,0-0.1,0c-0.4,0-0.8-0.3-0.8-0.7L549.7,364.3z"
+              style={{ opacity: 0.4 }}
             />
             <path
-              fill={quaternary}
+              fill={tertiary}
               d="M612.1,385.6h-43c-0.4,0-0.8-0.4-0.8-0.8c0-0.4,0.3-0.8,0.8-0.8h43c0.4,0,0.8,0.3,0.8,0.8
 							C612.9,385.3,612.6,385.6,612.1,385.6C612.1,385.6,612.1,385.6,612.1,385.6z"
+              style={{ opacity: 0.4 }}
             />
             <path
               fill={primary}
