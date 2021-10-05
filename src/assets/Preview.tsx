@@ -535,6 +535,7 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
 
 const Svg = styled.svg`
   max-height: 80vh;
+  width: 20rem;
 `;
 
 export default Preview;

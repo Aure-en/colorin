@@ -2,16 +2,17 @@ import React, { useState, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
+import { useAppSelector } from '../../app/hooks';
+import IconLock from '../../assets/icons/IconLock';
 import { Color as ColorType } from '../../ts/colors/colors';
-import useCopy from '../../hooks/useCopy';
-import Name from './Name';
+import { getLocked } from '../../slices/paletteSlice';
 
 interface Props {
-  color: ColorType;
+  color: ColorType
 }
 
-const Step : React.FC<Props> = ({ color }: Props): ReactElement => {
-  const { copy } = useCopy();
+const Name: React.FC<Props> = ({ color }: Props): ReactElement => {
+  const locked = useAppSelector(getLocked);
   const [textColor, setTextColor] = useState('');
 
   // If the color is bright, darken it to use it on the card.
@@ -25,14 +26,19 @@ const Step : React.FC<Props> = ({ color }: Props): ReactElement => {
   }, [color]);
 
   return (
-    <Card>
-      <Background $color={color.hex} onClick={(e) => { copy(e.pageX, e.pageY, color); }} />
-      <Name color={color} />
-    </Card>
+    <Informations>
+      <div>
+        <div>{color.name}</div>
+        <Code $color={textColor}>{color.hex}</Code>
+      </div>
+      {locked.find(
+        (lock) => Array.isArray(lock) && lock.join('') === color.rgb.join(''),
+      ) && <IconLock color={textColor} />}
+    </Informations>
   );
 };
 
-Step.propTypes = {
+Name.propTypes = {
   color: PropTypes.shape({
     name: PropTypes.string.isRequired,
     hex: PropTypes.string.isRequired,
@@ -41,32 +47,17 @@ Step.propTypes = {
   }).isRequired,
 };
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Background = styled.button<{
-  $color: string;
-}>`
-  position: relative;
-  background: ${(props) => props.$color};
-  min-height: 3.5rem;
-  max-height: 3.5rem;
-  flex: 1;
-  border: none;
-  cursor: pointer;
-
-  &:focus {
-    outline: 2px solid transparent;
-  }
-`;
-
 const Code = styled.small<{
   $color: string,
 }>`
   color: ${(props) => props.$color};
   font-size: 0.925rem;
+  text-transform: uppercase;
 `;
 
-export default Step;
+const Informations = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export default Name;

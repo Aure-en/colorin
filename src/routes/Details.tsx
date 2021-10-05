@@ -55,13 +55,11 @@ const Details = () => {
     <ThemeProvider theme={theme}>
       <Wrapper>
         <Steps />
-        <Center>
-          <Palettes mainPalette={mainPalette} steps={steps} />
-          <Buttons>
-            <Generate />
-            <Reset />
-          </Buttons>
-        </Center>
+        <Palettes mainPalette={mainPalette} steps={steps} />
+        <Buttons>
+          <Generate />
+          <Reset />
+        </Buttons>
         <Preview mainPalette={mainPalette} />
       </Wrapper>
     </ThemeProvider>
@@ -69,23 +67,22 @@ const Details = () => {
 };
 
 const Wrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: min-content 2.5fr auto;
+  grid-template-rows: 1fr min-content;
+  grid-column-gap: 2.5rem;
+  grid-row-gap: 1rem;
   align-items: center;
-  padding: 0 3rem;
-  min-height: 100vh;
-`;
-
-const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 2rem 3rem 2rem 2rem;
+  padding: 2rem;
+  min-height: calc(100vh - 6rem);
 `;
 
 const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: 2rem;
+  grid-row: 2;
+  grid-column: 2;
+  align-self: start;
 
   & > button {
     margin-left: 1rem;

@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Palette: React.FC<Props> = ({ palette, main }: Props): ReactElement => (
-  <Row>
+  <Row $main={main}>
     {palette.map((color: ColorType, index: number) => (
       main
         ? (
@@ -48,11 +48,14 @@ Palette.defaultProps = {
   main: false,
 };
 
-const Row = styled.div`
+const Row = styled.div<{
+  $main?: boolean,
+}>`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 1rem;
   width: 100%;
+  min-height: ${(props) => props.$main && '80%'};
 `;
 
 export default Palette;
