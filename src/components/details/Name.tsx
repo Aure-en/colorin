@@ -58,6 +58,7 @@ const Code = styled.small<{
 const Informations = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%;
 `;
 
 export default Name;

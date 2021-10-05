@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import Color from 'color';
-import colorName from '../utils/colorName';
+import {
+  getColorFromHex, getColorFromRgb, getBrighterStep, getDarkerStep, getColorSteps,
+} from '../utils/color';
 import {
   Color as ColorType,
   Palette as PaletteType,
@@ -62,32 +64,11 @@ export const fetchPalette = createAsyncThunk<
   // Get color formats from the RGB.
   const palette = paletteWithLocked.map(
     (
-      color,
-    ): {
-      rgb: Values;
-      hex: string;
-      hsl: Values;
-    } => {
-      const colorObj = Color.rgb(color);
-      const colorHex = colorObj.hex();
-      const colorHsl = colorObj.hsl().array();
-      return {
-        rgb: color,
-        hex: colorHex,
-        hsl: colorHsl,
-      };
-    },
+      rgb,
+    ): ColorType => getColorFromRgb(rgb),
   );
 
-  // Get nearest color name for every palette color.
-  const paletteWithName: PaletteType = palette.map(
-    (color): ColorType => ({
-      ...color,
-      name: colorName(color.hex).name,
-    }),
-  );
-
-  return paletteWithName;
+  return palette;
 });
 
 const paletteSlice = createSlice({
@@ -110,56 +91,12 @@ const paletteSlice = createSlice({
       for (let step = 1; step <= state.stepsNumber; step += 1) {
         // Light steps
         steps.light.unshift(
-          palette.map((color: ColorType): ColorType => {
-            // Lighten the color
-            const colorObject = Color.rgb(color.rgb);
-            const luminosity = colorObject.hsl().array()[2];
-            const lighter = colorObject.lightness(
-              ((100 - luminosity) / (state.stepsNumber + 1)) * step + luminosity,
-            );
-
-            // Get new color values
-            const rgb = lighter.rgb().array();
-            const hex = lighter.hex();
-            const hsl = lighter.hsl().array();
-
-            // Get color name
-            const { name } = colorName(hex);
-
-            return {
-              name,
-              rgb,
-              hex,
-              hsl,
-            };
-          }),
+          palette.map((color: ColorType): ColorType => getBrighterStep(color, step)),
         );
 
         // Dark steps
         steps.dark.push(
-          palette.map((color: ColorType): ColorType => {
-            // Darken the color
-            const colorObject = Color.rgb(color.rgb);
-            const luminosity = colorObject.hsl().array()[2];
-            const darker = colorObject.lightness(
-              luminosity - (luminosity / (state.stepsNumber + 1)) * step,
-            );
-
-            // Get new color values
-            const rgb = darker.rgb().array();
-            const hex = darker.hex();
-            const hsl = darker.hsl().array();
-
-            // Get color name
-            const { name } = colorName(hex);
-
-            return {
-              name,
-              rgb,
-              hex,
-              hsl,
-            };
-          }),
+          palette.map((color: ColorType): ColorType => getDarkerStep(color, step)),
         );
       }
 
@@ -167,6 +104,26 @@ const paletteSlice = createSlice({
         ...state,
         steps,
       };
+    },
+
+    setStep: {
+      reducer(state, action: PayloadAction <{ index:number, color: ColorType }>) {
+        const steps = getColorSteps(action.payload.color, state.stepsNumber);
+
+        for (let step = 0; step < state.stepsNumber; step += 1) {
+          state.steps.light[step][action.payload.index] = steps.light[step];
+          state.steps.dark[step][action.payload.index] = steps.dark[step];
+        }
+      },
+
+      prepare(index: number, hex: string) {
+        return {
+          payload: {
+            index,
+            color: getColorFromHex(hex),
+          },
+        };
+      },
     },
 
     incrementSteps(state) {
@@ -216,15 +173,9 @@ const paletteSlice = createSlice({
 
       prepare(index: number, hex: string) {
         // Return color with all formats and names.
-        const color = Color(hex);
         return {
           payload: {
-            color: {
-              hex,
-              rgb: color.rgb().array(),
-              hsl: color.hsl().array(),
-              name: colorName(hex).name,
-            },
+            color: getColorFromHex(hex),
             index,
           },
         };
@@ -262,6 +213,7 @@ const paletteSlice = createSlice({
 
 export const {
   setSteps,
+  setStep,
   incrementSteps,
   decrementSteps,
   toggleLock,
@@ -281,7 +233,7 @@ export const getLocked = (state: Store): (Values | 'N')[] => state.palette.locke
 
 export const getModels = (state: Store): string[] => state.palette.models;
 
-export const isPaletteLoading = (state: Store): boolean => state.palette.loading.palette;
+export const getIsPaletteLoading = (state: Store): boolean => state.palette.loading.palette;
 
 export const getColor = (state: Store, index: number): ColorType => state.palette.mainPalette[index];
 

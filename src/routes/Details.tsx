@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
 import {
   fetchPalette,
   getMainPalette,
+  getIsPaletteLoading,
   getSteps,
   setSteps,
   getModels,
@@ -23,10 +24,11 @@ const Details = () => {
     quaternary: '#000',
     quinary: '#000',
   });
-  const dispatch = useDispatch();
-  const models = useSelector(getModels);
-  const mainPalette = useSelector(getMainPalette);
-  const steps: StepsType = useSelector(getSteps);
+  const dispatch = useAppDispatch();
+  const models = useAppSelector(getModels);
+  const mainPalette = useAppSelector(getMainPalette);
+  const isPaletteLoading = useAppSelector(getIsPaletteLoading);
+  const steps: StepsType = useAppSelector(getSteps);
 
   // Load models
   useEffect(() => {
@@ -35,8 +37,10 @@ const Details = () => {
 
   // Get steps
   useEffect(() => {
-    dispatch(setSteps());
-  }, [mainPalette]);
+    if (!isPaletteLoading) {
+      dispatch(setSteps());
+    }
+  }, [isPaletteLoading]);
 
   // Setup theme
   useEffect(() => {

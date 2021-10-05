@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../app/hooks';
-import { updatePalette } from '../../slices/paletteSlice';
+import { updatePalette, setStep } from '../../slices/paletteSlice';
 import { Color } from '../../ts/colors/colors';
 
 interface Props {
@@ -17,6 +17,7 @@ const Edit: React.FC<Props> = ({ color, index }: Props) => {
     (e: React.ChangeEvent<HTMLInputElement>): void => {
       if (!throttle) {
         dispatch(updatePalette(index, e.target.value));
+        dispatch(setStep(index, e.target.value));
         throttle = true;
         setTimeout(() => {
           throttle = false;
@@ -37,8 +38,8 @@ const Edit: React.FC<Props> = ({ color, index }: Props) => {
         e.stopPropagation();
       }}
       $index={index}
+      $color={color}
     >
-      edit
       <input
         value={color.hex}
         onChange={handleChange}
@@ -53,14 +54,12 @@ const Edit: React.FC<Props> = ({ color, index }: Props) => {
 
 const Label = styled.label<{
   $index: number;
+  $color: Color
 }>`
   display: flex;
   justify-content: flex-end;
   cursor: pointer;
-  position: absolute;
-  right: ${(props) => `calc(${100 - (props.$index + 1) * 20}%)`};
-  transform: translateX(-${(props) => (4 - props.$index) * 15}%);
-  top: -1rem;
+  background: ${(props) => props.$color.hex};
 
   & > input {
     border: none;
