@@ -37,7 +37,6 @@ const Wrapper = styled.div`
   grid-row-gap: 1rem;
   align-items: center;
   padding: 2rem;
-  min-height: calc(100vh - 10rem);
 `;
 
 const Buttons = styled.div`

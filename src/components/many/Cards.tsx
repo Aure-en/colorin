@@ -33,7 +33,6 @@ const List = styled.ul`
   width: 100%;
   flex: 1;
   grid-gap: 2rem;
-  padding: 3rem;
 `;
 
 export default Cards;

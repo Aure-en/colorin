@@ -3,25 +3,25 @@ import styled from 'styled-components';
 import { useAppSelector } from '../app/hooks';
 import { getPalettesFromAPI, getArePalettesLoading } from '../slices/paletteSlice';
 import Cards from '../components/many/Cards';
+import Generate from '../components/many/buttons/Generate';
 
 const List: React.FC = () => {
   const palettes = useAppSelector(getPalettesFromAPI);
   const arePalettesLoading = useAppSelector(getArePalettesLoading);
 
-  if (!arePalettesLoading) {
-    return (
-      <Wrapper>
-        <Cards palettes={palettes} />
-      </Wrapper>
-    );
-  }
-
-  return <></>;
+  return (
+    <Wrapper>
+      <Cards palettes={palettes} />
+      <Generate />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.main`
-  display: flex;
-  min-height: calc(100vh - 5rem);
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  padding: 3rem;
+  flex: 1;
 `;
 
 export default List;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactElement } from 'react';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from './app/hooks';
 import {
@@ -73,15 +73,25 @@ const App: React.FC = (): ReactElement => {
     <Router>
       <GlobalStyles />
       <ThemeProvider theme={theme}>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Details} />
-          <Route exact path="/list" component={List} />
-        </Switch>
+
+        <Wrapper>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Details} />
+            <Route exact path="/list" component={List} />
+          </Switch>
+
+        </Wrapper>
       </ThemeProvider>
       <Copies />
     </Router>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 
 export default App;
