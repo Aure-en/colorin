@@ -38,6 +38,7 @@ const Wrapper = styled.li`
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+  overflow: hidden;
 `;
 
 const Colors = styled.div`

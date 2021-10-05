@@ -23,10 +23,10 @@ const App: React.FC = (): ReactElement => {
   const paletteLoading = useAppSelector(getPaletteLoading);
   const [theme, setTheme] = useState({
     primary: '#000',
-    secondary: '#000',
-    tertiary: '#000',
-    quaternary: '#000',
-    quinary: '#000',
+    secondary: '#aaa',
+    tertiary: '#bbb',
+    quaternary: '#ccc',
+    quinary: '#ddd',
     text: '#fff',
     text_dark: '#000',
     text_neutral: '#2c2c2c',

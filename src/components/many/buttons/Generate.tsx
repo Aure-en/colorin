@@ -1,18 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { fetchPalettes, getModels } from '../../../slices/paletteSlice';
+import { fetchPalettes, getModels, getPalettesLoading } from '../../../slices/paletteSlice';
+import { ReactComponent as IconLoad } from '../../../assets/icons/loader.svg';
 
-const Generate = () => {
+const Generate: React.FC = () => {
   const dispatch = useAppDispatch();
   const models = useAppSelector(getModels);
+  const palettesLoading = useAppSelector(getPalettesLoading);
 
   return (
-    <Button type="button" onClick={() => { if (models.length > 0) dispatch(fetchPalettes()); }}>
-      Generate
-    </Button>
+    <Wrapper>
+      {palettesLoading === 'pending' && <IconLoad />}
+      <Button type="button" onClick={() => { if (models.length > 0) dispatch(fetchPalettes()); }}>
+        Generate
+      </Button>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-self: end;
+`;
 
 const Button = styled.button`
   color: white;
@@ -22,7 +33,7 @@ const Button = styled.button`
   font-size: 0.925rem;
   border: none;
   transition: background-color 0.2s ease-out;
-  justify-self: end;
+  margin-left: 1rem;
 
   &:hover {
     background: ${(props) => props.theme.primary};

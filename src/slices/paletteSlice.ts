@@ -309,7 +309,7 @@ export const getModels = (state: Store): string[] => state.palette.models;
 
 export const getPaletteLoading = (state: Store): Loading => state.palette.loading.palette;
 
-export const getArePalettesLoading = (state: Store): Loading => state.palette.loading.palettes;
+export const getPalettesLoading = (state: Store): Loading => state.palette.loading.palettes;
 
 export const getColor = (state: Store, index: number): ColorType => state.palette.mainPalette[index];
 

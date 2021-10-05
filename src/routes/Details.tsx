@@ -50,7 +50,6 @@ const Buttons = styled.div`
   & > button {
     margin-left: 1rem;
   }
-
 `;
 
 export default Details;
