@@ -8,7 +8,8 @@ declare module 'styled-components' {
     quaternary: string,
     quinary: string,
     text: string,
-    neutral_text: string,
-    neutral_silent: string,
+    text_dark: string,
+    text_neutral: string,
+    text_bright: string,
   }
 }

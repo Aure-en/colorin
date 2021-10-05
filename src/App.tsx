@@ -7,7 +7,7 @@ import {
   fetchModels,
   fetchPalette,
   fetchPalettes,
-  getIsPaletteLoading,
+  getPaletteLoading,
   setSteps,
   getModels,
 } from './slices/paletteSlice';
@@ -20,7 +20,7 @@ import GlobalStyles from './style/globalStyles';
 const App: React.FC = (): ReactElement => {
   const models = useAppSelector(getModels);
   const mainPalette = useAppSelector(getMainPalette);
-  const isPaletteLoading = useAppSelector(getIsPaletteLoading);
+  const paletteLoading = useAppSelector(getPaletteLoading);
   const [theme, setTheme] = useState({
     primary: '#000',
     secondary: '#000',
@@ -28,8 +28,9 @@ const App: React.FC = (): ReactElement => {
     quaternary: '#000',
     quinary: '#000',
     text: '#fff',
-    neutral_text: '#000',
-    neutral_silent: '#2c2c2c',
+    text_dark: '#000',
+    text_neutral: '#2c2c2c',
+    text_bright: '#fff',
   });
   const dispatch = useAppDispatch();
 
@@ -46,16 +47,16 @@ const App: React.FC = (): ReactElement => {
 
   // Get steps
   useEffect(() => {
-    if (!isPaletteLoading) {
+    if (paletteLoading === 'fulfilled') {
       dispatch(setSteps());
     }
-  }, [isPaletteLoading]);
+  }, [paletteLoading]);
 
   // Setup theme
   useEffect(() => {
     if (mainPalette.length >= 5) {
       // Determine text color depending on how bright the primary color is.
-      const text = mainPalette[0].hsl[2] > 50 ? '#000' : '#fff';
+      const text = mainPalette[0].hsl[2] > 50 ? theme.text_dark : theme.text_bright;
 
       setTheme((prev) => ({
         ...prev,
@@ -73,14 +74,12 @@ const App: React.FC = (): ReactElement => {
     <Router>
       <GlobalStyles />
       <ThemeProvider theme={theme}>
-
         <Wrapper>
           <Header />
           <Switch>
             <Route exact path="/" component={Details} />
             <Route exact path="/list" component={List} />
           </Switch>
-
         </Wrapper>
       </ThemeProvider>
       <Copies />

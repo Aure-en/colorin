@@ -12,7 +12,7 @@ import {
   Steps,
   Values,
 } from '../ts/colors/colors';
-import PaletteState from '../ts/colors/palette';
+import PaletteState, { Loading } from '../ts/colors/palette';
 import Store from '../ts/store';
 
 const initialState: PaletteState = {
@@ -27,9 +27,9 @@ const initialState: PaletteState = {
     dark: [],
   },
   loading: {
-    models: false,
-    palette: false,
-    palettes: false,
+    models: 'idle',
+    palette: 'idle',
+    palettes: 'idle',
   },
   error: null,
 };
@@ -168,6 +168,24 @@ const paletteSlice = createSlice({
       },
     },
 
+    setPalette: {
+      reducer(
+        state,
+        action: PayloadAction<{ palette: PaletteType }>,
+      ) {
+        state.paletteFromAPI = action.payload.palette;
+        state.mainPalette = action.payload.palette;
+      },
+
+      prepare(palette: PaletteType) {
+        return {
+          payload: {
+            palette,
+          },
+        };
+      },
+    },
+
     incrementSteps(state) {
       state.stepsNumber += 1;
     },
@@ -228,37 +246,37 @@ const paletteSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchPalette.pending, (state: PaletteState) => {
-        state.loading.palette = true;
+        state.loading.palette = 'pending';
       })
       .addCase(fetchPalette.fulfilled, (state: PaletteState, action) => {
         state.paletteFromAPI = action.payload;
         state.mainPalette = JSON.parse(JSON.stringify([...action.payload]));
-        state.loading.palette = false;
+        state.loading.palette = 'fulfilled';
       })
       .addCase(fetchPalette.rejected, (state: PaletteState) => {
-        state.loading.palette = false;
+        state.loading.palette = 'rejected';
         state.error = 'Sorry, something went wrong.';
       })
       .addCase(fetchModels.pending, (state: PaletteState) => {
-        state.loading.models = true;
+        state.loading.models = 'pending';
       })
       .addCase(fetchModels.fulfilled, (state: PaletteState, action) => {
         state.models = action.payload;
-        state.loading.models = false;
+        state.loading.models = 'fulfilled';
       })
       .addCase(fetchModels.rejected, (state: PaletteState) => {
-        state.loading.models = false;
+        state.loading.models = 'rejected';
         state.error = 'Sorry, something went wrong.';
       })
       .addCase(fetchPalettes.pending, (state: PaletteState) => {
-        state.loading.palettes = true;
+        state.loading.palettes = 'pending';
       })
       .addCase(fetchPalettes.fulfilled, (state: PaletteState, action) => {
         state.palettesFromAPI = action.payload;
-        state.loading.palettes = false;
+        state.loading.palettes = 'fulfilled';
       })
       .addCase(fetchPalettes.rejected, (state: PaletteState) => {
-        state.loading.palettes = false;
+        state.loading.palettes = 'rejected';
         state.error = 'Sorry, something went wrong.';
       });
   },
@@ -272,6 +290,7 @@ export const {
   toggleLock,
   reset,
   updatePalette,
+  setPalette,
 } = paletteSlice.actions;
 
 export const getPaletteFromAPI = (state: Store): PaletteType => state.palette.paletteFromAPI;
@@ -288,9 +307,9 @@ export const getLocked = (state: Store): (Values | 'N')[] => state.palette.locke
 
 export const getModels = (state: Store): string[] => state.palette.models;
 
-export const getIsPaletteLoading = (state: Store): boolean => state.palette.loading.palette;
+export const getPaletteLoading = (state: Store): Loading => state.palette.loading.palette;
 
-export const getArePalettesLoading = (state: Store): boolean => state.palette.loading.palettes;
+export const getArePalettesLoading = (state: Store): Loading => state.palette.loading.palettes;
 
 export const getColor = (state: Store, index: number): ColorType => state.palette.mainPalette[index];
 

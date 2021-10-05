@@ -16,7 +16,7 @@ const Generate = () => {
 
 const Button = styled.button`
   color: white;
-  background: ${(props) => props.theme.neutral_text};
+  background: ${(props) => props.theme.text_dark};
   padding: 0.5rem 1rem;
   text-transform: uppercase;
   font-size: 0.925rem;

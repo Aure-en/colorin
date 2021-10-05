@@ -37,6 +37,7 @@ const Wrapper = styled.div`
   grid-row-gap: 1rem;
   align-items: center;
   padding: 2rem;
+  flex: 1;
 `;
 
 const Buttons = styled.div`
