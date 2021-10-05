@@ -4,7 +4,7 @@ type Locked = Values | 'N';
 
 interface PaletteState {
   models: string[],
-  palettes: Palette[],
+  palettesFromAPI: Palette[],
   locked: Locked[],
   paletteFromAPI: Palette,
   mainPalette: Palette,
@@ -13,6 +13,7 @@ interface PaletteState {
   loading: {
     models: boolean,
     palette: boolean,
+    palettes: boolean,
   },
   error: any,
 }

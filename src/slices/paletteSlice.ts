@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import Color from 'color';
 import {
-  getColorFromHex, getColorFromRgb, getBrighterStep, getDarkerStep, getColorSteps,
+  getColorFromHex,
+  getColorFromRgb,
+  getBrighterStep,
+  getDarkerStep,
+  getColorSteps,
 } from '../utils/color';
 import {
   Color as ColorType,
@@ -15,6 +18,7 @@ import Store from '../ts/store';
 const initialState: PaletteState = {
   models: [], // Models from Colormind
   paletteFromAPI: [], // Palette fetched from API.
+  palettesFromAPI: [], // Palettes fetched from API.
   mainPalette: [], // Palette modified by the user to fit their taste.
   locked: ['N', 'N', 'N', 'N', 'N'], // Locked colors.
   stepsNumber: 2,
@@ -22,10 +26,10 @@ const initialState: PaletteState = {
     light: [],
     dark: [],
   },
-  palettes: [], // Group of palettes from API.
   loading: {
     models: false,
     palette: false,
+    palettes: false,
   },
   error: null,
 };
@@ -61,14 +65,45 @@ export const fetchPalette = createAsyncThunk<
 
   const paletteWithLocked = result.map((color, index) => (Array.isArray(locked[index]) ? <number[]>locked[index] : color));
 
-  // Get color formats from the RGB.
+  // Get color formats and name
   const palette = paletteWithLocked.map(
-    (
-      rgb,
-    ): ColorType => getColorFromRgb(rgb),
+    (rgb): ColorType => getColorFromRgb(rgb),
   );
 
   return palette;
+});
+
+export const fetchPalettes = createAsyncThunk<
+  ColorType[][],
+  void,
+  { state: Store }
+>('palette/fetchPalettes', async (undefined, { getState }) => {
+  // Get 20 palettes from Colormind API.
+  const { models } = getState().palette;
+
+  const responses: Values[][] = await Promise.all(
+    Array(20)
+      .fill('')
+      .map(async () => {
+        const response = await fetch('http://colormind.io/api/', {
+          method: 'POST',
+          body: JSON.stringify({
+            model:
+              // Select a random model
+              models.length === 0
+                ? 'default'
+                : models[Math.floor(Math.random() * models.length)],
+          }),
+        });
+        const json = await response.json();
+        const { result }: { result: Values[] } = json; // Color RGB.
+        return result;
+      }),
+  );
+
+  // Get color formats and name
+  const palettes = responses.map((palette) => palette.map((rgb): ColorType => getColorFromRgb(rgb)));
+  return palettes;
 });
 
 const paletteSlice = createSlice({
@@ -91,12 +126,16 @@ const paletteSlice = createSlice({
       for (let step = 1; step <= state.stepsNumber; step += 1) {
         // Light steps
         steps.light.unshift(
-          palette.map((color: ColorType): ColorType => getBrighterStep(color, step)),
+          palette.map(
+            (color: ColorType): ColorType => getBrighterStep(color, step),
+          ),
         );
 
         // Dark steps
         steps.dark.push(
-          palette.map((color: ColorType): ColorType => getDarkerStep(color, step)),
+          palette.map(
+            (color: ColorType): ColorType => getDarkerStep(color, step),
+          ),
         );
       }
 
@@ -107,7 +146,10 @@ const paletteSlice = createSlice({
     },
 
     setStep: {
-      reducer(state, action: PayloadAction <{ index:number, color: ColorType }>) {
+      reducer(
+        state,
+        action: PayloadAction<{ index: number; color: ColorType }>,
+      ) {
         const steps = getColorSteps(action.payload.color, state.stepsNumber);
 
         for (let step = 0; step < state.stepsNumber; step += 1) {
@@ -207,6 +249,17 @@ const paletteSlice = createSlice({
       .addCase(fetchModels.rejected, (state: PaletteState) => {
         state.loading.models = false;
         state.error = 'Sorry, something went wrong.';
+      })
+      .addCase(fetchPalettes.pending, (state: PaletteState) => {
+        state.loading.palettes = true;
+      })
+      .addCase(fetchPalettes.fulfilled, (state: PaletteState, action) => {
+        state.palettesFromAPI = action.payload;
+        state.loading.palettes = false;
+      })
+      .addCase(fetchPalettes.rejected, (state: PaletteState) => {
+        state.loading.palettes = false;
+        state.error = 'Sorry, something went wrong.';
       });
   },
 });
@@ -223,6 +276,8 @@ export const {
 
 export const getPaletteFromAPI = (state: Store): PaletteType => state.palette.paletteFromAPI;
 
+export const getPalettesFromAPI = (state: Store): PaletteType[] => state.palette.palettesFromAPI;
+
 export const getMainPalette = (state: Store): PaletteType => state.palette.mainPalette;
 
 export const getSteps = (state: Store): Steps => state.palette.steps;
@@ -234,6 +289,8 @@ export const getLocked = (state: Store): (Values | 'N')[] => state.palette.locke
 export const getModels = (state: Store): string[] => state.palette.models;
 
 export const getIsPaletteLoading = (state: Store): boolean => state.palette.loading.palette;
+
+export const getArePalettesLoading = (state: Store): boolean => state.palette.loading.palettes;
 
 export const getColor = (state: Store, index: number): ColorType => state.palette.mainPalette[index];
 

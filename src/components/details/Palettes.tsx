@@ -60,8 +60,6 @@ const Palettes: React.FC<Props> = ({
   </Wrapper>
 );
 
-Palettes.propTypes = {};
-
 const Wrapper = styled.main`
   display: flex;
   flex-direction: column;

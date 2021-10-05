@@ -1,31 +1,20 @@
 /* eslint-disable linebreak-style */
-import React, { useState, useEffect, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Color from 'color';
-import { Palette } from '../ts/colors/colors';
+import { Palette } from '../../ts/colors/colors';
 
 interface Props {
   mainPalette: Palette,
 }
 
 const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
-  const [palette, setPalette] = useState<Palette>([]);
   const backgroundColor = '#FFF';
 
-  useEffect(() => {
-    if (mainPalette.length === 0) return;
-    // Sort by saturation
-    const palette: Palette = JSON.parse(
-      JSON.stringify([...mainPalette].sort((a, b) => a.hsl[2] - b.hsl[2])),
-    );
-
-    setPalette(palette);
-  }, [mainPalette]);
-
-  if (palette.length > 0) {
-    const primary = Color.hsl(palette[0].hsl).hex(); // Phone and lines
-    const secondary = Color.hsl(palette[2].hsl).hex(); // Sea and buttons
-    const tertiary = Color.hsl(palette[3].hsl).hex(); // Borders and square
+  if (mainPalette.length > 0) {
+    const primary = Color.hsl(mainPalette[0].hsl).hex(); // Phone and lines
+    const secondary = Color.hsl(mainPalette[2].hsl).hex(); // Sea and buttons
+    const tertiary = Color.hsl(mainPalette[3].hsl).hex(); // Borders and square
 
     return (
       <Svg

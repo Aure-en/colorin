@@ -1,72 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { useAppSelector, useAppDispatch } from '../app/hooks';
+import React, { ReactElement } from 'react';
+import styled from 'styled-components';
+import { useAppSelector } from '../app/hooks';
 import {
-  fetchPalette,
   getMainPalette,
-  getIsPaletteLoading,
   getSteps,
-  setSteps,
-  getModels,
 } from '../slices/paletteSlice';
 import Palettes from '../components/details/Palettes';
 import Steps from '../components/details/Steps';
 import { Steps as StepsType } from '../ts/colors/colors';
-import Preview from '../assets/Preview';
+import Phone from '../assets/preview/Phone';
 import Generate from '../components/details/buttons/Generate';
 import Reset from '../components/details/buttons/Reset';
 
-const Details = () => {
-  const [theme, setTheme] = useState({
-    primary: '#000',
-    secondary: '#000',
-    tertiary: '#000',
-    quaternary: '#000',
-    quinary: '#000',
-  });
-  const dispatch = useAppDispatch();
-  const models = useAppSelector(getModels);
+const Details: React.FC = (): ReactElement => {
   const mainPalette = useAppSelector(getMainPalette);
-  const isPaletteLoading = useAppSelector(getIsPaletteLoading);
   const steps: StepsType = useAppSelector(getSteps);
 
-  // Load models
-  useEffect(() => {
-    if (models.length > 0) dispatch(fetchPalette());
-  }, [models]);
-
-  // Get steps
-  useEffect(() => {
-    if (!isPaletteLoading) {
-      dispatch(setSteps());
-    }
-  }, [isPaletteLoading]);
-
-  // Setup theme
-  useEffect(() => {
-    if (mainPalette.length >= 5) {
-      setTheme({
-        primary: mainPalette[0].hex,
-        secondary: mainPalette[1].hex,
-        tertiary: mainPalette[2].hex,
-        quaternary: mainPalette[3].hex,
-        quinary: mainPalette[4].hex,
-      });
-    }
-  }, [mainPalette]);
-
   return (
-    <ThemeProvider theme={theme}>
-      <Wrapper>
-        <Steps />
-        <Palettes mainPalette={mainPalette} steps={steps} />
-        <Buttons>
-          <Generate />
-          <Reset />
-        </Buttons>
-        <Preview mainPalette={mainPalette} />
-      </Wrapper>
-    </ThemeProvider>
+    <Wrapper>
+      <Steps />
+      <Palettes mainPalette={mainPalette} steps={steps} />
+      <Buttons>
+        <Generate />
+        <Reset />
+      </Buttons>
+      <Phone mainPalette={mainPalette} />
+    </Wrapper>
   );
 };
 
@@ -78,7 +37,7 @@ const Wrapper = styled.div`
   grid-row-gap: 1rem;
   align-items: center;
   padding: 2rem;
-  min-height: calc(100vh - 6rem);
+  min-height: calc(100vh - 10rem);
 `;
 
 const Buttons = styled.div`

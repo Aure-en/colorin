@@ -60,6 +60,7 @@ const Label = styled.label<{
   justify-content: flex-end;
   cursor: pointer;
   background: ${(props) => props.$color.hex};
+  min-height: 5rem;
 
   & > input {
     border: none;
