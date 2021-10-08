@@ -44,6 +44,7 @@ const Wrapper = styled.div`
     cursor: pointer;
     margin: 0.5rem 0;
     transition: color 0.2s ease-out;
+    color: ${(props) => props.theme.text_neutral};
 
     &:hover {
       color: ${(props) => props.theme.primary};

@@ -43,9 +43,8 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
 						c0-8.8,1.9-17.6,5.7-25.8h-96.8c-89.5,0-162,64.3-162,143.6v1820.6c0,79.3,72.6,143.6,162,143.6l0,0h798.1
 						c89.5,0,162-64.3,162-143.6l0,0l0,0V193.7C1182.1,114.4,1109.6,50,1020.1,50C1020.1,50,1020.1,50,1020.1,50z"
           />
-          <path
+          <Path
             id="f6ecfbd0-b722-47f2-8687-80b685eaa1e2"
-            fill={tertiary}
             d="M830,1914.7c-11,0-20,20.7-20,46.1c0,25.5,8.9,46.1,20,46.1h209.4
 						c11,0,20-20.7,20-46.1c0-25.5-8.9-46.1-20-46.1H830z"
           />
@@ -525,6 +524,14 @@ const Preview: React.FC<Props> = ({ mainPalette }: Props): ReactElement => {
 const Svg = styled.svg`
   max-height: 80vh;
   width: 20rem;
+`;
+
+const Path = styled.path`
+  fill: ${(props) => props.theme.tertiary};
+
+  &:hover {
+    fill: ${(props) => props.theme.quaternary};
+  }
 `;
 
 export default Preview;

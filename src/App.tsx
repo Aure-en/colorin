@@ -29,7 +29,7 @@ const App: React.FC = (): ReactElement => {
     quinary: '#ddd',
     text: '#fff',
     text_dark: '#000',
-    text_neutral: '#2c2c2c',
+    text_neutral: '#585858',
     text_bright: '#fff',
   });
   const dispatch = useAppDispatch();
