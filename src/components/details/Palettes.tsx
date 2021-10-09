@@ -2,8 +2,6 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { Palette as PaletteType, Steps } from '../../ts/colors/colors';
 import Palette from './Palette';
-import Edit from './Edit';
-import Name from './Name';
 
 interface Props {
   mainPalette: PaletteType;
@@ -28,22 +26,10 @@ const Palettes: React.FC<Props> = ({
     )}
 
     {mainPalette.length > 0 && (
-      <Center>
-        <Colors>
-          <Editing>
-            {[...mainPalette].map((color, index) => (
-              // color cannot be used in the key, or the input will close onChange.
-              <Edit color={color} index={index} key={`edit-${color.id}`} />
-            ))}
-          </Editing>
-        </Colors>
-
-        <Informations>
-          {mainPalette.map((color) => (
-            <Name color={color} key={`name-${color.hex}`} />
-          ))}
-        </Informations>
-      </Center>
+    <Palette
+      palette={mainPalette}
+      main
+    />
     )}
 
     {steps.dark.map(

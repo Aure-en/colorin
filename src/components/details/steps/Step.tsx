@@ -2,9 +2,9 @@ import React, { useState, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
-import { Color as ColorType } from '../../ts/colors/colors';
-import useCopy from '../../hooks/useCopy';
-import Name from './Name';
+import { Color as ColorType } from '../../../ts/colors/colors';
+import useCopy from '../../../hooks/useCopy';
+import Name from '../Name';
 
 interface Props {
   color: ColorType;
@@ -60,13 +60,6 @@ const Background = styled.button<{
   &:focus {
     outline: 2px solid transparent;
   }
-`;
-
-const Code = styled.small<{
-  $color: string,
-}>`
-  color: ${(props) => props.$color};
-  font-size: 0.925rem;
 `;
 
 export default Step;

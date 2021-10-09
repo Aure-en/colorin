@@ -6,7 +6,7 @@ import {
   getSteps,
 } from '../slices/paletteSlice';
 import Palettes from '../components/details/Palettes';
-import Steps from '../components/details/Steps';
+import Steps from '../components/details/steps/Steps';
 import { Steps as StepsType } from '../ts/colors/colors';
 import Generate from '../components/details/buttons/Generate';
 import Reset from '../components/details/buttons/Reset';

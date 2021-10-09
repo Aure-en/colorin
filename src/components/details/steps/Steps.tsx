@@ -1,11 +1,11 @@
 import React, { ReactElement, useEffect } from 'react';
 import styled from 'styled-components';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import {
   getStepsNumber, incrementSteps, decrementSteps, setSteps,
-} from '../../slices/paletteSlice';
-import { ReactComponent as IconPlus } from '../../assets/icons/plus.svg';
-import { ReactComponent as IconMinus } from '../../assets/icons/minus.svg';
+} from '../../../slices/paletteSlice';
+import { ReactComponent as IconPlus } from '../../../assets/icons/plus.svg';
+import { ReactComponent as IconMinus } from '../../../assets/icons/minus.svg';
 
 const Steps: React.FC = (): ReactElement => {
   const dispatch = useAppDispatch();

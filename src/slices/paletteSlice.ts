@@ -71,7 +71,7 @@ export const fetchPalette = createAsyncThunk<
   );
 
   // Set up ids.
-  const paletteWithId = palette.map((color, index) => ({ ...color, index }));
+  const paletteWithId = palette.map((color, index) => ({ ...color, id: index }));
 
   return paletteWithId;
 });
@@ -231,7 +231,8 @@ const paletteSlice = createSlice({
         state,
         action: PayloadAction<{ index: number; color: ColorType }>,
       ) {
-        state.mainPalette[action.payload.index] = action.payload.color;
+        state.mainPalette[action.payload.index] = 
+        { ...state.mainPalette[action.payload.index], ...action.payload.color };
       },
 
       prepare(index: number, hex: string) {

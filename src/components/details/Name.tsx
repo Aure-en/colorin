@@ -3,15 +3,17 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
 import { useAppSelector } from '../../app/hooks';
-import IconLock from '../../assets/icons/IconLock';
 import { Color as ColorType } from '../../ts/colors/colors';
 import { getLocked } from '../../slices/paletteSlice';
+import Lock from './color/Lock';
+import Edit from './color/Edit';
 
 interface Props {
-  color: ColorType
+  color: ColorType;
+  main?: boolean;
 }
 
-const Name: React.FC<Props> = ({ color }: Props): ReactElement => {
+const Name: React.FC<Props> = ({ color, main }: Props): ReactElement => {
   const locked = useAppSelector(getLocked);
   const [textColor, setTextColor] = useState('');
 
@@ -31,9 +33,19 @@ const Name: React.FC<Props> = ({ color }: Props): ReactElement => {
         <div>{color.name}</div>
         <Code $color={textColor}>{color.hex}</Code>
       </div>
-      {locked.find(
-        (lock) => Array.isArray(lock) && lock.join('') === color.rgb.join(''),
-      ) && <IconLock color={textColor} />}
+      {main && (
+        <Buttons>
+          <Edit color={color} index={(color.id as number)} />
+          <Lock
+            color={color}
+            isLocked={
+              locked.find(
+                (lock) => Array.isArray(lock) && lock.join('') === color.rgb.join(''),
+              ) !== undefined
+            }
+          />
+        </Buttons>
+      )}
     </Informations>
   );
 };
@@ -45,10 +57,15 @@ Name.propTypes = {
     rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   }).isRequired,
+  main: PropTypes.bool,
+};
+
+Name.defaultProps = {
+  main: false,
 };
 
 const Code = styled.small<{
-  $color: string,
+  $color: string;
 }>`
   color: ${(props) => props.$color};
   font-size: 0.925rem;
@@ -59,6 +76,12 @@ const Informations = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  align-items: start;
+  margin-left: 1rem;
 `;
 
 export default Name;

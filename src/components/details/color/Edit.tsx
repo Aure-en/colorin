@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch } from '../../app/hooks';
-import { updatePalette, setStep } from '../../slices/paletteSlice';
-import { Color } from '../../ts/colors/colors';
+import { useAppDispatch } from '../../../app/hooks';
+import { updatePalette, setStep } from '../../../slices/paletteSlice';
+import { Color } from '../../../ts/colors/colors';
+import { ReactComponent as IconEdit } from '../../../assets/icons/edit.svg';
 
 interface Props {
   index: number;
@@ -40,6 +41,7 @@ const Edit: React.FC<Props> = ({ color, index }: Props) => {
       $index={index}
       $color={color}
     >
+      <IconEdit />
       <input
         value={color.hex}
         onChange={handleChange}
@@ -56,11 +58,7 @@ const Label = styled.label<{
   $index: number;
   $color: Color
 }>`
-  display: flex;
-  justify-content: flex-end;
   cursor: pointer;
-  background: ${(props) => props.$color.hex};
-  min-height: 5rem;
 
   & > input {
     border: none;

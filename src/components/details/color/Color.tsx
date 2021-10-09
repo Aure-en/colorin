@@ -1,10 +1,11 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useAppDispatch } from '../../app/hooks';
-import { Color as ColorType } from '../../ts/colors/colors';
-import { toggleLock } from '../../slices/paletteSlice';
-import useCopy from '../../hooks/useCopy';
+import { useAppDispatch } from '../../../app/hooks';
+import { Color as ColorType } from '../../../ts/colors/colors';
+import { toggleLock } from '../../../slices/paletteSlice';
+import useCopy from '../../../hooks/useCopy';
+import Name from '../Name';
 
 interface Props {
   color: ColorType;
@@ -13,7 +14,6 @@ interface Props {
 
 const Color: React.FC<Props> = ({ color, index }: Props): ReactElement => {
   const dispatch = useAppDispatch();
-  const [isHovered, setIsHovered] = useState(false);
   const { copy } = useCopy();
 
   /**
@@ -26,16 +26,19 @@ const Color: React.FC<Props> = ({ color, index }: Props): ReactElement => {
   };
 
   return (
-    <Background
-      $color={color.hex}
-      onClick={(e) => {
-        copy(e.pageX, e.pageY, color);
-      }}
-      onContextMenu={(e) => {
-        e.preventDefault();
-        handleRightClick(e);
-      }}
-    />
+    <Card>
+      <Background
+        $color={color.hex}
+        onClick={(e) => {
+          copy(e.pageX, e.pageY, color);
+        }}
+        onContextMenu={(e) => {
+          e.preventDefault();
+          handleRightClick(e);
+        }}
+      />
+      <Name color={color} main />
+    </Card>
   );
 };
 
@@ -48,6 +51,11 @@ Color.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
+
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Background = styled.button<{
   $color: string;
