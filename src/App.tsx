@@ -79,7 +79,7 @@ const App: React.FC = (): ReactElement => {
           <Header />
           <Switch>
             <Route exact path="/" component={Preview} />
-            <Route exact path="/details" component={Details} />
+            <Route exact path="/shades" component={Details} />
             <Route exact path="/list" component={List} />
           </Switch>
         </Wrapper>

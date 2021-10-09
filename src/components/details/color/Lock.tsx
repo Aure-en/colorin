@@ -9,10 +9,11 @@ import { Color } from '../../../ts/colors/colors';
 
 interface Props {
   color: Color,
+  textColor: string,
   isLocked: boolean,
 }
 
-const Lock: React.FC<Props> = ({ color, isLocked }: Props) => {
+const Lock: React.FC<Props> = ({ color, textColor, isLocked }: Props) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -25,8 +26,8 @@ const Lock: React.FC<Props> = ({ color, isLocked }: Props) => {
       }}
     >
       {isLocked
-        ? <IconLock color={color.hex} />
-        : <IconUnlock color={color.hex} />}
+        ? <IconLock color={textColor} />
+        : <IconUnlock color={textColor} />}
     </Button>
   );
 };
@@ -44,5 +45,6 @@ Lock.propTypes = {
     hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
   }).isRequired,
   isLocked: PropTypes.bool.isRequired,
+  textColor: PropTypes.string.isRequired,
 };
 export default Lock;

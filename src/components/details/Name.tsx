@@ -37,6 +37,7 @@ const Name: React.FC<Props> = ({ color, main }: Props): ReactElement => {
         <Buttons>
           <Edit color={color} index={(color.id as number)} />
           <Lock
+            textColor={textColor}
             color={color}
             isLocked={
               locked.find(

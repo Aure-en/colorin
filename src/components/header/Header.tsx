@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import IconSwatch from '../../assets/icons/IconSwatch';
 
-const Header = () => (
+const Header: React.FC = () => (
   <Wrapper>
     <IconSwatch />
     <nav>
@@ -14,7 +14,16 @@ const Header = () => (
         }}
         to="/"
       >
-        Single
+        Preview
+      </Link>
+      <Link
+        exact
+        activeStyle={{
+          fontWeight: 400,
+        }}
+        to="/shades"
+      >
+        Shades
       </Link>
       <Link
         exact
@@ -23,7 +32,7 @@ const Header = () => (
         }}
         to="/list"
       >
-        Many
+        Palettes
       </Link>
     </nav>
   </Wrapper>
