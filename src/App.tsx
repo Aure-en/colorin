@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ReactElement } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import Color from 'color';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from './app/hooks';
 import {
