@@ -5,13 +5,16 @@ import Step from './steps/Step';
 import Color from './color/Color';
 import { Color as ColorType, Palette as PaletteType } from '../../ts/colors/colors';
 
+type Direction = 'vertical' | 'horizontal';
+
 interface Props {
   palette: PaletteType,
   main?: boolean,
+  direction?: Direction,
 }
 
-const Palette: React.FC<Props> = ({ palette, main }: Props): ReactElement => (
-  <Row $main={main}>
+const Palette: React.FC<Props> = ({ palette, main, direction }: Props): ReactElement => (
+  <Wrapper $main={main} $direction={direction}>
     {palette.map((color: ColorType, index: number) => (
       main
         ? (
@@ -29,7 +32,7 @@ const Palette: React.FC<Props> = ({ palette, main }: Props): ReactElement => (
           />
         )
     ))}
-  </Row>
+  </Wrapper>
 );
 
 Palette.propTypes = {
@@ -42,20 +45,28 @@ Palette.propTypes = {
     }).isRequired,
   ).isRequired,
   main: PropTypes.bool,
+  direction: PropTypes.oneOf(['vertical', 'horizontal']),
 };
 
 Palette.defaultProps = {
   main: false,
+  direction: 'horizontal',
 };
 
-const Row = styled.div<{
+const Wrapper = styled.div<{
   $main?: boolean,
+  $direction?: Direction,
 }>`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-direction: ${(props) => (props.$direction === 'vertical' ? 'column' : 'row')};
   grid-gap: 1rem;
   width: 100%;
   flex: ${(props) => props.$main && '1'};
+
+  & > * {
+    flex: 1;
+  }
+
 `;
 
 export default Palette;
