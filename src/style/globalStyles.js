@@ -60,6 +60,9 @@ button {
     outline: 2px solid transparent;
   }
 }
+strong {
+  font-weight: bold;
+}
 `;
 
 export default GlobalStyles;

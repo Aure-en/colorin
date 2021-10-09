@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import Shape from "../../assets/preview/Leaves";
+import React from 'react';
+import styled from 'styled-components';
+import Shape from '../../assets/preview/Leaves';
 
 const Leaves: React.FC = () => (
   <Wrapper>
@@ -15,7 +15,16 @@ const Leaves: React.FC = () => (
 
       <Main>
         <Heading>
-          Explore <Secondary>thousands</Secondary> of colors to <Tertiary>paint</Tertiary> your next project<Secondary>.</Secondary>
+          Explore
+          {' '}
+          <Secondary>thousands</Secondary>
+          {' '}
+          of colors to
+          {' '}
+          <Tertiary>paint</Tertiary>
+          {' '}
+          your next project
+          <Secondary>.</Secondary>
         </Heading>
         <Subheading>
           Create the perfect color scheme, or be inspired by existing ones.

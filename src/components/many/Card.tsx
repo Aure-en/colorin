@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Palette } from '../../ts/colors/colors';
 import Name from '../details/Name';
@@ -12,6 +12,10 @@ interface Props {
 const Card: React.FC<Props> = ({ palette }: Props) => {
   const [currentColor, setCurrentColor] = useState(palette[0]);
   const { copy } = useCopy();
+
+  useEffect(() => {
+    setCurrentColor(palette[0]);
+  }, [palette]);
 
   return (
     <Wrapper>

@@ -23,7 +23,7 @@ const Preview: React.FC = () => {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr auto;
-  grid-gap: 2rem;
+  grid-gap: 3rem;
   flex: 1;
   max-height: 100%;
   padding: 3rem;

@@ -3,6 +3,7 @@ import Center from './Center';
 import Geometric from './Geometric';
 import Triangle from './Triangle';
 import Leaves from './Leaves';
+import Corner from './Corner';
 
 interface Props {
   number: number,
@@ -18,6 +19,8 @@ const Preview: React.FC<Props> = ({ number }: Props) => {
       return <Center />;
     case 4:
       return <Leaves />;
+    case 5:
+      return <Corner />;
     default:
       return <></>;
   }

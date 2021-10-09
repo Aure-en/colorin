@@ -7,7 +7,6 @@ import Generate from '../components/many/buttons/Generate';
 
 const List: React.FC = () => {
   const palettes = useAppSelector(getPalettesFromAPI);
-  const palettesLoading = useAppSelector(getPalettesLoading);
 
   return (
     <Wrapper>
