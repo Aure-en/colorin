@@ -9,32 +9,34 @@ const Corner: React.FC = () => (
       <Heading>
         We are here to
         {' '}
-        change your <span>life</span>
+        change your
+        {' '}
+        <span>life</span>
       </Heading>
       <Subheading>
-        We've made the process of finding your dream house a piece of cake!
-        Here's how it works.
+        We&apos;ve made the process of finding your dream house a piece of cake!
+        Here&apos;s how it works.
       </Subheading>
 
       <Ul>
         <li>
           <Content>
-          <strong>Find your dream house.</strong>
-          <div>We have over 300 homes ready for you to view!</div>
+            <strong>Find your dream house.</strong>
+            <div>We have over 300 homes ready for you to view.</div>
           </Content>
         </li>
 
         <li>
-        <Content>
-          <strong>Message the seller</strong>
-          <div>We connect you directly to the seller, chat away!</div>
+          <Content>
+            <strong>Message the seller.</strong>
+            <div>We connect you directly to the seller, chat away.</div>
           </Content>
         </li>
 
         <li>
-        <Content>
-          <strong>Move in!</strong>
-          <div>Agree to a price, and it's a done deal. You just need to move in!</div>
+          <Content>
+            <strong>Move in.</strong>
+            <div>Agree to a price, and it&apos;s a done deal. You just need to move in.</div>
           </Content>
         </li>
       </Ul>

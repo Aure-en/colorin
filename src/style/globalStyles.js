@@ -55,6 +55,7 @@ button {
   font-size: 1rem;
   border: none;
   cursor: pointer;
+  background: transparent;
 
   &:focus {
     outline: 2px solid transparent;

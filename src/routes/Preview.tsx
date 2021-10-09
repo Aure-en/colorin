@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useAppSelector } from '../app/hooks';
-import { getMainPalette } from '../slices/paletteSlice';
-import Palette from '../components/details/Palette';
-import Buttons from '../components/preview/Buttons';
-import Example from '../components/preview/Preview';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { useAppSelector } from "../app/hooks";
+import { getMainPalette } from "../slices/paletteSlice";
+import Palette from "../components/details/Palette";
+import Buttons from "../components/preview/Buttons";
+import Example from "../components/preview/Preview";
 
 const Preview: React.FC = () => {
   const mainPalette = useAppSelector(getMainPalette);
@@ -15,7 +15,11 @@ const Preview: React.FC = () => {
     <Wrapper>
       <Palette palette={mainPalette} main direction="vertical" />
       <Example number={previewNumber} />
-      <Buttons select={setPreviewNumber} total={TOTAL_PREVIEWS} />
+      <Buttons
+        select={setPreviewNumber}
+        total={TOTAL_PREVIEWS}
+        current={previewNumber}
+      />
     </Wrapper>
   );
 };
