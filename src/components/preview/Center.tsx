@@ -7,7 +7,7 @@ const Center: React.FC = () => (
     <Shape />
     <Text>
       <h2>Colorin</h2>
-      <div>palettes</div>
+      <div>artworks</div>
     </Text>
   </Wrapper>
 );

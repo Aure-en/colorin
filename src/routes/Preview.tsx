@@ -8,7 +8,7 @@ import Example from '../components/preview/Preview';
 
 const Preview: React.FC = () => {
   const mainPalette = useAppSelector(getMainPalette);
-  const TOTAL_PREVIEWS = 3;
+  const TOTAL_PREVIEWS = 5;
   const [previewNumber, setPreviewNumber] = useState(1);
 
   return (

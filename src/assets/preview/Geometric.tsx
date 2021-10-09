@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components';
 const Geometric: React.FC = () => {
   const theme = useTheme();
   return (
-    <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1200" preserveAspectRatio="xMaxYMax slice">
+    <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="80%" viewBox="0 0 2000 1200" preserveAspectRatio="xMaxYMax slice">
       <g transform="scale(2.8612303290414878)">
         <rect x="0" y="0" width="699" height="699" fill="#ffffff" />
         <rect x="0" y="0" width="139.8" height="139.8" fill={theme.primary} />

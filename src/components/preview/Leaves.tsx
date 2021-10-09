@@ -1,42 +1,42 @@
-import React from 'react';
-import styled from 'styled-components';
-import Shape from '../../assets/preview/Triangles';
+import React from "react";
+import styled from "styled-components";
+import Shape from "../../assets/preview/Leaves";
 
-const Triangle: React.FC = () => (
+const Leaves: React.FC = () => (
   <Wrapper>
     <Text>
       <Header>
-        <Logo>Notes</Logo>
+        <Logo>Colors</Logo>
         <Right>
-          <div>Your Present</div>
-          <div>Our Project</div>
+          <div>Generate</div>
+          <div>Explore</div>
         </Right>
       </Header>
 
       <Main>
-        <Heading>Welcome to Notes<Accent>.</Accent></Heading>
-        <Subheading>Free up your mental space</Subheading>
-        <p>
-          Regain clarity and calmness by getting all those tasks out of your head
-          and onto your to-do list. Don't worry, we'll make it all fit <Accent>together.</Accent>
-        </p>
+        <Heading>
+          Explore <Secondary>thousands</Secondary> of colors to <Tertiary>paint</Tertiary> your next project<Secondary>.</Secondary>
+        </Heading>
+        <Subheading>
+          Create the perfect color scheme, or be inspired by existing ones.
+        </Subheading>
       </Main>
 
-      <Button>
-        Organize your life &#8594;
-      </Button>
+      <Button>Explore &#8594;</Button>
     </Text>
     <Shape />
   </Wrapper>
 );
 
-export default Triangle;
+export default Leaves;
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   overflow: hidden;
+  grid-gap: 5rem;
   padding: 0 3rem;
+  align-items: center;
 `;
 
 const Text = styled.div`
@@ -67,7 +67,7 @@ const Logo = styled.div`
   font-size: 1.25rem;
 
   &:before {
-    content: "▲";
+    content: "● ";
     color: ${(props) => props.theme.tertiary};
   }
 `;
@@ -75,7 +75,6 @@ const Logo = styled.div`
 const Right = styled.div`
   display: flex;
   opacity: 0.5;
-  transition: background 0.2s linear;
 
   & > div:first-child {
     margin-right: 2rem;
@@ -91,26 +90,21 @@ const Right = styled.div`
 `;
 
 const Heading = styled.h2`
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  max-width: 80%;
 `;
 
 const Subheading = styled.h3`
-  font-size: 1.5rem;
   color: ${(props) => props.theme.secondary};
-
-  &:after {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 2rem;
-    background: ${(props) => props.theme.tertiary};
-    margin: 2rem 0;
-  }
 `;
 
-const Accent = styled.span`
+const Secondary = styled.span`
   color: ${(props) => props.theme.secondary};
+`;
+
+const Tertiary = styled.span`
+  color: ${(props) => props.theme.tertiary};
 `;
 
 const Button = styled.div`
@@ -125,6 +119,6 @@ const Button = styled.div`
   transition: background 0.2s linear;
 
   &:hover {
-    background: ${(props) => props.theme.secondary};
+    background: ${(props) => props.theme.tertiary};
   }
 `;
