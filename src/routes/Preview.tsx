@@ -8,7 +8,7 @@ import Example from '../components/preview/Preview';
 
 const Preview: React.FC = () => {
   const mainPalette = useAppSelector(getMainPalette);
-  const TOTAL_PREVIEWS = 2;
+  const TOTAL_PREVIEWS = 3;
   const [previewNumber, setPreviewNumber] = useState(1);
 
   return (
@@ -23,6 +23,7 @@ const Preview: React.FC = () => {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr auto;
+  grid-gap: 2rem;
   flex: 1;
   max-height: 100%;
   padding: 3rem;

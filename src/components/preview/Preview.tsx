@@ -1,4 +1,5 @@
 import React from 'react';
+import Center from './Center';
 import Geometric from './Geometric';
 import Triangle from './Triangle';
 
@@ -12,6 +13,8 @@ const Preview: React.FC<Props> = ({ number }: Props) => {
       return <Geometric />;
     case 2:
       return <Triangle />;
+    case 3:
+      return <Center />;
     default:
       return <></>;
   }
