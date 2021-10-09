@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { useAppSelector } from "../app/hooks";
-import { getMainPalette } from "../slices/paletteSlice";
-import Geometric from "../components/preview/Geometric";
-import Palette from "../components/details/Palette";
+import React from 'react';
+import styled from 'styled-components';
+import { useAppSelector } from '../app/hooks';
+import { getMainPalette } from '../slices/paletteSlice';
+import Geometric from '../components/preview/Geometric';
+import Palette from '../components/details/Palette';
 
 const Preview = () => {
   const mainPalette = useAppSelector(getMainPalette);
@@ -23,6 +23,7 @@ const Wrapper = styled.div`
   grid-template-columns: 10rem 1fr auto;
   max-height: 100%;
   padding: 2rem;
+  min-height: 0;
 `;
 
 export default Preview;

@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   flex: 1;
   align-items: center;
+  overflow: hidden;
 `;
 
 const Text = styled.div`
@@ -52,7 +53,7 @@ const Heading = styled.h2`
     top: 0.75rem;
     z-index: -1;
     height: 90%;
-    background: ${(props) => props.theme.primary};
+    background: ${(props) => props.theme.quinary};
     opacity: 0.5;
   }
 `;
@@ -64,6 +65,7 @@ const Details = styled.div`
 const Number = styled.div`
   font-size: 2rem;
   text-transform: uppercase;
+  letter-spacing: 3px;
 `;
 
 export default Geometric;
