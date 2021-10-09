@@ -50,7 +50,7 @@ const Message = styled.div<{
   padding: 0.5rem 1rem;
   border-radius: 3px;
   font-size: 0.875rem;
-  animation: ${animation} 1.5s ease-in-out;
+  animation: ${animation} 2s ease-in-out;
   transform: translateX(-50%);
 `;
 

@@ -70,7 +70,10 @@ export const fetchPalette = createAsyncThunk<
     (rgb): ColorType => getColorFromRgb(rgb),
   );
 
-  return palette;
+  // Set up ids.
+  const paletteWithId = palette.map((color, index) => ({ ...color, index }));
+
+  return paletteWithId;
 });
 
 export const fetchPalettes = createAsyncThunk<

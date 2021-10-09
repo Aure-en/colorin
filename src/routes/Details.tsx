@@ -8,7 +8,6 @@ import {
 import Palettes from '../components/details/Palettes';
 import Steps from '../components/details/Steps';
 import { Steps as StepsType } from '../ts/colors/colors';
-import Phone from '../assets/preview/Phone';
 import Generate from '../components/details/buttons/Generate';
 import Reset from '../components/details/buttons/Reset';
 
@@ -24,7 +23,6 @@ const Details: React.FC = (): ReactElement => {
         <Generate />
         <Reset />
       </Buttons>
-      <Phone mainPalette={mainPalette} />
     </Wrapper>
   );
 };

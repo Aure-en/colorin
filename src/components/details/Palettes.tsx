@@ -33,7 +33,7 @@ const Palettes: React.FC<Props> = ({
           <Editing>
             {[...mainPalette].map((color, index) => (
               // color cannot be used in the key, or the input will close onChange.
-              <Edit color={color} index={index} key={`edit-${index}`} />
+              <Edit color={color} index={index} key={`edit-${color.id}`} />
             ))}
           </Editing>
         </Colors>
@@ -90,7 +90,6 @@ const Informations = styled.div`
 `;
 
 const Editing = styled.div`
-  position: absolute;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 1rem;

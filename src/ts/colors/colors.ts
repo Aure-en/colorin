@@ -5,6 +5,7 @@ export type Color = {
   hex: string,
   hsl: Values,
   name: string,
+  id?: number,
 };
 
 export type Palette = Color[];

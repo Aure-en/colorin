@@ -13,6 +13,7 @@ import {
 } from './slices/paletteSlice';
 import Details from './routes/Details';
 import List from './routes/List';
+import Preview from './routes/Preview';
 import Copies from './components/copy/Copies';
 import Header from './components/header/Header';
 import GlobalStyles from './style/globalStyles';
@@ -77,7 +78,8 @@ const App: React.FC = (): ReactElement => {
         <Wrapper>
           <Header />
           <Switch>
-            <Route exact path="/" component={Details} />
+            <Route exact path="/" component={Preview} />
+            <Route exact path="/details" component={Details} />
             <Route exact path="/list" component={List} />
           </Switch>
         </Wrapper>
@@ -90,7 +92,7 @@ const App: React.FC = (): ReactElement => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 `;
 
 export default App;
