@@ -43,10 +43,11 @@ const Button = styled.button<{
   margin: 0.5rem 0;
   transition: color 0.2s linear, transform 0.2s linear;
   opacity: ${(props) => (props.$current ? 1 : 0.5)};
+  transform: ${(props) => props.$current && 'scale(1.2)'};
 
   &:hover {
     color: ${(props) => props.theme.tertiary};
-    transform: scale(1.1);
+    transform: scale(1.2);
     opacity: 1;
   }
 `;
