@@ -17,38 +17,43 @@ const Steps: React.FC = (): ReactElement => {
 
   return (
     <Wrapper>
-      <button type="button" onClick={() => dispatch(incrementSteps())}>
+      <Button type="button" onClick={() => dispatch(incrementSteps())}>
         <IconPlus />
-      </button>
+      </Button>
       {stepsNumber}
-      <button type="button" onClick={() => dispatch(decrementSteps())}>
+      <Button type="button" onClick={() => dispatch(decrementSteps())}>
         <IconMinus />
-      </button>
+      </Button>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   font-size: 1.5rem;
+  grid-row: 1 / span 1;
 
-  & > button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin: 0.5rem 0;
-    transition: color 0.2s ease-out;
-    color: ${(props) => props.theme.text_neutral};
+  @media all and (min-width: 576px) {
+    flex-direction: column;
+    grid-row: initial;
+  }
+`;
 
-    &:hover {
-      color: ${(props) => props.theme.primary};
-    }
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 0.5rem 0;
+  transition: color 0.2s ease-out;
+  color: ${(props) => props.theme.text_neutral};
+
+  &:hover {
+    color: ${(props) => props.theme.primary};
   }
 `;
 

@@ -30,8 +30,12 @@ Buttons.propTypes = {
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
   align-self: center;
+  justify-self: center;
+
+  @media all and (min-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const Button = styled.button<{

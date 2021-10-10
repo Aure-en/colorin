@@ -52,36 +52,13 @@ const Wrapper = styled.main`
   height: 100%;
   grid-gap: 1rem;
   width: 100%;
-`;
+  grid-row: 2;
+  grid-column: 1 / span 2;
 
-const Center = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  flex: 1;
-`;
-
-const Colors = styled.div`
-  position: relative;
-  height: 100%;
-  width: 100%;
-`;
-
-const Informations = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 1rem;
-  width: 100%;
-`;
-
-const Editing = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 1rem;
-  height: 100%;
-  width: 100%;
-  top: 0;
+  @media all and (min-width: 576px) {
+    grid-row: initial;
+    grid-column: initial;
+  }
 `;
 
 export default Palettes;

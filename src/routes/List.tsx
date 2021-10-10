@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../app/hooks';
-import { getPalettesFromAPI, getPalettesLoading } from '../slices/paletteSlice';
+import { getPalettesFromAPI } from '../slices/paletteSlice';
 import Cards from '../components/many/Cards';
 import Generate from '../components/many/buttons/Generate';
 

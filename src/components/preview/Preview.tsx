@@ -12,13 +12,13 @@ interface Props {
 const Preview: React.FC<Props> = ({ number }: Props) => {
   switch (number) {
     case 1:
-      return <Center />;
+      return <Leaves />;
     case 2:
       return <Triangle />;
     case 3:
       return <Geometric />;
     case 4:
-      return <Leaves />;
+      return <Center />;
     case 5:
       return <Corner />;
     default:

@@ -36,22 +36,35 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   overflow: hidden;
-  padding: 0 3rem;
+  margin: 2rem 0;
+
+  @media all and (min-width: 600px) {
+    padding: 0 3rem;
+  }
 `;
 
 const Text = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
-  padding: 3rem;
+  padding: 0 1rem;
+
+  @media all and (min-width: 800px) {
+    padding: 0 3rem;
+  }
 `;
 
 const Header = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+
+  @media all and (min-width: 1000px) {
+    flex-direction: row;
+  }
 `;
 
 const Main = styled.div`
-  margin: 3rem 0;
+  margin: 1rem 0;
   align-self: center;
 
   & > p {
@@ -120,11 +133,15 @@ const Button = styled.div`
   color: ${(props) => props.theme.text};
   border-radius: 3px;
   cursor: pointer;
-  margin: 2rem 0;
+  margin: 1rem 0;
   justify-self: start;
   transition: background 0.2s linear;
 
   &:hover {
     background: ${(props) => props.theme.secondary};
+  }
+
+  @media all and (min-width: 1000px) {
+    margin: 2rem 0;
   }
 `;

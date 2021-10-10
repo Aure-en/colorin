@@ -41,22 +41,35 @@ export default Leaves;
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   overflow: hidden;
-  grid-gap: 5rem;
-  padding: 0 3rem;
+  grid-gap: 1rem;
   align-items: center;
+  grid-template-columns: 2fr 1fr;
+
+  @media all and (min-width: 1235px) {
+    grid-gap: 5rem;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 3rem;
+  }
 `;
 
 const Text = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
-  padding: 3rem;
+
+  @media all and (min-width: 900px) {
+    padding: 3rem;
+  }
 `;
 
 const Header = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+
+  @media all and (min-width: 900px) {
+    flex-direction: row;
+  }
 `;
 
 const Main = styled.div`
@@ -99,9 +112,13 @@ const Right = styled.div`
 `;
 
 const Heading = styled.h2`
-  font-size: 4rem;
+  font-size: 2rem;
   margin-bottom: 2rem;
   max-width: 80%;
+
+  @media all and (min-width: 1360px) {
+    font-size: 4rem;
+  }
 `;
 
 const Subheading = styled.h3`

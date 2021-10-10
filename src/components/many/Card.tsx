@@ -61,6 +61,7 @@ const Color = styled.button<{
   height: 100%;
   background: ${(props) => props.$color};
   transition: all 0.2s ease-out;
+  min-height: 3rem;
 
   &:hover {
     flex: 3;

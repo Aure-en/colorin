@@ -75,14 +75,22 @@ const Code = styled.small<{
 
 const Informations = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
+
+  @media all and (min-width: 800px) {
+    flex-direction: row;
+  }
 `;
 
 const Buttons = styled.div`
   display: flex;
   align-items: start;
-  margin-left: 1rem;
+
+  @media all and (min-width: 800px) {
+    margin-left: 1rem;
+  }
 `;
 
 export default Name;

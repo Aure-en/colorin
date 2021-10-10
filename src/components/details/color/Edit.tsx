@@ -49,6 +49,7 @@ const Edit: React.FC<Props> = ({ color, index }: Props) => {
         type="color"
         id={`color-${index}`}
         name={`color-${index}`}
+        aria-label="Edit color"
       />
     </Label>
   );

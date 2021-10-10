@@ -13,8 +13,12 @@ const Geometric: React.FC = () => (
       </Heading>
       <Details>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, animi
-        quisquam. Delectus unde accusamus, ut asperiores modi cumque enim
-        aspernatur quasi. Dolor aliquid.
+        quisquam.
+        <span>
+          {' '}
+          Delectus unde accusamus, ut asperiores modi cumque enim
+          aspernatur quasi. Dolor aliquid.
+        </span>
       </Details>
       <Number>#01</Number>
     </Text>
@@ -64,6 +68,10 @@ const Heading = styled.h2`
 
 const Details = styled.div`
   margin: 2rem;
+
+  & > span {
+    display: none;
+  }
 `;
 
 const Number = styled.div`

@@ -29,10 +29,21 @@ Cards.propTypes = {
 
 const List = styled.ul`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   width: 100%;
   flex: 1;
   grid-gap: 2rem;
+
+  @media all and (min-width: 500px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media all and (min-width: 730px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media all and (min-width: 900px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
 
 export default Cards;

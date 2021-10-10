@@ -46,25 +46,36 @@ const Corner: React.FC = () => (
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
   flex: 1;
   align-items: center;
   overflow: hidden;
+  grid-template-columns: 1fr 4fr;
+
+  @media all and (min-width: 800px) {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  @media all and (min-width: 1120px) {
+    grid-template-columns: 1.5fr 1fr;
+  }
 `;
 
 const Right = styled.div`
-  max-width: 70%;
   background: ${(props) => props.theme.text_bright};
   padding: 2rem;
   border-radius: 5px;
+
+  @media all and (min-width: 1120px) {
+    max-width: 70%;
+  }
 `;
 
 const Heading = styled.h2`
-  font-size: 3rem;
   text-transform: uppercase;
   letter-spacing: 5px;
   font-weight: 300;
   margin-bottom: 2rem;
+  font-size: 2rem;
 
   & > span {
     position: relative;
@@ -81,13 +92,21 @@ const Heading = styled.h2`
     background: ${(props) => props.theme.quinary};
     opacity: 0.15;
   }
+
+  @media all and (min-width: 1120px) {
+    font-size: 3rem;
+  }
 `;
 
 const Subheading = styled.div`
   letter-spacing: 3px;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 300;
   color: ${(props) => props.theme.tertiary};
+
+  @media all and (min-width: 1120px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const Ul = styled.ul`

@@ -1,10 +1,13 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const Geometric: React.FC = () => {
+  const windowSize = useWindowSize();
   const theme = useTheme();
+
   return (
-    <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1200" preserveAspectRatio="xMaxYMax slice">
+    <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox={windowSize.width > 800 ? '0 0 2000 1200' : '0 0 2000 2000'} preserveAspectRatio="xMaxYMax slice">
       <g transform="scale(2.8612303290414878)">
         <rect x="0" y="0" width="699" height="699" fill="#ffffff" />
         <rect x="0" y="0" width="139.8" height="139.8" fill={theme.primary} />
@@ -42,7 +45,7 @@ const Geometric: React.FC = () => {
         <path d="M 69.9 279.6 A 69.9 69.9 0 0 1  139.8 209.7 L 69.9 279.6 A 69.9 69.9 0 0 0 139.8 209.7" fill={theme.primary} />
         <rect x="139.8" y="139.8" width="139.8" height="139.8" fill={theme.secondary} />
         <path d="M 139.8 279.6 A 139.8 139.8 0 0 1  279.6 139.8 L 139.8 279.6 A 139.8 139.8 0 0 0 279.6 139.8" fill={theme.primary} />
-        <rect x="279.6" y="139.8" width="139.8" height="139.8" fill={theme.quinary} />
+        <rect x="279.6" y="139.8" width="139.8" height="139.8" fill={theme.tertiary} />
         <path d="M 279.6 139.8 A 139.8 139.8 0 0 1  419.40000000000003 279.6 L 279.6 139.8 A 139.8 139.8 0 0 0 419.40000000000003 279.6" fill={theme.secondary} />
         <rect x="419.4" y="139.8" width="139.8" height="139.8" fill={theme.primary} />
         <path d="M 419.4 139.8 A 139.8 139.8 0 0 0 559.2 279.6 L 559.2 139.8" fill={theme.tertiary} />

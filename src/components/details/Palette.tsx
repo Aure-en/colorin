@@ -58,7 +58,6 @@ const Wrapper = styled.div<{
   $direction?: Direction,
 }>`
   display: flex;
-  flex-direction: ${(props) => (props.$direction === 'vertical' ? 'column' : 'row')};
   grid-gap: 1rem;
   width: 100%;
   flex: ${(props) => props.$main && '1'};
@@ -67,6 +66,9 @@ const Wrapper = styled.div<{
     flex: 1;
   }
 
+  @media all and (min-width: 600px) {
+    flex-direction: ${(props) => (props.$direction === 'vertical' ? 'column' : 'row')};
+  }
 `;
 
 export default Palette;

@@ -30,46 +30,46 @@ const Center: React.FC = () => {
           <g clipPath="url(#SVGID_2_)">
             <rect x="253.8" y="156.9" fill={theme.primary} width="56.1" height="64.1" />
             <path fill={theme.primary} d="M-26.8,28.6v-64.1l0,0c31,0,56.1,28.7,56.1,64.1l0,0H-26.8z" />
-            <rect x="-26.8" y="156.9" fill={theme.quinary} width="56.1" height="64.1" />
-            <path fill={theme.quinary} d="M29.3,28.6L29.3,28.6c0-35.4,25.1-64.1,56.1-64.1l0,0v64.1H29.3z" />
+            <rect x="-26.8" y="156.9" fill={theme.quaternary} width="56.1" height="64.1" />
+            <path fill={theme.quaternary} d="M29.3,28.6L29.3,28.6c0-35.4,25.1-64.1,56.1-64.1l0,0v64.1H29.3z" />
             <rect x="29.3" y="28.6" fill="#ffffff" width="56.1" height="64.1" />
-            <rect x="29.3" y="92.8" fill={theme.quinary} width="56.1" height="64.1" />
+            <rect x="29.3" y="92.8" fill={theme.quaternary} width="56.1" height="64.1" />
             <polygon fill={theme.tertiary} points="113.6,124.9 85.4,92.8 141.5,92.8 141.5,93 			" />
             <rect x="141.5" y="92.8" fill="#ffffff" width="56.1" height="64.1" />
             <rect x="197.7" y="-35.5" fill={theme.tertiary} width="56.1" height="64.1" />
-            <rect x="197.7" y="28.6" fill={theme.quinary} width="56.1" height="64.1" />
+            <rect x="197.7" y="28.6" fill={theme.quaternary} width="56.1" height="64.1" />
             <rect x="197.7" y="92.8" fill={theme.tertiary} width="56.1" height="64.1" />
             <path fill="#ffffff" d="M197.7,156.9V92.8h56.1l0,0C253.8,128.2,228.7,156.9,197.7,156.9L197.7,156.9z" />
-            <path fill={theme.quinary} d="M182.1,221h15.5v-17.7l0,0C189.1,203.3,182.1,211.2,182.1,221z" />
+            <path fill={theme.quaternary} d="M182.1,221h15.5v-17.7l0,0C189.1,203.3,182.1,211.2,182.1,221z" />
             <path fill={theme.tertiary} d="M170.5,136.6h-13.7v15.6l0,0C164.4,152.3,170.5,145.3,170.5,136.6z" />
-            <rect x="197.7" y="156.9" fill={theme.quinary} width="56.1" height="64.1" />
+            <rect x="197.7" y="156.9" fill={theme.quaternary} width="56.1" height="64.1" />
             <path fill={theme.primary} d="M197.7,221v-64.1h56.1l0,0C253.8,192.3,228.7,221,197.7,221L197.7,221z" />
             <path fill="#ffffff" d="M253.8,221v-64.1h56.1l0,0C309.9,192.3,284.8,221,253.8,221L253.8,221z" />
             <rect x="253.8" y="28.6" fill="#ffffff" width="56.1" height="64.1" />
-            <rect x="253.8" y="92.8" fill={theme.quinary} width="56.1" height="64.1" />
+            <rect x="253.8" y="92.8" fill={theme.quaternary} width="56.1" height="64.1" />
             <rect x="1.2" y="156.9" fill={theme.primary} width="28.1" height="64.1" />
             <rect x="281.8" y="28.6" fill={theme.tertiary} width="28.1" height="64.1" />
-            <rect x="114" y="-32.2" fill={theme.quinary} width="1.7" height="115" />
+            <rect x="114" y="-32.2" fill={theme.quaternary} width="1.7" height="115" />
             <rect x="-26.8" y="92.8" fill={theme.primary} width="56.1" height="32.1" />
             <g>
               <rect x="-10.8" y="28.6" fill={theme.tertiary} width="8" height="64.1" />
-              <rect x="-2.8" y="28.6" fill={theme.quinary} width="8" height="64.1" />
+              <rect x="-2.8" y="28.6" fill={theme.quaternary} width="8" height="64.1" />
               <rect x="-26.8" y="28.6" fill={theme.tertiary} width="8" height="64.1" />
-              <rect x="-18.8" y="28.6" fill={theme.quinary} width="8" height="64.1" />
-              <rect x="13.2" y="28.6" fill={theme.quinary} width="8" height="64.1" />
+              <rect x="-18.8" y="28.6" fill={theme.quaternary} width="8" height="64.1" />
+              <rect x="13.2" y="28.6" fill={theme.quaternary} width="8" height="64.1" />
               <rect x="5.2" y="28.6" fill={theme.tertiary} width="8" height="64.1" />
               <rect x="21.3" y="28.6" fill={theme.tertiary} width="8" height="64.1" />
             </g>
-            <path fill={theme.quinary} d="M253.8,92.8V28.6l0,0c31,0,56.1,28.7,56.1,64.1l0,0H253.8z" />
+            <path fill={theme.quaternary} d="M253.8,92.8V28.6l0,0c31,0,56.1,28.7,56.1,64.1l0,0H253.8z" />
             <path fill={theme.primary} d="M253.8,92.8v-32l0,0c15.5,0,28,14.3,28,32l0,0H253.8z" />
             <polygon fill="#ffffff" points="253.8,-35.5 197.7,28.6 253.8,28.6 			" />
-            <path fill={theme.quinary} d="M197.7,28.6h56.1l0,0c0-17.7-12.6-32.1-28.1-32.1h-28.1V28.6z" />
+            <path fill={theme.quaternary} d="M197.7,28.6h56.1l0,0c0-17.7-12.6-32.1-28.1-32.1h-28.1V28.6z" />
             <path fill="#ffffff" d="M-26.8,28.6V-8.1l0,0C-9.1-8.1,5.3,8.3,5.3,28.6l0,0H-26.8z" />
             <g>
-              <rect x="29.3" y="28.6" fill={theme.quinary} width="56.1" height="64.1" />
+              <rect x="29.3" y="28.6" fill={theme.quaternary} width="56.1" height="64.1" />
               <rect x="57.3" y="60.7" fill="#ffffff" width="28.1" height="32.1" />
               <rect x="29.3" y="28.6" fill={theme.primary} width="28.1" height="32.1" />
-              <rect x="29.3" y="60.7" fill={theme.quinary} width="28.1" height="32.1" />
+              <rect x="29.3" y="60.7" fill={theme.quaternary} width="28.1" height="32.1" />
               <g>
                 <path
                   fill={theme.tertiary}
@@ -82,7 +82,7 @@ const Center: React.FC = () => {
 						C45.5,49.3,47.4,47.2,47.4,44.7z"
                 />
                 <path
-                  fill={theme.quinary}
+                  fill={theme.quaternary}
                   d="M75.4,75.5L75.4,75.5c0-2.6-1.8-4.6-4.1-4.6l0,0c-2.2,0-4.1,2.1-4.1,4.6l0,0c0,2.6,1.8,4.6,4.1,4.6l0,0
 						C73.6,80.2,75.4,78.1,75.4,75.5z"
                 />
@@ -106,8 +106,8 @@ const Center: React.FC = () => {
               />
             </g>
             <path fill={theme.primary} d="M85.4,28.6v-64.1l0,0c-15.5,0-29.5,7.2-39.7,18.8L85.4,28.6L85.4,28.6z" />
-            <path fill={theme.quinary} d="M281.9,156.9h-28.1V189l0,0C269.3,189,281.9,174.6,281.9,156.9z" />
-            <rect x="85.5" y="-35.5" fill={theme.quinary} width="15.8" height="18.1" />
+            <path fill={theme.quaternary} d="M281.9,156.9h-28.1V189l0,0C269.3,189,281.9,174.6,281.9,156.9z" />
+            <rect x="85.5" y="-35.5" fill={theme.quaternary} width="15.8" height="18.1" />
             <path
               fill="#ffffff"
               d="M218.3,188.9L218.3,188.9c0-4.7,3.3-8.5,7.5-8.5l0,0c4.1,0,7.5,3.8,7.5,8.5l0,0c0,4.7-3.3,8.5-7.5,8.5l0,0
@@ -134,7 +134,7 @@ const Center: React.FC = () => {
             </g>
             <rect x="197.7" y="28.6" fill={theme.tertiary} width="56.1" height="64.1" />
             <rect x="225.7" y="28.6" fill="#ffffff" width="28" height="64.1" />
-            <path fill={theme.quinary} d="M197.7,92.7h56.1v-32h-28C210.3,60.7,197.7,75,197.7,92.7L197.7,92.7z" />
+            <path fill={theme.quaternary} d="M197.7,92.7h56.1v-32h-28C210.3,60.7,197.7,75,197.7,92.7L197.7,92.7z" />
           </g>
         </g>
       </g>
