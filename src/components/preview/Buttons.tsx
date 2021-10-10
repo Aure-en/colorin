@@ -15,6 +15,7 @@ const Buttons: React.FC<Props> = ({ select, total, current }: Props) => (
         type="button"
         onClick={() => select(number + 1)}
         $current={current === number + 1}
+        key={number}
       >
         {number + 1}
       </Button>

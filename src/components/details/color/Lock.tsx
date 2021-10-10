@@ -20,7 +20,7 @@ const Lock: React.FC<Props> = ({ color, textColor, isLocked }: Props) => {
     <Button
       type="button"
       onClick={() => {
-        if (color.id) {
+        if (typeof color.id === 'number') {
           dispatch(toggleLock(color.id, color.rgb));
         }
       }}
@@ -47,4 +47,5 @@ Lock.propTypes = {
   isLocked: PropTypes.bool.isRequired,
   textColor: PropTypes.string.isRequired,
 };
+
 export default Lock;

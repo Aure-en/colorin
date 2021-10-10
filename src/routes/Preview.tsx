@@ -6,6 +6,8 @@ import Palette from '../components/details/Palette';
 import Buttons from '../components/preview/Buttons';
 import Example from '../components/preview/Preview';
 import useWindowSize from '../hooks/useWindowSize';
+import Generate from '../components/details/buttons/Generate';
+import Reset from '../components/details/buttons/Reset';
 
 const Preview: React.FC = () => {
   const mainPalette = useAppSelector(getMainPalette);
@@ -54,7 +56,13 @@ const Preview: React.FC = () => {
 
   return (
     <Wrapper>
-      <Palette palette={mainPalette} main direction="vertical" />
+      <Colors>
+        <Palette palette={mainPalette} main direction="vertical" />
+        <Controls>
+          <Generate icon />
+          <Reset icon />
+        </Controls>
+      </Colors>
       <Example number={previewNumber} />
       <Buttons
         select={setPreviewNumber}
@@ -69,8 +77,8 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
   flex: 1;
-  padding: 3rem;
   min-height: 0;
+  padding: 1rem;
 
   @media all and (min-width: 600px) {
     grid-template-columns: 10rem 1fr auto;
@@ -80,7 +88,18 @@ const Wrapper = styled.div`
 
   @media all and (min-width: 900px) {
     grid-gap: 3rem;
+    padding: 3rem;
   }
+`;
+
+const Colors = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Controls = styled.div`
+  display: flex;
 `;
 
 export default Preview;
