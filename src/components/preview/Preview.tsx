@@ -8,7 +8,8 @@ import Leaves from './Leaves';
 import Corner from './Corner';
 
 interface Props {
-  number: number,
+  number: number;
+  direction: 'next' | 'prev',
 }
 
 const preview = (number: number) => {
@@ -28,9 +29,13 @@ const preview = (number: number) => {
   }
 };
 
-const Preview: React.FC<Props> = ({ number }: Props) => (
-  <Wrapper>
-    <CSSTransition timeout={{ enter: 50000, exit: 50000 }} key={number} classNames="slide">
+const Preview: React.FC<Props> = ({ number, direction }: Props) => (
+  <Wrapper className={direction}>
+    <CSSTransition
+      timeout={1000}
+      key={number}
+      classNames="slide"
+    >
       {preview(number)}
     </CSSTransition>
   </Wrapper>
@@ -44,10 +49,8 @@ const Wrapper = styled(TransitionGroup)`
   overflow: hidden;
 
   & > div {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
   }
 `;
