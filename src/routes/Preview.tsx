@@ -79,6 +79,7 @@ const Wrapper = styled.div`
   flex: 1;
   min-height: 0;
   padding: 1rem;
+  overflow: hidden;
 
   @media all and (min-width: 600px) {
     grid-template-columns: 10rem 1fr auto;

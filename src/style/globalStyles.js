@@ -64,6 +64,21 @@ button {
 strong {
   font-weight: bold;
 }
+
+.slide-enter {
+  transform: translateY(100%);
+}
+.slide-enter-active {
+  transform: translateY(0%);
+  transition: transform 0.7s ease-in-out;
+}
+.slide-exit {
+  transform: translateY(0%);
+}
+.slide-exit-active {
+  transform: translateY(-100%);
+  transition: transform 0.7s ease-in-out;
+}
 `;
 
 export default GlobalStyles;

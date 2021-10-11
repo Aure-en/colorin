@@ -36,11 +36,6 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   overflow: hidden;
-  margin: 2rem 0;
-
-  @media all and (min-width: 600px) {
-    padding: 0 3rem;
-  }
 `;
 
 const Text = styled.div`
