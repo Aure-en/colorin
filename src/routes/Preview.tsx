@@ -11,18 +11,30 @@ import Reset from '../components/details/buttons/Reset';
 
 const Preview: React.FC = () => {
   const mainPalette = useAppSelector(getMainPalette);
-  const [previewNumber, setPreviewNumber] = useState(1);
+  const [slide, setSlide] = useState<{
+    number: number,
+    direction: 'next' | 'prev',
+  }>({
+    number: 1,
+    direction: 'next',
+  });
   const windowSize = useWindowSize();
 
   const TOTAL_PREVIEWS = 5;
   let throttle = false;
 
   const prevPreview = () => {
-    setPreviewNumber((prev) => (prev === 1 ? TOTAL_PREVIEWS : prev - 1));
+    setSlide((prev) => ({
+      number: prev.number === 1 ? TOTAL_PREVIEWS : prev.number - 1,
+      direction: 'prev',
+    }));
   };
 
   const nextPreview = () => {
-    setPreviewNumber((prev) => (prev === TOTAL_PREVIEWS ? 1 : prev + 1));
+    setSlide((prev) => ({
+      number: prev.number === TOTAL_PREVIEWS ? 1 : prev.number + 1,
+      direction: 'next',
+    }));
   };
 
   const onMouseWheel = (e: WheelEvent) => {
@@ -63,11 +75,11 @@ const Preview: React.FC = () => {
           <Reset icon />
         </Controls>
       </Colors>
-      <Example number={previewNumber} />
+      <Example number={slide.number} direction={slide.direction} />
       <Buttons
-        select={setPreviewNumber}
+        select={setSlide}
         total={TOTAL_PREVIEWS}
-        current={previewNumber}
+        current={slide.number}
       />
     </Wrapper>
   );
@@ -79,6 +91,7 @@ const Wrapper = styled.div`
   flex: 1;
   min-height: 0;
   padding: 1rem;
+  overflow: hidden;
 
   @media all and (min-width: 600px) {
     grid-template-columns: 10rem 1fr auto;

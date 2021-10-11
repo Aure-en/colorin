@@ -64,6 +64,46 @@ button {
 strong {
   font-weight: bold;
 }
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Animations */
+.slide-enter,
+.slide-enter-active,
+.slide-exit,
+.slide-exit-active {
+  transition: transform 1000ms ease-in-out;
+}
+
+.next .slide-enter {
+  transform: translateY(100%);
+}
+
+.prev .slide-enter {
+  transform: translateY(-100%);
+}
+
+.next .slide-enter-active,
+.prev .slide-enter-active {
+  transform: translateY(0%);
+}
+
+.next .slide-exit,
+.prev .slide-exit {
+  transform: translateY(0%);
+}
+
+.prev .slide-exit-active {
+  transform: translateY(100%);
+}
+
+.next .slide-exit-active {
+  transform: translateY(-100%);
+}
 `;
 
 export default GlobalStyles;

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 interface Props {
-  select: (number: number) => void;
+  select: ({ number, direction }: {
+    number: number,
+    direction: 'next' | 'prev',
+  }) => void;
   current: number;
   total: number;
 }
@@ -13,7 +16,24 @@ const Buttons: React.FC<Props> = ({ select, total, current }: Props) => (
     {Array.from(Array(total).keys()).map((number: number) => (
       <Button
         type="button"
-        onClick={() => select(number + 1)}
+        onClick={() => {
+          if (current === 5 && number + 1 === 1) {
+            select({
+              number: number + 1,
+              direction: 'prev',
+            });
+          } else if (current === 1 && number + 1 === 5) {
+            select({
+              number: number + 1,
+              direction: 'next',
+            });
+          } else {
+            select({
+              number: number + 1,
+              direction: current > number + 1 ? 'prev' : 'next',
+            });
+          }
+        }}
         $current={current === number + 1}
         key={number}
       >

@@ -36,17 +36,17 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   overflow: hidden;
-  margin: 2rem 0;
-
-  @media all and (min-width: 600px) {
-    padding: 0 3rem;
+  padding: 1rem;
+  
+  @media all and (min-width: 800px) {
+    padding: 3rem;
   }
 `;
 
 const Text = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
-  padding: 0 1rem;
+  padding: 1rem;
 
   @media all and (min-width: 800px) {
     padding: 0 3rem;
