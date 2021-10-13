@@ -1,9 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
-import { useAppSelector } from '../app/hooks';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
 import {
   getMainPalette,
   getSteps,
+  setSteps,
 } from '../slices/paletteSlice';
 import Palettes from '../components/details/Palettes';
 import Steps from '../components/details/steps/Steps';
@@ -14,6 +15,14 @@ import Reset from '../components/details/buttons/Reset';
 const Details: React.FC = (): ReactElement => {
   const mainPalette = useAppSelector(getMainPalette);
   const steps: StepsType = useAppSelector(getSteps);
+  const dispatch = useAppDispatch();
+
+  // Get steps
+  useEffect(() => {
+    if (mainPalette.length > 0) {
+      dispatch(setSteps());
+    }
+  }, [mainPalette]);
 
   return (
     <Wrapper>

@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useAppSelector } from '../app/hooks';
-import { getPalettesFromAPI } from '../slices/paletteSlice';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
+import { getModelsLoading, getPalettesFromAPI, fetchPalettes } from '../slices/paletteSlice';
 import Cards from '../components/many/Cards';
 import Generate from '../components/many/buttons/Generate';
 
 const List: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const modelsLoading = useAppSelector(getModelsLoading);
   const palettes = useAppSelector(getPalettesFromAPI);
+
+  // Load palettes
+  useEffect(() => {
+    if (modelsLoading === 'fulfilled') dispatch(fetchPalettes());
+  }, [modelsLoading]);
 
   return (
     <Wrapper>
