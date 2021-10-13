@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Palette } from '../../ts/colors/colors';
-import Name from '../details/Name';
+import Name from '../shades/steps/Name';
 import useCopy from '../../hooks/useCopy';
 import View from './View';
 

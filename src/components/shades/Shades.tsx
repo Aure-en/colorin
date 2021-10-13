@@ -1,22 +1,22 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { MainPalette as MainPaletteType, Steps } from '../../ts/colors/colors';
-import MainPalette from './MainPalette';
-import Palette from './Palette';
+import { MainPalette as MainPaletteType, Steps as StepsType } from '../../ts/colors/colors';
+import Palette from '../shared/palette/Palette';
+import Steps from './steps/Steps';
 
 interface Props {
   mainPalette: MainPaletteType;
-  steps: Steps;
+  steps: StepsType;
 }
 
-const Palettes: React.FC<Props> = ({
+const Shades: React.FC<Props> = ({
   mainPalette,
   steps,
 }: Props): ReactElement => (
   <Wrapper>
     {steps.light.map(
       (palette, index) => palette.length > 0 && (
-      <Palette
+      <Steps
         key={`${index}-${palette.reduce(
           (concat, color) => concat + color.hex,
           '',
@@ -27,14 +27,14 @@ const Palettes: React.FC<Props> = ({
     )}
 
     {mainPalette.length > 0 && (
-      <MainPalette
+      <Palette
         palette={mainPalette}
       />
     )}
 
     {steps.dark.map(
       (palette, index) => palette.length > 0 && (
-      <Palette
+      <Steps
         key={`${index}-${palette.reduce(
           (concat, color) => concat + color.hex,
           '',
@@ -61,4 +61,4 @@ const Wrapper = styled.main`
   }
 `;
 
-export default Palettes;
+export default Shades;

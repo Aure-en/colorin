@@ -2,19 +2,19 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { ReactSortable } from 'react-sortablejs';
 import PropTypes from 'prop-types';
-import { useAppDispatch } from '../../app/hooks';
-import Color from './color/Color';
-import { MainPalette as MainPaletteType } from '../../ts/colors/colors';
-import { setPalette } from '../../slices/paletteSlice';
+import { useAppDispatch } from '../../../app/hooks';
+import Color from './Color';
+import { MainPalette } from '../../../ts/colors/colors';
+import { setPalette } from '../../../slices/paletteSlice';
 
 type Direction = 'vertical' | 'horizontal';
 
 interface Props {
-  palette: MainPaletteType;
+  palette: MainPalette;
   direction?: Direction;
 }
 
-const MainPalette: React.FC<Props> = ({
+const Palette: React.FC<Props> = ({
   palette,
   direction,
 }: Props): ReactElement => {
@@ -33,7 +33,7 @@ const MainPalette: React.FC<Props> = ({
   );
 };
 
-MainPalette.propTypes = {
+Palette.propTypes = {
   palette: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -46,7 +46,7 @@ MainPalette.propTypes = {
   direction: PropTypes.oneOf(['vertical', 'horizontal']),
 };
 
-MainPalette.defaultProps = {
+Palette.defaultProps = {
   direction: 'horizontal',
 };
 
@@ -67,4 +67,4 @@ const Wrapper = styled(ReactSortable)<{
   }
 `;
 
-export default MainPalette;
+export default Palette;

@@ -1,10 +1,9 @@
-import React, { useState, useEffect, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Color from 'color';
 import { Color as ColorType } from '../../../ts/colors/colors';
 import useCopy from '../../../hooks/useCopy';
-import Name from '../Name';
+import Name from './Name';
 
 interface Props {
   color: ColorType;
@@ -12,17 +11,6 @@ interface Props {
 
 const Step : React.FC<Props> = ({ color }: Props): ReactElement => {
   const { copy } = useCopy();
-  const [textColor, setTextColor] = useState('');
-
-  // If the color is bright, darken it to use it on the card.
-  useEffect(() => {
-    const newColor = Color.rgb(color.rgb);
-    if (newColor.hsl().array()[2] > 70) {
-      setTextColor(newColor.lightness(70).hsl().string());
-    } else {
-      setTextColor(newColor.hsl().string());
-    }
-  }, [color]);
 
   return (
     <Card>

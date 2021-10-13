@@ -1,9 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Step from './steps/Step';
-import Color from './color/Color';
-import { isMainColor, Palette as PaletteType } from '../../ts/colors/colors';
+import Step from './Step';
+import { Palette as PaletteType } from '../../../ts/colors/colors';
 
 type Direction = 'vertical' | 'horizontal';
 
@@ -13,29 +12,18 @@ interface Props {
   direction?: Direction,
 }
 
-const Palette: React.FC<Props> = ({ palette, main, direction }: Props): ReactElement => (
+const Steps: React.FC<Props> = ({ palette, main, direction }: Props): ReactElement => (
   <Wrapper $main={main} $direction={direction}>
     {palette.map((color, index) => (
-      main && isMainColor(color)
-        ? (
-          <Color
-            key={color.id}
-            index={index}
-            color={color}
-          />
-
-        )
-        : (
-          <Step
-            key={`${index}-${color.hex}`}
-            color={color}
-          />
-        )
+      <Step
+        key={`${index}-${color.hex}`}
+        color={color}
+      />
     ))}
   </Wrapper>
 );
 
-Palette.propTypes = {
+Steps.propTypes = {
   palette: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -48,7 +36,7 @@ Palette.propTypes = {
   direction: PropTypes.oneOf(['vertical', 'horizontal']),
 };
 
-Palette.defaultProps = {
+Steps.defaultProps = {
   main: false,
   direction: 'horizontal',
 };
@@ -71,4 +59,4 @@ const Wrapper = styled.div<{
   }
 `;
 
-export default Palette;
+export default Steps;

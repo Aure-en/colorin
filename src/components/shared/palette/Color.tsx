@@ -2,13 +2,13 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useAppDispatch } from '../../../app/hooks';
-import { Color as ColorType } from '../../../ts/colors/colors';
+import { MainColor } from '../../../ts/colors/colors';
 import { toggleLock } from '../../../slices/paletteSlice';
 import useCopy from '../../../hooks/useCopy';
-import Name from '../Name';
+import Name from './Name';
 
 interface Props {
-  color: ColorType;
+  color: MainColor;
   index: number,
 }
 
@@ -37,7 +37,7 @@ const Color: React.FC<Props> = ({ color, index }: Props): ReactElement => {
           handleRightClick(e);
         }}
       />
-      <Name color={color} main />
+      <Name color={color} />
     </Card>
   );
 };
@@ -48,6 +48,7 @@ Color.propTypes = {
     hex: PropTypes.string.isRequired,
     rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,
 };
