@@ -7,11 +7,11 @@ import Settings from '../ts/settings/settings';
 
 const initialState: Settings = {
   theme: {
-    primary: '#000',
-    secondary: '#aaa',
-    tertiary: '#bbb',
-    quaternary: '#ccc',
-    quinary: '#ddd',
+    primary: '#fff',
+    secondary: '#fff',
+    tertiary: '#fff',
+    quaternary: '#fff',
+    quinary: '#fff',
     text: '#fff',
     text_dark: '#000',
     text_neutral: '#585858',

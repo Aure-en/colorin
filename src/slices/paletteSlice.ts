@@ -319,6 +319,8 @@ export const getLocked = (state: Store): (Values | 'N')[] => state.palette.locke
 
 export const getModels = (state: Store): string[] => state.palette.models;
 
+export const getModelsLoading = (state: Store): Loading => state.palette.loading.models;
+
 export const getPaletteLoading = (state: Store): Loading => state.palette.loading.palette;
 
 export const getPalettesLoading = (state: Store): Loading => state.palette.loading.palettes;

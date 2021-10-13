@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import {
   fetchPalette,
   getModels,
+  getModelsLoading,
   getPaletteLoading,
 } from '../../../slices/paletteSlice';
 import { ReactComponent as IconLoad } from '../../../assets/icons/loader.svg';
@@ -18,6 +19,7 @@ const Generate: React.FC<Props> = ({ icon }) => {
   const dispatch = useAppDispatch();
   const models = useAppSelector(getModels);
   const paletteLoading = useAppSelector(getPaletteLoading);
+  const modelsLoading = useAppSelector(getModelsLoading);
 
   return (
     <Wrapper>
@@ -29,6 +31,7 @@ const Generate: React.FC<Props> = ({ icon }) => {
         }}
         $rotate={paletteLoading === 'pending' && icon}
         $icon={icon}
+        disabled={paletteLoading === 'pending' || modelsLoading !== 'fulfilled'}
       >
         {icon ? <IconReset /> : 'Generate'}
       </Button>

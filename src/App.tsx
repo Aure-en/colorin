@@ -1,13 +1,9 @@
 import React, { useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from './app/hooks';
+import { useAppDispatch } from './app/hooks';
 import {
-  getMainPalette,
   fetchModels,
-  fetchPalettes,
-  setSteps,
-  getModels,
   setPalette,
 } from './slices/paletteSlice';
 import Details from './routes/Details';
@@ -20,8 +16,6 @@ import GlobalStyles from './style/globalStyles';
 import palettes from './data/palettes';
 
 const App: React.FC = (): ReactElement => {
-  const models = useAppSelector(getModels);
-  const mainPalette = useAppSelector(getMainPalette);
   const dispatch = useAppDispatch();
 
   // Setup
@@ -33,18 +27,6 @@ const App: React.FC = (): ReactElement => {
     // Load models
     dispatch(fetchModels());
   }, []);
-
-  // Load palettes
-  useEffect(() => {
-    if (models.length > 0) dispatch(fetchPalettes());
-  }, [models]);
-
-  // Get steps
-  useEffect(() => {
-    if (mainPalette.length > 0) {
-      dispatch(setSteps());
-    }
-  }, [mainPalette]);
 
   return (
     <Router>
