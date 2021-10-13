@@ -8,6 +8,7 @@ import {
 } from './slices/paletteSlice';
 import Details from './routes/Details';
 import List from './routes/List';
+import Test from './routes/Test';
 import Preview from './routes/Preview';
 import Theme from './components/theme/Theme';
 import Copies from './components/copy/Copies';
@@ -38,6 +39,7 @@ const App: React.FC = (): ReactElement => {
             <Route exact path="/" component={Preview} />
             <Route exact path="/shades" component={Details} />
             <Route exact path="/list" component={List} />
+            <Route exact path="/test" component={Test} />
           </Switch>
         </Wrapper>
       </Theme>

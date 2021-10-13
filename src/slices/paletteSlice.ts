@@ -307,11 +307,11 @@ export const {
   setPalette,
 } = paletteSlice.actions;
 
-export const getPaletteFromAPI = (state: Store): PaletteType => state.palette.paletteFromAPI;
+export const getPaletteFromAPI = (state: Store): MainPaletteType => state.palette.paletteFromAPI;
 
 export const getPalettesFromAPI = (state: Store): PaletteType[] => state.palette.palettesFromAPI;
 
-export const getMainPalette = (state: Store): PaletteType => state.palette.mainPalette;
+export const getMainPalette = (state: Store): MainPaletteType => state.palette.mainPalette;
 
 export const getSteps = (state: Store): Steps => state.palette.steps;
 

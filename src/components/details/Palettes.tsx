@@ -1,10 +1,11 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { Palette as PaletteType, Steps } from '../../ts/colors/colors';
+import { MainPalette as MainPaletteType, Steps } from '../../ts/colors/colors';
+import MainPalette from './MainPalette';
 import Palette from './Palette';
 
 interface Props {
-  mainPalette: PaletteType;
+  mainPalette: MainPaletteType;
   steps: Steps;
 }
 
@@ -26,10 +27,9 @@ const Palettes: React.FC<Props> = ({
     )}
 
     {mainPalette.length > 0 && (
-    <Palette
-      palette={mainPalette}
-      main
-    />
+      <MainPalette
+        palette={mainPalette}
+      />
     )}
 
     {steps.dark.map(
