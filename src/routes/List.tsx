@@ -12,7 +12,7 @@ const List: React.FC = () => {
 
   // Load palettes
   useEffect(() => {
-    if (modelsLoading === 'fulfilled') dispatch(fetchPalettes());
+    if (modelsLoading === 'fulfilled' && palettes.length === 0) dispatch(fetchPalettes());
   }, [modelsLoading]);
 
   return (

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Step from './steps/Step';
 import Color from './color/Color';
-import { Color as ColorType, Palette as PaletteType } from '../../ts/colors/colors';
+import { isMainColor, Palette as PaletteType } from '../../ts/colors/colors';
 
 type Direction = 'vertical' | 'horizontal';
 
@@ -15,8 +15,8 @@ interface Props {
 
 const Palette: React.FC<Props> = ({ palette, main, direction }: Props): ReactElement => (
   <Wrapper $main={main} $direction={direction}>
-    {palette.map((color: ColorType, index: number) => (
-      main
+    {palette.map((color, index) => (
+      main && isMainColor(color)
         ? (
           <Color
             key={color.id}

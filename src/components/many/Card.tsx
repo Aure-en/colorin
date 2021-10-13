@@ -22,6 +22,7 @@ const Card: React.FC<Props> = ({ palette }: Props) => {
       <Colors>
         {palette.map((color) => (
           <Color
+            key={color.hex}
             $color={color.hex}
             onMouseEnter={() => setCurrentColor(color)}
             onClick={(e) => {

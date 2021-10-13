@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
 import { useAppSelector } from '../../app/hooks';
-import { Color as ColorType } from '../../ts/colors/colors';
+import { Color as ColorType, MainColor, isMainColor } from '../../ts/colors/colors';
 import { getLocked } from '../../slices/paletteSlice';
 import Lock from './color/Lock';
 import Edit from './color/Edit';
 
 interface Props {
-  color: ColorType;
-  main?: boolean;
+  color: ColorType | MainColor,
+  main?: boolean,
 }
 
 const Name: React.FC<Props> = ({ color, main }: Props): ReactElement => {
@@ -33,9 +33,9 @@ const Name: React.FC<Props> = ({ color, main }: Props): ReactElement => {
         <div>{color.name}</div>
         <Code $color={textColor}>{color.hex}</Code>
       </div>
-      {main && (
+      {main && isMainColor(color) && (
         <Buttons>
-          <Edit color={color} index={(color.id as number)} />
+          <Edit color={color} index={color.id} />
           <Lock
             textColor={textColor}
             color={color}
@@ -57,6 +57,7 @@ Name.propTypes = {
     hex: PropTypes.string.isRequired,
     rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    id: PropTypes.number,
   }).isRequired,
   main: PropTypes.bool,
 };
