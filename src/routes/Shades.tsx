@@ -6,11 +6,11 @@ import {
   getSteps,
   setSteps,
 } from '../slices/paletteSlice';
-import Palettes from '../components/details/Palettes';
-import Steps from '../components/details/steps/Steps';
+import Palettes from '../components/shades/Shades';
+import StepsButtons from '../components/shades/steps/Buttons';
 import { Steps as StepsType } from '../ts/colors/colors';
-import Generate from '../components/details/buttons/Generate';
-import Reset from '../components/details/buttons/Reset';
+import Generate from '../components/shades/buttons/Generate';
+import Reset from '../components/shades/buttons/Reset';
 
 const Details: React.FC = (): ReactElement => {
   const mainPalette = useAppSelector(getMainPalette);
@@ -26,7 +26,7 @@ const Details: React.FC = (): ReactElement => {
 
   return (
     <Wrapper>
-      <Steps />
+      <StepsButtons />
       <Palettes mainPalette={mainPalette} steps={steps} />
       <Buttons>
         <Generate />

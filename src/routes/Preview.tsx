@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../app/hooks';
 import { getMainPalette } from '../slices/paletteSlice';
-import Palette from '../components/details/Palette';
 import Buttons from '../components/preview/Buttons';
 import Example from '../components/preview/Preview';
 import useWindowSize from '../hooks/useWindowSize';
-import Generate from '../components/details/buttons/Generate';
-import Reset from '../components/details/buttons/Reset';
+import Generate from '../components/shades/buttons/Generate';
+import Reset from '../components/shades/buttons/Reset';
+import Palette from '../components/shared/palette/Palette';
 
 const Preview: React.FC = () => {
   const mainPalette = useAppSelector(getMainPalette);
@@ -69,7 +69,7 @@ const Preview: React.FC = () => {
   return (
     <Wrapper>
       <Colors>
-        <Palette palette={mainPalette} main direction="vertical" />
+        <Palette palette={mainPalette} direction="vertical" />
         <Controls>
           <Generate icon />
           <Reset icon />

@@ -5,10 +5,10 @@ import { useAppDispatch } from '../../../app/hooks';
 import IconLock from '../../../assets/icons/IconLock';
 import IconUnlock from '../../../assets/icons/IconUnlock';
 import { toggleLock } from '../../../slices/paletteSlice';
-import { Color } from '../../../ts/colors/colors';
+import { MainColor } from '../../../ts/colors/colors';
 
 interface Props {
-  color: Color,
+  color: MainColor,
   textColor: string,
   isLocked: boolean,
 }
@@ -43,6 +43,7 @@ Lock.propTypes = {
     hex: PropTypes.string.isRequired,
     rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
   isLocked: PropTypes.bool.isRequired,
   textColor: PropTypes.string.isRequired,

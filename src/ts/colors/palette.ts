@@ -1,4 +1,6 @@
-import { Values, Palette, Steps } from './colors';
+import {
+  Values, Palette, MainPalette, Steps,
+} from './colors';
 
 type Locked = Values | 'N';
 export type Loading = 'idle' | 'pending' | 'rejected' | 'fulfilled';
@@ -7,8 +9,8 @@ interface PaletteState {
   models: string[],
   palettesFromAPI: Palette[],
   locked: Locked[],
-  paletteFromAPI: Palette,
-  mainPalette: Palette,
+  paletteFromAPI: MainPalette,
+  mainPalette: MainPalette,
   stepsNumber: number,
   steps: Steps,
   loading: {

@@ -55,7 +55,7 @@ const Wrapper = styled.div`
     grid-template-columns: 1fr 2fr;
   }
 
-  @media all and (min-width: 1120px) {
+  @media all and (min-width: 1300px) {
     grid-template-columns: 1.5fr 1fr;
   }
 `;
@@ -65,7 +65,7 @@ const Right = styled.div`
   padding: 2rem;
   border-radius: 5px;
 
-  @media all and (min-width: 1120px) {
+  @media all and (min-width: 1300px) {
     max-width: 70%;
   }
 `;

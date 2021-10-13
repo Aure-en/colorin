@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../../app/hooks';
 import { updatePalette, setStep } from '../../../slices/paletteSlice';
-import { Color } from '../../../ts/colors/colors';
+import { MainColor } from '../../../ts/colors/colors';
 import { ReactComponent as IconEdit } from '../../../assets/icons/edit.svg';
 
 interface Props {
   index: number;
-  color: Color;
+  color: MainColor;
 }
 
 const Edit: React.FC<Props> = ({ color, index }: Props) => {
@@ -55,9 +56,20 @@ const Edit: React.FC<Props> = ({ color, index }: Props) => {
   );
 };
 
+Edit.propTypes = {
+  color: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    hex: PropTypes.string.isRequired,
+    rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+};
+
 const Label = styled.label<{
   $index: number;
-  $color: Color
+  $color: MainColor
 }>`
   cursor: pointer;
 

@@ -1,39 +1,37 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
+import { ReactSortable } from 'react-sortablejs';
 import PropTypes from 'prop-types';
-import Step from './steps/Step';
-import Color from './color/Color';
-import { Color as ColorType, Palette as PaletteType } from '../../ts/colors/colors';
+import { useAppDispatch } from '../../../app/hooks';
+import Color from './Color';
+import { MainPalette } from '../../../ts/colors/colors';
+import { setPalette } from '../../../slices/paletteSlice';
 
 type Direction = 'vertical' | 'horizontal';
 
 interface Props {
-  palette: PaletteType,
-  main?: boolean,
-  direction?: Direction,
+  palette: MainPalette;
+  direction?: Direction;
 }
 
-const Palette: React.FC<Props> = ({ palette, main, direction }: Props): ReactElement => (
-  <Wrapper $main={main} $direction={direction}>
-    {palette.map((color: ColorType, index: number) => (
-      main
-        ? (
-          <Color
-            key={color.id}
-            index={index}
-            color={color}
-          />
+const Palette: React.FC<Props> = ({
+  palette,
+  direction,
+}: Props): ReactElement => {
+  const dispatch = useAppDispatch();
 
-        )
-        : (
-          <Step
-            key={`${index}-${color.hex}`}
-            color={color}
-          />
-        )
-    ))}
-  </Wrapper>
-);
+  return (
+    <Wrapper
+      $direction={direction}
+      list={palette}
+      setList={(newPalette: any) => dispatch(setPalette(newPalette))}
+    >
+      {palette.map((color, index) => (
+        <Color key={color.id} index={index} color={color} />
+      ))}
+    </Wrapper>
+  );
+};
 
 Palette.propTypes = {
   palette: PropTypes.arrayOf(
@@ -42,25 +40,23 @@ Palette.propTypes = {
       hex: PropTypes.string.isRequired,
       rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
       hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+      id: PropTypes.number.isRequired,
     }).isRequired,
   ).isRequired,
-  main: PropTypes.bool,
   direction: PropTypes.oneOf(['vertical', 'horizontal']),
 };
 
 Palette.defaultProps = {
-  main: false,
   direction: 'horizontal',
 };
 
-const Wrapper = styled.div<{
-  $main?: boolean,
-  $direction?: Direction,
+const Wrapper = styled(ReactSortable)<{
+  $direction?: Direction;
 }>`
   display: flex;
   grid-gap: 1rem;
   width: 100%;
-  flex: ${(props) => props.$main && '1'};
+  flex: 1;
 
   & > * {
     flex: 1;

@@ -8,7 +8,9 @@ import {
 } from '../utils/color';
 import {
   Color as ColorType,
+  MainColor as MainColorType,
   Palette as PaletteType,
+  MainPalette as MainPaletteType,
   Steps,
   Values,
 } from '../ts/colors/colors';
@@ -43,7 +45,7 @@ export const fetchModels = createAsyncThunk('palette/fetchModels', async () => {
 });
 
 export const fetchPalette = createAsyncThunk<
-  ColorType[],
+  MainPaletteType,
   void,
   { state: Store }
 >('palette/fetchPalette', async (undefined, { getState }) => {
@@ -80,7 +82,7 @@ export const fetchPalette = createAsyncThunk<
 });
 
 export const fetchPalettes = createAsyncThunk<
-  ColorType[][],
+  PaletteType[],
   void,
   { state: Store }
 >('palette/fetchPalettes', async (undefined, { getState }) => {
@@ -305,11 +307,11 @@ export const {
   setPalette,
 } = paletteSlice.actions;
 
-export const getPaletteFromAPI = (state: Store): PaletteType => state.palette.paletteFromAPI;
+export const getPaletteFromAPI = (state: Store): MainPaletteType => state.palette.paletteFromAPI;
 
 export const getPalettesFromAPI = (state: Store): PaletteType[] => state.palette.palettesFromAPI;
 
-export const getMainPalette = (state: Store): PaletteType => state.palette.mainPalette;
+export const getMainPalette = (state: Store): MainPaletteType => state.palette.mainPalette;
 
 export const getSteps = (state: Store): Steps => state.palette.steps;
 

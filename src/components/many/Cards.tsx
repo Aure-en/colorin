@@ -10,7 +10,7 @@ interface Props {
 
 const Cards: React.FC<Props> = ({ palettes }: Props) => (
   <List>
-    {palettes.map((palette) => <Card palette={palette} />)}
+    {palettes.map((palette, index) => <Card palette={palette} key={index} />)}
   </List>
 );
 

@@ -6,7 +6,7 @@ import {
   fetchModels,
   setPalette,
 } from './slices/paletteSlice';
-import Details from './routes/Details';
+import Details from './routes/Shades';
 import List from './routes/List';
 import Preview from './routes/Preview';
 import Theme from './components/theme/Theme';

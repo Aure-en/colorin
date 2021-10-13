@@ -2,18 +2,17 @@ import React, { useState, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
-import { useAppSelector } from '../../app/hooks';
-import { Color as ColorType } from '../../ts/colors/colors';
-import { getLocked } from '../../slices/paletteSlice';
-import Lock from './color/Lock';
-import Edit from './color/Edit';
+import { useAppSelector } from '../../../app/hooks';
+import { MainColor } from '../../../ts/colors/colors';
+import { getLocked } from '../../../slices/paletteSlice';
+import Lock from './Lock';
+import Edit from './Edit';
 
 interface Props {
-  color: ColorType;
-  main?: boolean;
+  color: MainColor,
 }
 
-const Name: React.FC<Props> = ({ color, main }: Props): ReactElement => {
+const Name: React.FC<Props> = ({ color }: Props): ReactElement => {
   const locked = useAppSelector(getLocked);
   const [textColor, setTextColor] = useState('');
 
@@ -33,20 +32,18 @@ const Name: React.FC<Props> = ({ color, main }: Props): ReactElement => {
         <div>{color.name}</div>
         <Code $color={textColor}>{color.hex}</Code>
       </div>
-      {main && (
-        <Buttons>
-          <Edit color={color} index={(color.id as number)} />
-          <Lock
-            textColor={textColor}
-            color={color}
-            isLocked={
-              locked.find(
-                (lock) => Array.isArray(lock) && lock.join('') === color.rgb.join(''),
-              ) !== undefined
-            }
-          />
-        </Buttons>
-      )}
+      <Buttons>
+        <Edit color={color} index={color.id} />
+        <Lock
+          textColor={textColor}
+          color={color}
+          isLocked={
+            locked.find(
+              (lock) => Array.isArray(lock) && lock.join('') === color.rgb.join(''),
+            ) !== undefined
+          }
+        />
+      </Buttons>
     </Informations>
   );
 };
@@ -57,12 +54,8 @@ Name.propTypes = {
     hex: PropTypes.string.isRequired,
     rgb: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     hsl: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
-  main: PropTypes.bool,
-};
-
-Name.defaultProps = {
-  main: false,
 };
 
 const Code = styled.small<{
