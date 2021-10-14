@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../../app/hooks';
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const Edit: React.FC<Props> = ({ color, index }: Props) => {
+  const location = useLocation();
   const dispatch = useAppDispatch();
   let throttle = false;
 
@@ -19,7 +21,7 @@ const Edit: React.FC<Props> = ({ color, index }: Props) => {
     (e: React.ChangeEvent<HTMLInputElement>): void => {
       if (!throttle) {
         dispatch(updatePalette(index, e.target.value));
-        dispatch(setStep(index, e.target.value));
+        if (location.pathname === '/shades') dispatch(setStep(index, e.target.value));
         throttle = true;
         setTimeout(() => {
           throttle = false;
@@ -31,6 +33,7 @@ const Edit: React.FC<Props> = ({ color, index }: Props) => {
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updatePalette(index, e.target.value));
+    if (location.pathname === '/shades') dispatch(setStep(index, e.target.value));
   };
 
   return (
