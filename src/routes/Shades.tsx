@@ -6,7 +6,7 @@ import {
   getSteps,
   setSteps,
 } from '../slices/paletteSlice';
-import Palettes from '../components/shades/Shades';
+import Shades from '../components/shades/Shades';
 import StepsButtons from '../components/shades/steps/Buttons';
 import { Steps as StepsType } from '../ts/colors/colors';
 import Generate from '../components/shades/buttons/Generate';
@@ -27,7 +27,7 @@ const Details: React.FC = (): ReactElement => {
   return (
     <Wrapper>
       <StepsButtons />
-      <Palettes mainPalette={mainPalette} steps={steps} />
+      <Shades mainPalette={mainPalette} steps={steps} />
       <Buttons>
         <Generate />
         <Reset />
