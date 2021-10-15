@@ -9,7 +9,7 @@ import {
 import Details from './routes/Shades';
 import List from './routes/List';
 import Preview from './routes/Preview';
-import Theme from './components/theme/Theme';
+import Theme from './components/settings/Theme';
 import Copies from './components/copy/Copies';
 import Header from './components/header/Header';
 import GlobalStyles from './style/globalStyles';

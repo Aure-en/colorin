@@ -32,7 +32,7 @@ const preview = (number: number) => {
 const Preview: React.FC<Props> = ({ number, direction }: Props) => (
   <Wrapper className={direction}>
     <CSSTransition
-      timeout={1000}
+      timeout={750}
       key={number}
       classNames="slide"
     >

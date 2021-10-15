@@ -67,4 +67,6 @@ export const { setTheme, setFormat } = settingsSlice.actions;
 
 export const getTheme = (state: Store): Theme => state.settings.theme;
 
+export const getFormat = (state: Store): Format => state.settings.format;
+
 export default settingsSlice.reducer;

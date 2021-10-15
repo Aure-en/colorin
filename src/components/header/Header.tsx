@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import IconSwatch from '../../assets/icons/IconSwatch';
+import Format from '../settings/Format';
 
 const Header: React.FC = () => (
   <Wrapper>
@@ -35,6 +36,7 @@ const Header: React.FC = () => (
         Palettes
       </Link>
     </nav>
+    {/* <Format /> */}
   </Wrapper>
 );
 

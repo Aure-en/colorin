@@ -76,7 +76,7 @@ strong {
 .slide-enter-active,
 .slide-exit,
 .slide-exit-active {
-  transition: transform 1000ms ease-in-out;
+  transition: transform 0.75s ease-in-out;
 }
 
 .next .slide-enter {
