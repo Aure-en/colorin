@@ -71,6 +71,7 @@ const Informations = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  overflow-wrap: break-word;
 
   @media all and (min-width: 800px) {
     flex-direction: row;

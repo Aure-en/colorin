@@ -28,6 +28,7 @@ const Format: React.FunctionComponent = () => {
                 dispatch(setFormat(option));
                 setIsDropdownOpen(false);
               }}
+              key={option}
             >
               {option}
 
@@ -54,7 +55,6 @@ const DropdownHeader = styled.div`
   display: flex;
   align-items: center;
   text-transform: uppercase;
-  font-size: 0.75rem;
   font-weight: 500;
   cursor: pointer;
 `;
@@ -67,7 +67,6 @@ const DropdownList = styled.div`
   border: 1px solid ${(props) => props.theme.text};
   max-height: 30rem;
   z-index: 5;
-  font-size: 0.75rem;
 `;
 
 export default Format;

@@ -34,9 +34,12 @@ const Wrapper = styled.div`
 `;
 
 const Text = styled.div`
-  max-width: 50%;
   padding: 3rem;
   text-align: center;
+
+  @media all and (min-width: 800px) {
+    max-width: 50%;
+  }
 `;
 
 const Heading = styled.h2`
@@ -68,9 +71,18 @@ const Heading = styled.h2`
 
 const Details = styled.div`
   margin: 2rem;
+  display: none;
+
+  @media all and (min-width: 600px) {
+    display: block;
+  }
 
   & > span {
     display: none;
+
+    @media all and (min-width: 1300px) {
+      display: block;
+    }
   }
 `;
 

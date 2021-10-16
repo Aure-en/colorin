@@ -69,7 +69,10 @@ const Main = styled.div`
 
   & > p {
     line-height: 2rem;
-    max-width: 60%;
+
+    @media all and (min-width: 800px) {
+      max-width: 60%;
+    }
   }
 `;
 

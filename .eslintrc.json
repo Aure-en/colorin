@@ -6,7 +6,10 @@
     "extends": [
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "airbnb"
+        "plugin:import/recommended",
+        "plugin:import/typescript",
+        "airbnb",
+        "airbnb-typescript"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -14,7 +17,8 @@
             "jsx": true
         },
         "ecmaVersion": 12,
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": "./tsconfig.json"
     },
     "plugins": [
         "react",
@@ -22,6 +26,7 @@
     ],
     "rules": {
         "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
-        "no-use-before-define": "off" // styled-components defined at the end of the file.
+        "no-use-before-define": "off", // styled-components defined at the end of the file.
+        "@typescript-eslint/no-use-before-define": "off"
     }
 }
