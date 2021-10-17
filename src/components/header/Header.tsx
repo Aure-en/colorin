@@ -4,10 +4,19 @@ import { NavLink } from 'react-router-dom';
 import IconSwatch from '../../assets/icons/IconSwatch';
 import Format from '../settings/Format';
 
-const Header: React.FC = () => (
+const Header: React.FunctionComponent = () => (
   <Wrapper>
-    <IconSwatch />
-    <nav>
+    <Nav>
+      <Link
+        exact
+        activeStyle={{
+          fontWeight: 400,
+        }}
+        to="/"
+      >
+        <IconSwatch />
+      </Link>
+
       <Link
         exact
         activeStyle={{
@@ -35,20 +44,26 @@ const Header: React.FC = () => (
       >
         Palettes
       </Link>
-    </nav>
-    {/* <Format /> */}
+    </Nav>
+    <Format />
   </Wrapper>
 );
 
 const Wrapper = styled.header`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: ${(props) => props.theme.primary};
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 0;
 
-  & > nav {
-    margin-left: 0.75rem;
+  @media all and (min-width: 600px) {
+    padding: 0.25rem 1rem;
   }
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  align-items: center;
 `;
 
 const Link = styled(NavLink)`
@@ -56,8 +71,12 @@ const Link = styled(NavLink)`
   font-weight: 300;
   text-decoration: none;
   color: ${(props) => props.theme.text};
-  margin: 0 0.75rem;
   font-size: 1.25rem;
+  margin: 0 0.25rem;
+
+  @media all and (min-width: 600px) {
+    margin: 0 0.75rem;
+  }
 `;
 
 export default Header;

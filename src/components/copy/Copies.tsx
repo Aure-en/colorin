@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { getCopied } from '../../slices/copySlice';
 import Copy from './Copy';
 
-const Copies: React.FC = (): ReactElement => {
+const Copies: React.FunctionComponent = (): ReactElement => {
   const copied = useAppSelector(getCopied);
 
   return (

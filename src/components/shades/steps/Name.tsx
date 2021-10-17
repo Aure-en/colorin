@@ -8,7 +8,7 @@ interface Props {
   color: ColorType,
 }
 
-const Name: React.FC<Props> = ({ color }: Props): ReactElement => {
+const Name: React.FunctionComponent<Props> = ({ color }: Props): ReactElement => {
   const [textColor, setTextColor] = useState('');
 
   // If the color is bright, darken it to use it on the card.

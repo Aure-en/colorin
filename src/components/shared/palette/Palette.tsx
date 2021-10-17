@@ -14,7 +14,7 @@ interface Props {
   direction?: Direction;
 }
 
-const Palette: React.FC<Props> = ({
+const Palette: React.FunctionComponent<Props> = ({
   palette,
   direction,
 }: Props): ReactElement => {
@@ -24,7 +24,7 @@ const Palette: React.FC<Props> = ({
     <Wrapper
       $direction={direction}
       list={palette}
-      setList={(newPalette: any) => dispatch(setPalette(newPalette))}
+      setList={(newPalette: MainPalette) => dispatch(setPalette(newPalette))}
     >
       {palette.map((color, index) => (
         <Color key={color.id} index={index} color={color} />

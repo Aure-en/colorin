@@ -9,7 +9,7 @@ interface Props {
   icon?: boolean;
 }
 
-const Reset: React.FC<Props> = ({ icon }) => {
+const Reset: React.FunctionComponent<Props> = ({ icon }) => {
   const dispatch = useAppDispatch();
 
   return (

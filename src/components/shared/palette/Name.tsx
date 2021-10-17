@@ -12,7 +12,7 @@ interface Props {
   color: MainColor,
 }
 
-const Name: React.FC<Props> = ({ color }: Props): ReactElement => {
+const Name: React.FunctionComponent<Props> = ({ color }: Props): ReactElement => {
   const locked = useAppSelector(getLocked);
   const [textColor, setTextColor] = useState('');
 

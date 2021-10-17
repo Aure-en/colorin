@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Shape from '../../assets/preview/Geometric';
 
-const Geometric: React.FC = () => (
+const Geometric: React.FunctionComponent = () => (
   <Wrapper>
     <Shape />
     <Text>

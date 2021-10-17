@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setFormat, getFormat } from '../../slices/settingsSlice';
 import useDropdown from '../../hooks/useDropdown';
+import { ReactComponent as IconCaret } from '../../assets/icons/caret.svg';
 
 const Format: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
@@ -17,12 +18,13 @@ const Format: React.FunctionComponent = () => {
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <div>{format}</div>
+        <IconCaret />
       </DropdownHeader>
 
       {isDropdownOpen && (
         <DropdownList>
           {options.map((option) => (
-            <button
+            <Button
               type="button"
               onClick={() => {
                 dispatch(setFormat(option));
@@ -31,8 +33,7 @@ const Format: React.FunctionComponent = () => {
               key={option}
             >
               {option}
-
-            </button>
+            </Button>
           ))}
         </DropdownList>
       )}
@@ -49,14 +50,23 @@ const Dropdown = styled.div<{
   z-index: 5;
   color: ${(props) => props.theme.text};
   padding: 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 300;
+  text-transform: uppercase;
 `;
 
-const DropdownHeader = styled.div`
+const DropdownHeader = styled.button`
   display: flex;
   align-items: center;
-  text-transform: uppercase;
-  font-weight: 500;
   cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: ${(props) => props.theme.text};
+
+  & > svg {
+    margin-left: 0.25rem;
+  }
 `;
 
 const DropdownList = styled.div`
@@ -64,9 +74,23 @@ const DropdownList = styled.div`
   right: 0;
   display: flex;
   flex-direction: column;
-  border: 1px solid ${(props) => props.theme.text};
+  border: 1px solid ${(props) => props.theme.secondary};
+  background: ${(props) => props.theme.text_bright};
   max-height: 30rem;
   z-index: 5;
+  width: 100%;
+  text-align: start;
+`;
+
+const Button = styled.button`
+  text-align: start;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding: 0.1rem 0.5rem;
+
+  &:hover {
+    background: ${(props) => props.theme.secondary}15; // (color with 0.15 opacity)
+  }
 `;
 
 export default Format;

@@ -5,7 +5,7 @@ import { getModelsLoading, getPalettesFromAPI, fetchPalettes } from '../slices/p
 import Cards from '../components/many/Cards';
 import Generate from '../components/many/buttons/Generate';
 
-const List: React.FC = () => {
+const List: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const modelsLoading = useAppSelector(getModelsLoading);
   const palettes = useAppSelector(getPalettesFromAPI);

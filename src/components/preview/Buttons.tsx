@@ -11,7 +11,7 @@ interface Props {
   total: number;
 }
 
-const Buttons: React.FC<Props> = ({ select, total, current }: Props) => (
+const Buttons: React.FunctionComponent<Props> = ({ select, total, current }: Props) => (
   <Wrapper>
     {Array.from(Array(total).keys()).map((number: number) => (
       <Button

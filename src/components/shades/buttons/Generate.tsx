@@ -15,7 +15,7 @@ interface Props {
   icon?: boolean;
 }
 
-const Generate: React.FC<Props> = ({ icon }) => {
+const Generate: React.FunctionComponent<Props> = ({ icon }) => {
   const dispatch = useAppDispatch();
   const models = useAppSelector(getModels);
   const paletteLoading = useAppSelector(getPaletteLoading);

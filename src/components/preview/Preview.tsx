@@ -29,7 +29,7 @@ const preview = (number: number) => {
   }
 };
 
-const Preview: React.FC<Props> = ({ number, direction }: Props) => (
+const Preview: React.FunctionComponent<Props> = ({ number, direction }: Props) => (
   <Wrapper className={direction}>
     <CSSTransition
       timeout={750}

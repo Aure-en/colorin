@@ -9,7 +9,7 @@ import Generate from '../components/shades/buttons/Generate';
 import Reset from '../components/shades/buttons/Reset';
 import Palette from '../components/shared/palette/Palette';
 
-const Preview: React.FC = () => {
+const Preview: React.FunctionComponent = () => {
   const mainPalette = useAppSelector(getMainPalette);
   const [slide, setSlide] = useState<{
     number: number,

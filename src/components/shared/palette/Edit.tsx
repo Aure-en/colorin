@@ -12,7 +12,7 @@ interface Props {
   color: MainColor;
 }
 
-const Edit: React.FC<Props> = ({ color, index }: Props) => {
+const Edit: React.FunctionComponent<Props> = ({ color, index }: Props) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   let throttle = false;

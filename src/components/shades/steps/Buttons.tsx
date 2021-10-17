@@ -7,7 +7,7 @@ import {
 import { ReactComponent as IconPlus } from '../../../assets/icons/plus.svg';
 import { ReactComponent as IconMinus } from '../../../assets/icons/minus.svg';
 
-const Buttons: React.FC = (): ReactElement => {
+const Buttons: React.FunctionComponent = (): ReactElement => {
   const dispatch = useAppDispatch();
   const stepsNumber = useAppSelector(getStepsNumber);
 

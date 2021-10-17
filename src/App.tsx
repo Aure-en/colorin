@@ -15,7 +15,7 @@ import Header from './components/header/Header';
 import GlobalStyles from './style/globalStyles';
 import palettes from './data/palettes';
 
-const App: React.FC = (): ReactElement => {
+const App: React.FunctionComponent = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   // Setup

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Shape from '../../assets/preview/Leaves';
 
-const Leaves: React.FC = () => (
+const Leaves: React.FunctionComponent = () => (
   <Wrapper>
     <Text>
       <Header>

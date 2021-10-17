@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Shape from '../../assets/preview/Triangles';
 
-const Triangle: React.FC = () => (
+const Triangle: React.FunctionComponent = () => (
   <Wrapper>
     <Text>
       <Header>

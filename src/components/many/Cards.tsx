@@ -8,7 +8,7 @@ interface Props {
   palettes: Palette[],
 }
 
-const Cards: React.FC<Props> = ({ palettes }: Props) => (
+const Cards: React.FunctionComponent<Props> = ({ palettes }: Props) => (
   <List>
     {palettes.map((palette, index) => <Card palette={palette} key={index} />)}
   </List>

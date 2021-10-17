@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 
-const Corner: React.FC = () => {
+const Corner: React.FunctionComponent = () => {
   const theme = useTheme();
 
   return (
