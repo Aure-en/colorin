@@ -2,8 +2,10 @@ import React, { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useAppDispatch } from '../../../app/hooks';
-import { updatePalette, setStep } from '../../../slices/paletteSlice';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import {
+  updatePalette, setStep, getLocked, unlock,
+} from '../../../slices/paletteSlice';
 import { MainColor } from '../../../ts/colors/colors';
 import { ReactComponent as IconEdit } from '../../../assets/icons/edit.svg';
 
@@ -15,6 +17,7 @@ interface Props {
 const Edit: React.FunctionComponent<Props> = ({ color, index }: Props) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const locked = useAppSelector(getLocked);
   let throttle = false;
 
   const handleChange = useCallback(
@@ -34,6 +37,7 @@ const Edit: React.FunctionComponent<Props> = ({ color, index }: Props) => {
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(updatePalette(index, e.target.value));
     if (location.pathname === '/shades') dispatch(setStep(index, e.target.value));
+    if (locked[index] !== 'N') dispatch(unlock(index));
   };
 
   return (

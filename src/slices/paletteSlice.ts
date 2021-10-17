@@ -8,7 +8,6 @@ import {
 } from '../utils/color';
 import {
   Color as ColorType,
-  MainColor as MainColorType,
   Palette as PaletteType,
   MainPalette as MainPaletteType,
   Steps,
@@ -45,9 +44,9 @@ export const fetchModels = createAsyncThunk('palette/fetchModels', async () => {
 });
 
 export const fetchPalette = createAsyncThunk<
-  MainPaletteType,
-  void,
-  { state: Store }
+MainPaletteType,
+void,
+{ state: Store }
 >('palette/fetchPalette', async (undefined, { getState }) => {
   // Get a 5 colors palette from Colormind API.
   const { models, locked } = getState().palette;
@@ -82,9 +81,9 @@ export const fetchPalette = createAsyncThunk<
 });
 
 export const fetchPalettes = createAsyncThunk<
-  PaletteType[],
-  void,
-  { state: Store }
+PaletteType[],
+void,
+{ state: Store }
 >('palette/fetchPalettes', async (undefined, { getState }) => {
   // Get 20 palettes from Colormind API.
   const { models } = getState().palette;
@@ -234,6 +233,20 @@ const paletteSlice = createSlice({
       },
     },
 
+    unlock: {
+      reducer(state, action: PayloadAction<{ index: number }>) {
+        state.locked[action.payload.index] = 'N';
+      },
+
+      prepare(index: number) {
+        return {
+          payload: {
+            index,
+          },
+        };
+      },
+    },
+
     updatePalette: {
       reducer(
         state,
@@ -302,6 +315,7 @@ export const {
   incrementSteps,
   decrementSteps,
   toggleLock,
+  unlock,
   reset,
   updatePalette,
   setPalette,
