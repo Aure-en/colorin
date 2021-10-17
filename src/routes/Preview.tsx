@@ -94,7 +94,7 @@ const Wrapper = styled.div`
   overflow: hidden;
 
   @media all and (min-width: 600px) {
-    grid-template-columns: 10rem 1fr auto;
+    grid-template-columns: 12rem 1fr auto;
     grid-template-rows: initial;
     grid-gap: 2rem;
   }

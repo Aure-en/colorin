@@ -2,7 +2,10 @@ import React, { useState, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Color from 'color';
+import { useAppSelector } from '../../../app/hooks';
+import { getFormat } from '../../../slices/settingsSlice';
 import { Color as ColorType } from '../../../ts/colors/colors';
+import formatColorCode from '../../../utils/format';
 
 interface Props {
   color: ColorType,
@@ -10,6 +13,7 @@ interface Props {
 
 const Name: React.FunctionComponent<Props> = ({ color }: Props): ReactElement => {
   const [textColor, setTextColor] = useState('');
+  const format = useAppSelector(getFormat);
 
   // If the color is bright, darken it to use it on the card.
   useEffect(() => {
@@ -25,7 +29,7 @@ const Name: React.FunctionComponent<Props> = ({ color }: Props): ReactElement =>
     <Informations>
       <div>
         <div>{color.name}</div>
-        <Code $color={textColor}>{color.hex}</Code>
+        <Code $color={textColor}>{formatColorCode(format, color)}</Code>
       </div>
     </Informations>
   );
