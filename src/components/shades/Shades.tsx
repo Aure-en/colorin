@@ -9,7 +9,7 @@ interface Props {
   steps: StepsType;
 }
 
-const Shades: React.FC<Props> = ({
+const Shades: React.FunctionComponent<Props> = ({
   mainPalette,
   steps,
 }: Props): ReactElement => (

@@ -12,7 +12,7 @@ interface Props {
   direction?: Direction,
 }
 
-const Steps: React.FC<Props> = ({ palette, main, direction }: Props): ReactElement => (
+const Steps: React.FunctionComponent<Props> = ({ palette, main, direction }: Props): ReactElement => (
   <Wrapper $main={main} $direction={direction}>
     {palette.map((color, index) => (
       <Step

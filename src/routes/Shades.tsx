@@ -12,7 +12,7 @@ import { Steps as StepsType } from '../ts/colors/colors';
 import Generate from '../components/shades/buttons/Generate';
 import Reset from '../components/shades/buttons/Reset';
 
-const Details: React.FC = (): ReactElement => {
+const Details: React.FunctionComponent = (): ReactElement => {
   const mainPalette = useAppSelector(getMainPalette);
   const steps: StepsType = useAppSelector(getSteps);
   const dispatch = useAppDispatch();

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Shape from '../../assets/preview/Center';
 
-const Center: React.FC = () => (
+const Center: React.FunctionComponent = () => (
   <Wrapper>
     <Shape />
     <Text>

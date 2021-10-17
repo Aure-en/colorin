@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Shape from '../../assets/preview/Corner';
 
-const Corner: React.FC = () => (
+const Corner: React.FunctionComponent = () => (
   <Wrapper>
     <Shape />
     <Right>

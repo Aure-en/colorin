@@ -9,7 +9,7 @@ interface Props {
   color: ColorType;
 }
 
-const Step : React.FC<Props> = ({ color }: Props): ReactElement => {
+const Step : React.FunctionComponent<Props> = ({ color }: Props): ReactElement => {
   const { copy } = useCopy();
 
   return (

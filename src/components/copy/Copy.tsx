@@ -7,7 +7,7 @@ interface Props {
   y: number,
 }
 
-const Copy: React.FC<Props> = ({ x, y }: Props): ReactElement => (
+const Copy: React.FunctionComponent<Props> = ({ x, y }: Props): ReactElement => (
   <Message $x={x} $y={y}>
     Copied
   </Message>

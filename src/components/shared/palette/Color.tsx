@@ -12,7 +12,7 @@ interface Props {
   index: number,
 }
 
-const Color: React.FC<Props> = ({ color, index }: Props): ReactElement => {
+const Color: React.FunctionComponent<Props> = ({ color, index }: Props): ReactElement => {
   const dispatch = useAppDispatch();
   const { copy } = useCopy();
 

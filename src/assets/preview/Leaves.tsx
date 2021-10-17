@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 
-const Leaves: React.FC = () => {
+const Leaves: React.FunctionComponent = () => {
   const theme = useTheme();
   return (
     <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000" height="70%" preserveAspectRatio="xMaxYMax slice">

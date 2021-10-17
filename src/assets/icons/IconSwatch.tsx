@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled, { useTheme } from 'styled-components';
 
-const IconSwatch: React.FC = (): ReactElement => {
+const IconSwatch: React.FunctionComponent = (): ReactElement => {
   const theme = useTheme();
 
   return (

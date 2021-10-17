@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 
-const Center: React.FC = () => {
+const Center: React.FunctionComponent = () => {
   const theme = useTheme();
 
   return (

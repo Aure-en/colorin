@@ -9,7 +9,7 @@ import Generate from '../components/shades/buttons/Generate';
 import Reset from '../components/shades/buttons/Reset';
 import Palette from '../components/shared/palette/Palette';
 
-const Preview: React.FC = () => {
+const Preview: React.FunctionComponent = () => {
   const mainPalette = useAppSelector(getMainPalette);
   const [slide, setSlide] = useState<{
     number: number,
@@ -94,7 +94,7 @@ const Wrapper = styled.div`
   overflow: hidden;
 
   @media all and (min-width: 600px) {
-    grid-template-columns: 10rem 1fr auto;
+    grid-template-columns: 12rem 1fr auto;
     grid-template-rows: initial;
     grid-gap: 2rem;
   }

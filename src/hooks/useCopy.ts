@@ -1,11 +1,18 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { addCopy, removeCopy } from '../slices/copySlice';
 import copy from '../utils/copy';
 import { Color } from '../ts/colors/colors';
+import { getFormat } from '../slices/settingsSlice';
+import formatColorCode from '../utils/format';
 
-const useCopy = () => {
-  const dispatch = useDispatch();
+interface Return {
+  copy: (x: number, y: number, color: Color) => void,
+}
+
+const useCopy = (): Return => {
+  const dispatch = useAppDispatch();
+  const format = useAppSelector(getFormat);
 
   /**
    * Copy the color
@@ -13,7 +20,7 @@ const useCopy = () => {
    * Dispatch an action in a set amount of time to remove the pop-up
    */
   const handleClick = (x: number, y: number, color: Color): void => {
-    copy(color.hex);
+    copy(formatColorCode(format, color));
     const id = nanoid();
     const copyToAdd = {
       x,

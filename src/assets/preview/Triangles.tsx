@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 
-const Triangles: React.FC = () => {
+const Triangles: React.FunctionComponent = () => {
   const theme = useTheme();
 
   return (

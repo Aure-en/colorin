@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { fetchPalettes, getModels, getPalettesLoading } from '../../../slices/paletteSlice';
 import { ReactComponent as IconLoad } from '../../../assets/icons/loader.svg';
 
-const Generate: React.FC = () => {
+const Generate: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const models = useAppSelector(getModels);
   const palettesLoading = useAppSelector(getPalettesLoading);

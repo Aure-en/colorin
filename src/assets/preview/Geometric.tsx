@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from 'styled-components';
 import useWindowSize from '../../hooks/useWindowSize';
 
-const Geometric: React.FC = () => {
+const Geometric: React.FunctionComponent = () => {
   const windowSize = useWindowSize();
   const theme = useTheme();
 

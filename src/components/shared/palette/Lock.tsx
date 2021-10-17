@@ -13,7 +13,7 @@ interface Props {
   isLocked: boolean,
 }
 
-const Lock: React.FC<Props> = ({ color, textColor, isLocked }: Props) => {
+const Lock: React.FunctionComponent<Props> = ({ color, textColor, isLocked }: Props) => {
   const dispatch = useAppDispatch();
 
   return (

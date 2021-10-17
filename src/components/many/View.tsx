@@ -2,19 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
-import { setPalette, setStep } from '../../slices/paletteSlice';
+import { setPalette } from '../../slices/paletteSlice';
 import { Palette } from '../../ts/colors/colors';
 
 interface Props {
   palette: Palette;
 }
 
-const View: React.FC<Props> = ({ palette }) => {
+const View: React.FunctionComponent<Props> = ({ palette }) => {
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
     dispatch(setPalette(palette));
-    palette.forEach((color, index) => dispatch(setStep(index, color.hex)));
   };
 
   return (

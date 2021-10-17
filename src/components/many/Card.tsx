@@ -9,7 +9,7 @@ interface Props {
   palette: Palette;
 }
 
-const Card: React.FC<Props> = ({ palette }: Props) => {
+const Card: React.FunctionComponent<Props> = ({ palette }: Props) => {
   const [currentColor, setCurrentColor] = useState(palette[0]);
   const { copy } = useCopy();
 
